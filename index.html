@@ -30,39 +30,47 @@
             color: #8b7355;
             font-size: 0.85rem;
             line-height: 1.5;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             font-style: italic;
         }
-        .header { color: #8b7355; font-size: 0.9rem; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 10px; }
-        .name { font-size: 3.8rem; color: #d4af37; margin: 10px 0; font-family: 'Times New Roman', serif; font-style: italic; }
-        .age { font-size: 1.4rem; color: #555; letter-spacing: 1px; margin-bottom: 30px; }
+        .name { font-size: 3.5rem; color: #d4af37; margin: 10px 0; font-family: 'Times New Roman', serif; font-style: italic; }
+        .age { font-size: 1.2rem; color: #555; letter-spacing: 2px; margin-bottom: 20px; text-transform: uppercase; }
         
-        .details-section {
+        /* Countdown Styling */
+        #countdown {
+            display: flex;
+            justify-content: space-around;
             background: #fffdfa;
+            padding: 15px;
+            border-radius: 12px;
+            margin: 20px 0;
+            border: 1px solid #f0e6d2;
+        }
+        .time-box { text-align: center; }
+        .time-num { display: block; font-size: 1.5rem; font-weight: bold; color: #d4af37; }
+        .time-label { font-size: 0.7rem; color: #8b7355; text-transform: uppercase; }
+
+        .details-section {
             border-top: 1px solid #f0e6d2;
             border-bottom: 1px solid #f0e6d2;
-            padding: 25px 0;
-            margin: 25px 0;
+            padding: 20px 0;
+            margin-bottom: 20px;
             color: #444;
             line-height: 1.6;
         }
-        .venue-name { font-weight: bold; color: #222; font-size: 1.1rem; display: block; margin-top: 10px; }
-        .landmark { color: #8b7355; font-style: italic; font-size: 0.95rem; }
+        .venue-name { font-weight: bold; color: #222; font-size: 1.1rem; display: block; margin-top: 5px; }
 
         .map-button {
             display: inline-block;
             background-color: #d4af37;
             color: white;
-            padding: 14px 28px;
+            padding: 12px 25px;
             text-decoration: none;
             border-radius: 30px;
             font-weight: bold;
-            font-size: 0.9rem;
-            margin-top: 10px;
+            font-size: 0.85rem;
             box-shadow: 0 4px 10px rgba(212, 175, 55, 0.3);
         }
-        
-        .footer-note { font-size: 0.9rem; color: #888; margin-top: 25px; }
     </style>
 </head>
 <body>
@@ -74,25 +82,48 @@
         <strong>— Numbers 6:24</strong>
     </div>
 
-    <div class="header">Join us to celebrate</div>
     <div class="name">Jianna</div>
-    <div class="age">TURNING ONE</div>
+    <div class="age">is turning ONE</div>
 
-    <div class="details-section">
-        <strong>FRIDAY, APRIL 24</strong><br>
-        <strong>AT 6:30 PM</strong>
-        
-        <span class="venue-name">S.S. CONVENTION HALL</span>
-        <span class="landmark">Back side of Sri Krishna Sweets</span><br>
-        Ponmeni, Madurai - 625016
+    <div id="countdown">
+        <div class="time-box"><span class="time-num" id="days">00</span><span class="time-label">Days</span></div>
+        <div class="time-box"><span class="time-num" id="hours">00</span><span class="time-label">Hours</span></div>
+        <div class="time-box"><span class="time-num" id="minutes">00</span><span class="time-label">Mins</span></div>
     </div>
 
-    <a href="https://maps.app.goo.gl/YourSpecificLinkHere" target="_blank" class="map-button">
-        📍 VIEW ON GOOGLE MAPS
-    </a>
+    <div class="details-section">
+        <strong>FRIDAY, APRIL 24 @ 6:30 PM</strong>
+        <span class="venue-name">S.S. CONVENTION HALL</span>
+        <small>Back side of Sri Krishna Sweets, Ponmeni, Madurai</small>
+    </div>
 
-    <p class="footer-note">Your blessings are the greatest gift.</p>
+    <a href="https://maps.app.goo.gl/YourActualLinkHere" target="_blank" class="map-button">
+        📍 NAVIGATE TO VENUE
+    </a>
 </div>
+
+<script>
+    // Set the target date: April 24, 2026 18:30:00
+    const targetDate = new Date("April 24, 2026 18:30:00").getTime();
+
+    const timer = setInterval(function() {
+        const now = new Date().getTime();
+        const distance = targetDate - now;
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+
+        document.getElementById("days").innerHTML = days;
+        document.getElementById("hours").innerHTML = hours;
+        document.getElementById("minutes").innerHTML = minutes;
+
+        if (distance < 0) {
+            clearInterval(timer);
+            document.getElementById("countdown").innerHTML = "<div style='color:#d4af37; font-weight:bold;'>THE CELEBRATION HAS BEGUN!</div>";
+        }
+    }, 1000);
+</script>
 
 </body>
 </html>
