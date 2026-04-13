@@ -70,7 +70,7 @@ body {
 .highlight{color:#d4af37;font-weight:bold;}
 
 /* Buttons */
-.map-btn,.music-btn,.cut-btn{
+.map-btn,.cut-btn{
   margin-top:10px;
   padding:10px 15px;
   border-radius:20px;
@@ -93,14 +93,6 @@ body {
 .bible{margin-top:15px;font-style:italic;font-size:13px;}
 .bible span{color:#d4af37;font-weight:bold;}
 
-/* Fireworks */
-#fireworks{
-  position:fixed;
-  top:0;left:0;
-  width:100%;height:100%;
-  pointer-events:none;
-}
-
 /* Location Pin */
 .location-pin{
   font-size:35px;
@@ -118,8 +110,6 @@ body {
 </head>
 
 <body>
-
-<canvas id="fireworks"></canvas>
 
 <div class="card">
 
@@ -163,6 +153,7 @@ target="_blank" class="map-btn">📍 View Location</a>
 
 <!-- Bible -->
 <div id="verseBox" class="bible"></div>
+
 </div>
 
 <script>
@@ -181,7 +172,6 @@ function cutCake(){
  document.querySelector('.cake').classList.add('cut');
  alert("🎉 Happy Birthday Jianna 🎂👑");
 }
-}
 
 // Bible rotation
 const verses=[
@@ -195,32 +185,6 @@ setInterval(()=>{
  verses[i][0]+"<br>"+verses[i][1]+"<span>"+verses[i][2]+"</span>";
  i=(i+1)%verses.length;
 },4000);
-
-// Fireworks
-const c=document.getElementById("fireworks");
-const ctx=c.getContext("2d");
-c.width=window.innerWidth;
-c.height=window.innerHeight;
-
-let p=[];
-function fire(){
- for(let i=0;i<30;i++){
-  p.push({x:Math.random()*c.width,y:Math.random()*c.height,dx:(Math.random()-0.5)*5,dy:(Math.random()-0.5)*5,l:100});
- }
-}
-function draw(){
- ctx.fillStyle="rgba(0,0,0,0.1)";
- ctx.fillRect(0,0,c.width,c.height);
- p.forEach((e,i)=>{
-  e.x+=e.dx;e.y+=e.dy;e.l--;
-  ctx.fillStyle="gold";
-  ctx.fillRect(e.x,e.y,2,2);
-  if(e.l<=0)p.splice(i,1);
- });
- if(Math.random()<0.05)fire();
- requestAnimationFrame(draw);
-}
-draw();
 </script>
 
 </body>
