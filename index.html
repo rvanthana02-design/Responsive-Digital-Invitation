@@ -11,7 +11,7 @@
 body {
   margin:0;
   font-family:'Poppins',sans-serif;
-  background:linear-gradient(135deg,#ffd6e8,#fff0f5);
+  background: radial-gradient(circle at top, #ffe4ec, #ffd1dc, #ffc0cb);
   display:flex;
   justify-content:center;
   align-items:center;
@@ -20,27 +20,35 @@ body {
 
 /* Card */
 .card{
-  background:#fff;
-  border-radius:25px;
-  padding:20px;
+  background: rgba(255,255,255,0.8);
+  backdrop-filter: blur(12px);
+  border-radius:30px;
+  padding:25px;
   width:90%;
   max-width:420px;
   text-align:center;
-  box-shadow:0 15px 40px rgba(0,0,0,0.2);
-  border:5px solid #f7c6d9;
+  box-shadow:0 20px 50px rgba(0,0,0,0.15);
+  border: 2px solid rgba(255,255,255,0.5);
+  animation: fadeIn 1.5s ease;
+}
+
+/* Fade animation */
+@keyframes fadeIn {
+  from {opacity:0; transform:translateY(20px);}
+  to {opacity:1; transform:translateY(0);}
 }
 
 /* Cross */
 .cross{
-  font-size:30px;
+  font-size:32px;
   color:gold;
   animation:float 3s infinite,glow 2s infinite alternate;
 }
 
-
+/* Animations */
 @keyframes float{
   0%{transform:translateY(0)}
-  50%{transform:translateY(-8px)}
+  50%{transform:translateY(-6px)}
   100%{transform:translateY(0)}
 }
 
@@ -49,48 +57,92 @@ body {
   to{text-shadow:0 0 20px gold}
 }
 
+/* Title */
+.title{
+  font-family:'Playfair Display';
+  color:#d4af37;
+  font-size:22px;
+  margin-top:10px;
+}
+
+/* Name */
+.name{
+  font-size:30px;
+  color:#ff4f81;
+  font-weight:bold;
+  margin:10px 0;
+}
+
 /* Text */
-.title{font-family:'Playfair Display';color:#d4af37;}
-.name{font-size:28px;color:#ff4f81;font-weight:bold;}
-.text{font-size:14px;color:#555;margin:8px 0;}
-.highlight{color:#d4af37;font-weight:bold;}
+.text{
+  font-size:14px;
+  color:#444;
+  margin:10px 0;
+  line-height:1.5;
+}
+
+/* Highlight */
+.highlight{
+  color:#d4af37;
+  font-weight:bold;
+}
 
 /* Buttons */
 .map-btn,.cut-btn{
-  margin-top:10px;
-  padding:10px 15px;
-  border-radius:20px;
+  margin-top:12px;
+  padding:10px 18px;
+  border-radius:25px;
   border:none;
-  background:linear-gradient(45deg,#d4af37,#ffd700);
+  background: linear-gradient(45deg,#d4af37,#ffd700);
   color:white;
+  font-weight:bold;
   cursor:pointer;
-  display:inline-block;
   text-decoration:none;
+  box-shadow:0 5px 15px rgba(0,0,0,0.2);
+  transition:0.3s;
+}
+
+.map-btn:hover,.cut-btn:hover{
+  transform:scale(1.05);
 }
 
 /* Countdown */
-.countdown{font-weight:bold;color:#d4af37;margin-top:10px;}
+.countdown{
+  font-weight:bold;
+  color:#d4af37;
+  margin-top:12px;
+  font-size:15px;
+}
 
 /* Cake */
-.cake{font-size:50px;transition:0.5s;}
-.cake.cut{transform:rotate(-10deg) scale(0.9);}
+.cake{
+  font-size:55px;
+  transition:0.5s;
+}
+.cake.cut{
+  transform:rotate(-10deg) scale(0.9);
+}
 
 /* Bible */
-.bible{margin-top:15px;font-style:italic;font-size:13px;}
-.bible span{color:#d4af37;font-weight:bold;}
+.bible{
+  margin-top:15px;
+  font-style:italic;
+  font-size:13px;
+  opacity:0.9;
+}
+.bible span{
+  color:#d4af37;
+  font-weight:bold;
+}
 
 /* Location Pin */
 .location-pin{
-  font-size:35px;
-  animation:bounce 1.5s infinite,glowPin 2s infinite alternate;
+  font-size:32px;
+  animation:bounce 1.5s infinite;
 }
 @keyframes bounce{
   0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-10px)}
-}
-@keyframes glowPin{
-  from{text-shadow:0 0 5px #ff4f81}
-  to{text-shadow:0 0 20px #ff85a2}
+  50%{transform:translateY(-8px)}
 }
 </style>
 </head>
@@ -109,11 +161,11 @@ body {
 </div>
 
 <div class="text">
-With God’s grace and abundant love,<br>
+With God’s grace and abundant love
 </div>
 
 <div class="text">
-📅 April 24, Friday | ஏப்ரல் 24, வெள்ளி<br>
+📅 April 24, Friday | ஏப்ரல் 24<br>
 ⏰ 6:30 PM | மாலை 6:30 மணி
 </div>
 
@@ -129,11 +181,9 @@ target="_blank" class="map-btn">📍 View Location</a>
 
 <div id="countdown" class="countdown"></div>
 
-<!-- Cake -->
 <div class="cake">🎂</div>
 <button onclick="cutCake()" class="cut-btn">🎉 Cut Cake</button>
 
-<!-- Bible -->
 <div id="verseBox" class="bible"></div>
 
 </div>
