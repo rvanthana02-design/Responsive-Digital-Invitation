@@ -13,7 +13,6 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            /* Premium Royal Deep Emerald Mesh Gradient */
             background: radial-gradient(at 0% 0%, #061c12 0, transparent 55%), 
                         radial-gradient(at 50% 0%, #0a2b1d 0, transparent 60%), 
                         radial-gradient(at 100% 0%, #04140e 0, transparent 55%), 
@@ -27,7 +26,6 @@
             position: relative;
         }
 
-        /* Floating Background Particles */
         .particles-container {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -35,7 +33,6 @@
             z-index: 0;
         }
 
-        /* Luxury Glassmorphic Card */
         .card {
             background: rgba(10, 35, 24, 0.35);
             backdrop-filter: blur(25px);
@@ -86,7 +83,6 @@
             margin-bottom: 15px;
         }
 
-        /* Live Heartbeat Pulse Row */
         .pulse-container {
             display: flex;
             align-items: center;
@@ -95,10 +91,7 @@
             margin: 20px 0;
         }
 
-        .ecg-svg {
-            width: 120px;
-            height: 30px;
-        }
+        .ecg-svg { width: 120px; height: 30px; }
 
         .ecg-line {
             stroke: #d4af37;
@@ -109,9 +102,7 @@
             animation: dash 3s linear infinite;
         }
 
-        @keyframes dash {
-            to { stroke-dashoffset: 0; }
-        }
+        @keyframes dash { to { stroke-dashoffset: 0; } }
 
         .bpm-counter {
             font-size: 0.75rem;
@@ -121,11 +112,8 @@
             animation: textPulse 1s ease-in-out infinite alternate;
         }
 
-        @keyframes textPulse {
-            from { opacity: 0.7; } to { opacity: 1; }
-        }
+        @keyframes textPulse { from { opacity: 0.7; } to { opacity: 1; } }
 
-        /* Countdown Grid */
         #countdown {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -140,13 +128,8 @@
             border: 1px solid rgba(212, 175, 55, 0.1);
         }
 
-        .time-num { 
-            display: block; font-size: 1.5rem; font-weight: 700; color: #d4af37; 
-        }
-        
-        .time-label { 
-            font-size: 0.55rem; color: rgba(255, 255, 255, 0.5); text-transform: uppercase; letter-spacing: 1px;
-        }
+        .time-num { display: block; font-size: 1.5rem; font-weight: 700; color: #d4af37; }
+        .time-label { font-size: 0.55rem; color: rgba(255, 255, 255, 0.5); text-transform: uppercase; letter-spacing: 1px; }
 
         .details {
             border-top: 1px solid rgba(212, 175, 55, 0.2);
@@ -160,12 +143,7 @@
         .venue { font-family: 'Cinzel', serif; font-weight: 800; font-size: 1.2rem; display: block; margin: 5px 0; color: #d4af37; }
         .address { font-size: 0.85rem; color: rgba(255, 255, 255, 0.7); font-weight: 300; }
 
-        /* Action Buttons Frame */
-        .action-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
+        .action-buttons { display: flex; flex-direction: column; gap: 12px; }
 
         .btn {
             padding: 15px;
@@ -189,55 +167,48 @@
             box-shadow: 0 8px 20px rgba(212, 175, 55, 0.2);
         }
 
-        .btn-map:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 25px rgba(212, 175, 55, 0.35);
-        }
+        .btn-map:hover { transform: translateY(-2px); box-shadow: 0 12px 25px rgba(212, 175, 55, 0.35); }
+        .btn-secondary { background: rgba(255, 255, 255, 0.05); color: #fff; border: 1px solid rgba(255, 255, 255, 0.15); }
+        .btn-secondary:hover { background: rgba(255, 255, 255, 0.1); border-color: #d4af37; }
 
-        .btn-secondary {
-            background: rgba(255, 255, 255, 0.05);
-            color: #fff;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-        }
-
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: #d4af37;
-        }
-
-        /* Virtual Gift Modal */
+        /* Modal Settings */
         .modal {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(4, 18, 12, 0.8);
-            backdrop-filter: blur(10px);
+            background: rgba(4, 18, 12, 0.85);
+            backdrop-filter: blur(12px);
             display: flex;
             justify-content: center;
             align-items: center;
             z-index: 10;
             opacity: 0; pointer-events: none;
             transition: opacity 0.4s ease;
+            padding: 20px;
         }
 
         .modal.active { opacity: 1; pointer-events: auto; }
 
         .modal-content {
-            background: rgba(15, 46, 32, 0.9);
+            background: rgba(15, 46, 32, 0.95);
             border: 1px solid #d4af37;
             padding: 35px 25px;
             border-radius: 24px;
-            max-width: 340px;
+            width: 100%;
+            max-width: 360px;
             text-align: center;
             color: #fff;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
             transform: scale(0.8);
             transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .modal.active .modal-content { transform: scale(1); }
-
-        .modal-content p { font-size: 0.95rem; line-height: 1.6; margin: 15px 0; font-weight: 300; }
-        .close-modal { color: #d4af37; font-weight: 700; cursor: pointer; text-transform: uppercase; font-size: 0.8rem; margin-top: 15px; display: inline-block; }
+        
+        .modal-day-title { font-family: 'Cinzel', serif; color: #d4af37; letter-spacing: 1px; font-size: 1.1rem; margin-bottom: 15px; }
+        .modal-verse { font-family: 'Noto Sans Tamil', sans-serif; font-size: 0.88rem; color: #fff3cd; font-style: italic; margin-bottom: 15px; line-height: 1.6; }
+        .modal-kavithai { font-family: 'Noto Sans Tamil', sans-serif; font-size: 0.9rem; line-height: 1.7; color: #f5f5f7; white-space: pre-line; margin-bottom: 20px; border-left: 2px solid rgba(212, 175, 55, 0.5); padding-left: 10px; text-align: left; }
+        
+        .close-modal { color: #d4af37; font-weight: 700; cursor: pointer; text-transform: uppercase; font-size: 0.8rem; margin-top: 10px; display: inline-block; letter-spacing: 1px; }
     </style>
 </head>
 <body>
@@ -255,7 +226,6 @@
         <div class="name">ISAAC</div>
         <p class="turning-one">24TH BIRTHDAY CELEBRATION</p>
 
-        <!-- Live Heartbeat Wave Dynamic Visual Element -->
         <div class="pulse-container">
             <svg class="ecg-svg" viewBox="0 0 100 30">
                 <path class="ecg-line" d="M0,15 L30,15 L35,5 L40,25 L45,15 L50,15 L53,10 L56,20 L59,15 L100,15" />
@@ -281,23 +251,23 @@
 
         <div class="action-buttons">
             <a href="https://share.google/I0SMHtHQirX8CQIFC" target="_blank" class="btn btn-map">📍 VIEW ON GOOGLE MAPS</a>
-            <button class="btn btn-secondary" onclick="openGift()">🎁 OPEN SURPRISE MESSAGE</button>
+            <button class="btn btn-secondary" onclick="openDailySurprise()">🎁 OPEN DAILY SURPRISE</button>
             <a id="calendarLink" target="_blank" class="btn btn-secondary">📅 ADD TO CALENDAR</a>
         </div>
     </div>
 
-    <!-- Surprise Modal Overlay Container -->
+    <!-- Surprise Overlay Window Structure -->
     <div class="modal" id="giftModal" onclick="closeGift()">
         <div class="modal-content" onclick="event.stopPropagation()">
-            <h3 style="color:#d4af37; font-family:'Cinzel', serif;">To My Favorite Person</h3>
-            <p>Happy 24th Birthday, Isaac! building this little space to celebrate you. May this year bring you closer to all your beautiful dreams. ✨</p>
+            <div id="modalDynamicContent">
+                <!-- Javascript fills this out cleanly dynamically -->
+            </div>
             <span class="close-modal" onclick="closeGift()">Close Box</span>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <script>
-        // Confetti Engine Initiation
         window.onload = () => {
             confetti({ particleCount: 120, spread: 65, origin: { y: 0.65 }, colors: ['#d4af37', '#ffffff', '#1a5c38'] });
             createCalendarLink();
@@ -331,21 +301,86 @@
         const timerInterval = setInterval(updateCountdown, 1000);
         updateCountdown();
 
-        // Surprise Window Handlers
-        function openGift() { document.getElementById('giftModal').classList.add('active'); }
+        // --- CALENDAR DATA & ADVENT ENGINE ---
+        // Format: "YYYY-MM-DD" matching content arrays perfectly.
+        const dailySurprises = {
+            "2026-09-01": {
+                title: "7 Days To Go - Advance Wish!",
+                verse: "“உன் தேவனாகிய கர்த்தர் உன் கைக்குக் கிடைத்த எல்லாவற்றிலும் உன்னை ஆசீர்வதிப்பார்.” — உபாகமம் 15:10",
+                kavithai: "நாட்கள் நகர நகர என் காதல் கூடுகிறது,\nஉன் பிறந்தநாளை எதிர்நோக்கி என் இதயம் துடிக்கிறது!\nஇனிய முன்-பிறந்தநாள் வாழ்த்துகள் அன்பே! ❤️"
+            },
+            "2026-09-02": {
+                title: "6 Days To Go!",
+                verse: "“கர்த்தர் உன்னை ஆசீர்வதித்து, உன்னைக் காக்கக்கடவர்.” — எண்ணாகமம் 6:24",
+                kavithai: "உன் புன்னகை தான் என் உலகத்தின் வெளிச்சம்,\nஉன்னோடு வாழும் ஒவ்வொரு நொடியும் வரம்.\nஇன்று போல் என்றும் மகிழ்ச்சியாய் இரு என் அரசனே! 👑"
+            },
+            "2026-09-03": {
+                title: "5 Days To Go!",
+                verse: "“பூமியின் எல்லைகளிலுள்ளவர்களே, எல்லாரும் என்னை நோக்கிப் பார்த்து இரட்சியுங்கள்.” — ஏசாயா 45:22",
+                kavithai: "என் தனிமையின் இரவுகளை அழகாக மாற்றியவன் நீ,\nஎன் இதயத்துடிப்பின் ரகசிய இசையும் நீ!\nகாத்திருக்கிறேன் உன் நாளுக்காக! 💕"
+            },
+            "2026-09-04": {
+                title: "4 Days To Go!",
+                verse: "“உன் அடியேன்மேல் உமது முகத்தைப் பிரகாசிப்பியும்.” — சங்கீதம் 31:16",
+                kavithai: "கடல் அலையாய் உன் நினைவு என் மனதில் மோதிக்கொண்டே இருக்கிறது.\nபேரன்பே, உன்னை அடைந்த நான் பாக்கியசாலி! ✨"
+            },
+            "2026-09-05": {
+                title: "3 Days To Go! 🤫",
+                verse: "“உனக்கு விரோதமாய் உருவாக்கப்படும் எந்த ஆயுதமும் வாய்க்காதேபோகும்.” — ஏசாயா 54:17",
+                kavithai: "கண்கள் பேசும் மொழியை விட உன் மௌனம் எனக்குப் புரியும்,\nஉன் கரம் கோர்க்கும் நொடியில் என் கவலைகள் யாவும் மறையும்! 🌿"
+            },
+            "2026-09-06": {
+                title: "2 Days To Go!",
+                verse: "“நீ படுத்துக்கொள்ளும்போது பயப்படாதிருப்பாய்; நீ படுத்துக்கொண்டிருக்கும்போது உன் நித்திரை இன்பமாயிருக்கும்.” — நீதிமொழிகள் 3:24",
+                kavithai: "இன்னும் இரண்டு தினங்களில் என் தேவனின் பிறப்பு,\nஉன்னை எனக்குத் தந்த இறைவனுக்கு என் நன்றி சமர்ப்பணம்! 💫"
+            },
+            "2026-09-07": {
+                title: "Tomorrow is the Big Day! 😍",
+                verse: "“நீ செய்கிற காரியங்களையெல்லாம் கர்த்தருக்கு ஒப்புவி, அப்பொழுது உன் யோசனைகள் ஸ்திரப்படும்.” — நீதிமொழிகள் 16:3",
+                kavithai: "நாளை விடியும் பொழுது உனக்கான பொன்னான நாள்,\nஎன் மொத்த காதலும் உனக்கு அர்ப்பணம் ஐசக்! 🌹"
+            },
+            "2026-09-08": {
+                title: "🎂 HAPPY 24th BIRTHDAY ISAAC! 🎉",
+                verse: "“நன்மையினால் உன் வாயைத் திருப்தியாக்குகிறார்; கழுகுக்குச் சமானமாய் உன் வயது திரும்ப வாலவயதுபோலாகிறது.” — சங்கீதம் 103:5",
+                kavithai: "என் அன்பான ஐசக்,\nபிறந்தநாள் நல்வாழ்த்துகள்! நீ நினைத்த காரியங்கள் அனைத்தும் ஜெயமாய் முடியட்டும். உன்னோடு வாழும் இந்த வாழ்க்கை பேரழகு! என்றும் உன் நினைவுகளுடன் நான்... 💝"
+            }
+        };
+
+        function openDailySurprise() {
+            const modalContainer = document.getElementById('modalDynamicContent');
+            
+            // Gets current date formatted precisely as standard ISO string sequence (YYYY-MM-DD)
+            const todayStr = new Date().toISOString().split('T')[0];
+            
+            // Fallback default message if he tests this outside September 1st-8th window range
+            let defaultPreview = {
+                title: "Countdown Active! ⚡",
+                verse: "“உன் இருதயத்தின் வேண்டுதல்களின்படி அவர் உனக்குத் தந்தருளுவாராக.” — சங்கீதம் 20:4",
+                kavithai: "செப்டம்பர் 1-ம் தேதி முதல் தினமும் ஒரு புதிய கவிதை மற்றும் வேத வசனம் இங்கே உனக்காகக் காத்திருக்கும் அன்பே! 🤫❤️"
+            };
+
+            const data = dailySurprises[todayStr] || defaultPreview;
+
+            // Update DOM inside modal smoothly
+            modalContainer.innerHTML = `
+                <h3 class="modal-day-title">${data.title}</h3>
+                <p class="modal-verse">${data.verse}</p>
+                <div class="modal-kavithai">${data.kavithai}</div>
+            `;
+
+            document.getElementById('giftModal').classList.add('active');
+        }
+
         function closeGift() { document.getElementById('giftModal').classList.remove('active'); }
 
-        // Dynamic Google Calendar Configuration Function
         function createCalendarLink() {
             const title = encodeURIComponent("Isaac's 24th Birthday Celebration!");
             const details = encodeURIComponent("Join us to celebrate Isaac's special day.");
             const location = encodeURIComponent("121 b, 8th Street, Tirumalai Colony, Sammatipuram, Madurai - 625016");
-            const dates = "20260908T130000Z/20260908T160000Z"; // Converts evening local time window cleanly to UTC range
-            
+            const dates = "20260908T130000Z/20260908T160000Z";
             document.getElementById('calendarLink').href = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${dates}&details=${details}&location=${location}`;
         }
 
-        // Background Sparkles Simulator
         function generateLoveParticles() {
             const container = document.getElementById('particles');
             for(let i=0; i<20; i++) {
@@ -357,7 +392,6 @@
                 particle.style.fontSize = (Math.random() * 10 + 8) + 'px';
                 particle.style.color = 'rgba(212, 175, 55, 0.25)';
                 particle.style.opacity = Math.random();
-                particle.style.pointerEvents = 'none';
                 container.appendChild(particle);
             }
         }
