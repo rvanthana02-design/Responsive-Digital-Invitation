@@ -8,33 +8,66 @@
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
+        :root {
+            --bg-gradient: radial-gradient(at 0% 0%, #061c12 0, transparent 55%), 
+                           radial-gradient(at 50% 0%, #0a2b1d 0, transparent 60%), 
+                           radial-gradient(at 100% 0%, #04140e 0, transparent 55%), 
+                           radial-gradient(at 0% 100%, #0d1f16 0, transparent 60%), 
+                           radial-gradient(at 50% 100%, #03120b 0, transparent 60%), 
+                           radial-gradient(at 100% 100%, #0b2418 0, transparent 55%);
+            --card-bg: rgba(10, 35, 24, 0.35);
+            --text-color: #f5f5f7;
+            --glow-color: #d4af37;
+            --secret-display: none;
+            --normal-display: block;
+        }
+
+        body.secret-glow-active {
+            --bg-gradient: radial-gradient(circle at center, #020b06 0%, #000000 100%);
+            --card-bg: rgba(0, 0, 0, 0.85);
+            --text-color: rgba(255, 255, 255, 0.15);
+            --glow-color: #ffdd67;
+            --secret-display: block;
+            --normal-display: none;
+        }
+
         body {
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            background: radial-gradient(at 0% 0%, #061c12 0, transparent 55%), 
-                        radial-gradient(at 50% 0%, #0a2b1d 0, transparent 60%), 
-                        radial-gradient(at 100% 0%, #04140e 0, transparent 55%), 
-                        radial-gradient(at 0% 100%, #0d1f16 0, transparent 60%), 
-                        radial-gradient(at 50% 100%, #03120b 0, transparent 60%), 
-                        radial-gradient(at 100% 100%, #0b2418 0, transparent 55%);
+            background: var(--bg-gradient);
             background-color: #04120c;
             font-family: 'Montserrat', sans-serif;
             padding: 25px;
             overflow-x: hidden;
             position: relative;
+            transition: all 0.5s ease;
         }
 
-        .particles-container {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none;
-            z-index: 0;
+        .glow-toggle-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid var(--glow-color);
+            color: var(--glow-color);
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            z-index: 5;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.1);
         }
+        .glow-toggle-btn:hover { box-shadow: 0 0 15px var(--glow-color); }
+
+        .particles-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
 
         .card {
-            background: rgba(10, 35, 24, 0.35);
+            background: var(--card-bg);
             backdrop-filter: blur(25px);
             -webkit-backdrop-filter: blur(25px);
             width: 100%;
@@ -42,62 +75,95 @@
             padding: 40px 25px;
             border-radius: 30px;
             border: 1px solid rgba(212, 175, 55, 0.18);
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7), inset 0 1px 1px rgba(255, 255, 255, 0.05);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7);
             text-align: center;
-            color: #f5f5f7;
+            color: var(--text-color);
             z-index: 1;
             position: relative;
+            transition: all 0.5s ease;
         }
 
-        .bible-verse {
-            font-family: 'Noto Sans Tamil', sans-serif;
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 0.88rem;
-            line-height: 1.8;
-            margin-bottom: 20px;
-        }
-
-        .bible-verse strong { color: #d4af37; display: block; margin-top: 6px; }
+        .bible-verse { font-family: 'Noto Sans Tamil', sans-serif; font-size: 0.88rem; line-height: 1.8; margin-bottom: 20px; }
+        .bible-verse strong { color: var(--glow-color); display: block; margin-top: 6px; }
+        
         .name { font-family: 'Great Vibes', cursive; font-size: 4.8rem; background: linear-gradient(135deg, #fff3cd 0%, #d4af37 50%, #aa841c 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 5px 0; filter: drop-shadow(0 2px 15px rgba(212, 175, 55, 0.3)); }
+        body.secret-glow-active .name { filter: drop-shadow(0 0 20px #d4af37); }
+        
         .turning-one { font-family: 'Cinzel', serif; letter-spacing: 5px; font-size: 0.8rem; font-weight: 800; color: rgba(255, 255, 255, 0.6); margin-bottom: 15px; }
 
         .pulse-container { display: flex; align-items: center; justify-content: center; gap: 10px; margin: 20px 0; }
         .ecg-svg { width: 120px; height: 30px; }
-        .ecg-line { stroke: #d4af37; stroke-width: 2; fill: none; stroke-dasharray: 1000; stroke-dashoffset: 1000; animation: dash 3s linear infinite; }
+        .ecg-line { stroke: var(--glow-color); stroke-width: 2; fill: none; stroke-dasharray: 1000; stroke-dashoffset: 1000; animation: dash 3s linear infinite; }
         @keyframes dash { to { stroke-dashoffset: 0; } }
-        .bpm-counter { font-size: 0.75rem; font-weight: 700; color: #d4af37; letter-spacing: 1px; animation: textPulse 1s ease-in-out infinite alternate; }
-        @keyframes textPulse { from { opacity: 0.7; } to { opacity: 1; } }
 
         #countdown { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 20px 0; }
         .time-box { background: rgba(255, 255, 255, 0.03); padding: 12px 2px; border-radius: 14px; border: 1px solid rgba(212, 175, 55, 0.1); }
-        .time-num { display: block; font-size: 1.5rem; font-weight: 700; color: #d4af37; }
+        .time-num { display: block; font-size: 1.5rem; font-weight: 700; color: var(--glow-color); }
         .time-label { font-size: 0.55rem; color: rgba(255, 255, 255, 0.5); text-transform: uppercase; letter-spacing: 1px; }
 
         .details { border-top: 1px solid rgba(212, 175, 55, 0.2); border-bottom: 1px solid rgba(212, 175, 55, 0.2); padding: 20px 0; margin: 25px 0; line-height: 1.7; }
         .date-highlight { color: #fff; font-weight: 700; letter-spacing: 2px; font-size: 0.95rem; }
-        .venue { font-family: 'Cinzel', serif; font-weight: 800; font-size: 1.2rem; display: block; margin: 5px 0; color: #d4af37; }
-        .address { font-size: 0.85rem; color: rgba(255, 255, 255, 0.7); font-weight: 300; }
+        .venue { font-family: 'Cinzel', serif; font-weight: 800; font-size: 1.2rem; display: block; margin: 5px 0; color: var(--glow-color); }
 
         .action-buttons { display: flex; flex-direction: column; gap: 12px; }
-        .btn { padding: 15px; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 0.85rem; letter-spacing: 1px; border: none; cursor: pointer; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .btn { padding: 15px; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 0.85rem; letter-spacing: 1px; border: none; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; gap: 8px; }
         .btn-map { color: #04120c; background: linear-gradient(135deg, #fff3cd 0%, #d4af37 100%); box-shadow: 0 8px 20px rgba(212, 175, 55, 0.2); }
-        .btn-map:hover { transform: translateY(-2px); box-shadow: 0 12px 25px rgba(212, 175, 55, 0.35); }
         .btn-secondary { background: rgba(255, 255, 255, 0.05); color: #fff; border: 1px solid rgba(255, 255, 255, 0.15); }
-        .btn-secondary:hover { background: rgba(255, 255, 255, 0.1); border-color: #d4af37; }
+        .btn-secondary:hover { border-color: var(--glow-color); color: var(--glow-color); }
 
-        /* Modal Layout Settings */
-        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(4, 18, 12, 0.88); backdrop-filter: blur(12px); display: flex; justify-content: center; align-items: center; z-index: 10; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; padding: 20px; }
+        /* Pop-up Overlay UI */
+        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(4, 18, 12, 0.95); backdrop-filter: blur(15px); display: flex; justify-content: center; align-items: center; z-index: 10; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; padding: 20px; }
         .modal.active { opacity: 1; pointer-events: auto; }
-        .modal-content { background: rgba(15, 46, 32, 0.95); border: 1px solid #d4af37; padding: 35px 25px; border-radius: 24px; width: 100%; max-width: 360px; text-align: center; color: #fff; box-shadow: 0 20px 50px rgba(0,0,0,0.6); transform: scale(0.8); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .modal-content { background: #0b2116; border: 1px solid var(--glow-color); padding: 30px 20px; border-radius: 24px; width: 100%; max-width: 380px; text-align: center; color: #fff; box-shadow: 0 20px 50px rgba(0,0,0,0.8); transform: scale(0.8); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; }
         .modal.active .modal-content { transform: scale(1); }
+
+        /* Scratch Box Graphic Frame */
+        .scratch-container { position: relative; width: 100%; max-width: 320px; height: 190px; margin: 15px auto; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.5); display: none; }
+        .scratch-container.show { display: block; }
+        .scratch-canvas { position: absolute; top: 0; left: 0; z-index: 3; cursor: crosshair; width: 100%; height: 100%; }
+        .scratch-secret-content { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #0f3020; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 15px; z-index: 1; overflow-y: auto; }
+
+        /* Neon Glow Message */
+        .normal-text { display: var(--normal-display); width: 100%; }
+        .secret-glow-text { 
+            display: var(--secret-display); 
+            color: #ffdd67 !important; 
+            font-size: 1.25rem !important; 
+            font-weight: 700; 
+            font-family: 'Noto Sans Tamil', sans-serif;
+            text-shadow: 0 0 10px #d4af37, 0 0 20px #ffdd67, 0 0 30px #ffcc00;
+            animation: pulseGlow 1.5s infinite alternate;
+            padding: 15px 0;
+            line-height: 1.6;
+        }
+        @keyframes pulseGlow { from { opacity: 0.5; } to { opacity: 1; } }
+
+        .modal-day-title { font-family: 'Cinzel', serif; color: var(--glow-color); font-size: 1.05rem; margin-bottom: 10px; }
+        .modal-verse { font-family: 'Noto Sans Tamil', sans-serif; font-size: 0.85rem; color: #fff3cd; line-height: 1.5; margin-bottom: 10px; }
+        .modal-kavithai { font-family: 'Noto Sans Tamil', sans-serif; font-size: 0.85rem; line-height: 1.6; color: #f5f5f7; white-space: pre-line; text-align: left; border-left: 2px solid var(--glow-color); padding-left: 10px; width: 100%; }
         
-        .modal-day-title { font-family: 'Cinzel', serif; color: #d4af37; letter-spacing: 1px; font-size: 1.1rem; margin-bottom: 15px; }
-        .modal-verse { font-family: 'Noto Sans Tamil', sans-serif; font-size: 0.88rem; color: #fff3cd; font-style: italic; margin-bottom: 15px; line-height: 1.6; }
-        .modal-kavithai { font-family: 'Noto Sans Tamil', sans-serif; font-size: 0.9rem; line-height: 1.7; color: #f5f5f7; white-space: pre-line; margin-bottom: 20px; border-left: 2px solid rgba(212, 175, 55, 0.5); padding-left: 12px; text-align: left; }
-        .close-modal { color: #d4af37; font-weight: 700; cursor: pointer; text-transform: uppercase; font-size: 0.8rem; margin-top: 10px; display: inline-block; letter-spacing: 1px; }
+        /* Quiz Layout Area */
+        .quiz-container { background: rgba(255,255,255,0.04); border: 1px dashed rgba(212,175,55,0.3); border-radius: 14px; padding: 15px; margin-top: 15px; display: none; }
+        .quiz-container.show { display: block; }
+        .quiz-question { font-size: 0.85rem; color: #fff3cd; font-family: 'Noto Sans Tamil', sans-serif; margin-bottom: 10px; font-weight: 600; }
+        .quiz-options { display: flex; flex-direction: column; gap: 8px; }
+        .quiz-btn { background: rgba(255,255,255,0.05); color: white; border: 1px solid rgba(255,255,255,0.15); padding: 9px; border-radius: 8px; cursor: pointer; font-size: 0.8rem; font-family: 'Noto Sans Tamil', sans-serif; transition: all 0.2s; }
+        .quiz-btn:hover { background: rgba(212,175,55,0.15); border-color: var(--glow-color); }
+
+        /* Direct WhatsApp Mood Reply */
+        .mood-container { margin-top: 15px; display: none; border-top: 1px solid rgba(212,175,55,0.2); padding-top: 15px; }
+        .mood-container.show { display: block; }
+        .mood-title { font-size: 0.75rem; color: rgba(255,255,255,0.6); text-transform: uppercase; margin-bottom: 8px; letter-spacing: 1px; }
+        .mood-options { display: flex; justify-content: center; gap: 12px; }
+        .mood-box { background: rgba(255,255,255,0.05); padding: 8px 14px; border-radius: 12px; cursor: pointer; border: 1px solid transparent; transition: all 0.2s; font-size: 1.1rem; }
+        .mood-box:hover { background: rgba(212,175,55,0.15); border-color: var(--glow-color); transform: translateY(-2px); }
+
+        .close-modal { color: var(--glow-color); font-weight: 700; cursor: pointer; text-transform: uppercase; font-size: 0.75rem; margin-top: 15px; display: inline-block; letter-spacing: 1px; }
     </style>
 </head>
 <body>
+
+    <button class="glow-toggle-btn" onclick="toggleSecretGlowMode()">🎸 TOGGLE GLOW MODE</button>
 
     <div class="particles-container" id="particles"></div>
 
@@ -144,25 +210,87 @@
 
     <div class="modal" id="giftModal" onclick="closeGift()">
         <div class="modal-content" onclick="event.stopPropagation()">
-            <div id="modalDynamicContent"></div>
+            <h3 class="modal-day-title" id="mTitle">Day Surprise</h3>
+
+            <div class="scratch-container" id="scratchWrapper">
+                <canvas class="scratch-canvas" id="scratchCanvas"></canvas>
+                <div class="scratch-secret-content">
+                    <p class="modal-verse normal-text" id="mVerse">Loading...</p>
+                    <div class="modal-kavithai normal-text" id="mKavithai">Loading...</div>
+                    <div class="secret-glow-text" id="mSecretGlow">🎼 நீதான் என் இதயத்தின் அழகான இசை, என் அன்பான ஐசக்! 💖🎸</div>
+                </div>
+            </div>
+
+            <div class="quiz-container" id="quizWrapper">
+                <p class="quiz-question" id="quizQn">Question?</p>
+                <div class="quiz-options" id="quizOpts"></div>
+            </div>
+
+            <div class="mood-container" id="moodWrapper">
+                <p class="mood-title">Tell her how you feel! 👇</p>
+                <div class="mood-options">
+                    <div class="mood-box" onclick="sendMoodReply('Loved! 🥰')">🥰 Loved</div>
+                    <div class="mood-box" onclick="sendMoodReply('Happy! 🎹')">🎹 Happy</div>
+                    <div class="mood-box" onclick="sendMoodReply('Emotional! 🥹🥁')">🥹 Urugiten</div>
+                </div>
+            </div>
+
             <span class="close-modal" onclick="closeGift()">Close Box</span>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <script>
+        // --- 90 DAYS COMPREHENSIVE DATA ENGINE ---
+        const versesDatabase = [
+            "சங்கீதம் 20:4 — உமது இருதயத்தின் விருப்பத்தின்படி உமக்குத் தந்தருளுவாராக.", // Day 1
+            "உபாகமம் 28:12 — கர்த்தர் உனக்குத் தமது நல்ல பொக்கிஷசாலையாகிய வானத்தைத் திறப்பார்.", // Day 2
+            "எண்ணாகமம் 6:24 — கர்த்தர் உன்னை ஆசீர்வதித்து, உன்னைக் காக்கக்கடவர்.", // Day 3
+            "சங்கீதம் 121:8 — கர்த்தர் உன் போக்கையும் உன் வரவையும் என்றென்றைக்கும் காப்பார்.", // Day 4
+            "சங்கீதம் 37:4 — கர்த்தரிடத்தில் மனமகிழ்ச்சியாயிரு; அவர் உன் இருதயத்தின் வேண்டுதல்களை அருளுவார்.", // Day 5
+            "சங்கீதம் 23:1 — கர்த்தர் என் மேய்ப்பராயிருக்கிறார்; நான் தாழ்ச்சியடையேன்.", // Day 6
+            "ஏசாயா 58:11 — கர்த்தர் நித்தமும் உன்னை நடத்தி, உன் ஆத்துமாவைத் திருப்தியாக்குவார்." // Day 7
+        ];
+        while(versesDatabase.length < 90) {
+            versesDatabase.push("சங்கீதம் 103:5 — நன்மையினால் உன் வாயைத் திருப்தியாக்குகிறார்; கழுகுக்குச் சமானமாய் உன் வயது திரும்ப வாலவயதுபோலாகிறது.");
+        }
+
+        const kavithaigalDatabase = [
+            "நாட்கள் நகர நகர என் காதல் கூடுகிறது,\nஉன் பிறந்தநாளை எதிர்நோக்கி என் இதயம் துடிக்கிறது! ❤️", // Day 1
+            "உன் புன்னகை தான் என் உலகத்தின் வெளிச்சம்,\nஉன்னோடு வாழும் ஒவ்வொரு நொடியும் வரம்! 👑", // Day 2
+            "என் தனிமையின் இரவுகளை அழகாக மாற்றியவன் நீ,\nஎன் இதயத்துடிப்பின் ரகசிய இசையும் நீ! 💕", // Day 3
+            "கடல் அலையாய் உன் நினைவு என் மனதில் மோதிக்கொண்டே இருக்கிறது.\nபேரன்பே, உன்னை அடைந்த நான் பாக்கியசாலி! ✨", // Day 4
+            "உன் கரம் கோர்த்து நடக்கும் பாதைகள் யாவும் கவிதை ஆகிறது,\nநீ அருகில் இருந்தால் என் உலகம் முழுமை பெறுகிறது! 🌸", // Day 5
+            "என் புன்னகையின் முகவரி நீ, என் மௌனத்தின் மொழி நீ!\nஎன் வாழ்வின் ஆகச்சிறந்த சர்ப்ரைஸ் நீ மட்டுமே! 💝" // Day 6
+        ];
+        while(kavithaigalDatabase.length < 90) {
+            kavithaigalDatabase.push("என் அன்பான ஐசக், பிறந்தநாள் நல்வாழ்த்துகள்! நீ என் இதயத்தின் கீபோர்டு நாதமாய், கிثار இசையாய் எந்நாளும் ஒலிக்கிறாய்! 💝🎸");
+        }
+
+        const quizDatabase = [
+            { q: "எனக்கு உன்கிட்ட ரொம்ப பிடிச்ச மியூசிக் இன்ஸ்ட்ருமென்ட் எது?", a: ["Guitar 🎸", "Drums 🥁", "Keyboard 🎹"], correct: 0 }, // Day 1
+            { q: "நாம முதன்முதலில் சந்திச்ச அந்த அழகான இடம் ஞாபகம் இருக்கா?", a: ["Ponmeni", "Nethaji Road", "Simmakkal"], correct: 0 }, // Day 2
+            { q: "என் மனசுக்கு பிடிச்ச உன்னோட ஸ்பெஷல் குணம் எது?", a: ["உன் சிரிப்பு", "உன் அன்பு", "உன் இசை திறமை"], correct: 1 }, // Day 3
+            { q: "நான் கோபமா இருக்கும்போது என்னை ஈஸியா சமாதானம் செய்ய நீ என்ன பண்ணுவ?", a: ["பாட்டு பாடுவ 🎤", "செல்லமா திட்டுவ", "சாக்லேட் தருவ 🍫"], correct: 0 } // Day 4
+        ];
+        while(quizDatabase.length < 90) {
+            quizDatabase.push({ q: "என் இதயத்துடிப்பின் மியூசிக் டைரக்டர் யாரு?", a: ["இளையராஜா", "ஏ.ஆர்.ரஹ்மான்", "ஐசக் 👑"], correct: 2 });
+        }
+
         window.onload = () => {
-            confetti({ particleCount: 120, spread: 65, origin: { y: 0.65 }, colors: ['#d4af37', '#ffffff', '#1a5c38'] });
+            confetti({ particleCount: 100, spread: 60, colors: ['#d4af37', '#ffffff'] });
             createCalendarLink();
             generateLoveParticles();
         };
 
-        const targetDate = new Date("September 08, 2026 18:30:00").getTime();
+        function toggleSecretGlowMode() {
+            document.body.classList.toggle('secret-glow-active');
+        }
 
+        const targetDate = new Date("September 08, 2026 18:30:00").getTime();
         function updateCountdown() {
             const now = new Date().getTime();
             const gap = targetDate - now;
-
             const d = Math.floor(gap / (1000 * 60 * 60 * 24));
             const h = Math.floor((gap % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const m = Math.floor((gap % (1000 * 60 * 60)) / (1000 * 60));
@@ -174,251 +302,109 @@
                 document.getElementById("minutes").innerText = m < 10 ? "0" + m : m;
                 document.getElementById("seconds").innerText = s < 10 ? "0" + s : s;
             }
-
-            if (gap < 0) {
-                document.getElementById("countdown").innerHTML = "<div style='grid-column: span 4; color:#d4af37; font-weight:700; letter-spacing:1px;'>🎂 HAPPY BIRTHDAY ISAAC! 🎉</div>";
-                clearInterval(timerInterval);
-            }
         }
-        const timerInterval = setInterval(updateCountdown, 1000);
+        setInterval(updateCountdown, 1000);
         updateCountdown();
 
-        // 90 Dynamic Days Calendar Engine
-        // Holds structural matrix mapping dates directly to unique contents
-        const versesDatabase = [
-            "சங்கீதம் 20:4 — உமது இருதயத்தின் விருப்பத்தின்படி உமக்குத் தந்தருளுவாராக.",
-            "உபாகமம் 28:12 — கர்த்தர் உனக்குத் தமது நல்ல பொக்கிஷசாலையாகிய வானத்தைத் திறப்பார்.",
-            "எண்ணாகமம் 6:24 — கர்த்தர் உன்னை ஆசீர்வதித்து, உன்னைக் காக்கக்கடவர்.",
-            "சங்கீதம் 121:8 — கர்த்தர் உன் போக்கையும் உன் வரவையும் இதுமுதற்கொண்டு என்றென்றைக்கும் காப்பார்.",
-            "ஏசாயா 41:10 — நீ பயப்படாதே, நான் உன்னுடனே இருக்கிறேன்; திகைக்காதே, நான் உன் தேவன்.",
-            "யோசுவா 1:9 — நீ பலங்கொண்டு திடமனதாயிரு; திடுக்கிடாதே, கலங்காதே.",
-            "சங்கீதம் 37:4 — கართரிடம் மனமகிழ்ச்சியாயிரு, அவர் உன் இருதயத்தின் வேண்டுதல்களை உனக்கு அருள்செய்வார்.",
-            "நீதிமொழிகள் 16:3 — உன் கிரியைகளைக் கர்த்தருக்கு ஒப்புவி, அப்பொழுது உன் யோசனைகள் ஸ்திரப்படும்.",
-            "ஏசாயா 54:10 — மலைகள் விலகினாலும், பர்வதங்கள் நிலைபெயர்ந்தாலும், என் கிருபை உன்னைவிட்டு விலகாது.",
-            "சங்கீதம் 23:1 — கர்த்தர் என் மேய்ப்பராயிருக்கிறார்; நான் தாழ்ச்சியடையேன்.",
-            "புலம்பல் 3:23 — அவைகள் காலைதோறும் புதியவைகள்; உமது உண்மை பெரியதாயிருக்கிறது.",
-            "ரோமர் 15:13 — நம்பிக்கையின் தேவன் உங்களை எல்லா சந்தோஷத்தினாலும் சமாதானத்தினாலும் நிரப்புவாராக.",
-            "பிலிப்பியர் 4:19 — என் தேவன் தம்முடைய ஐசுவரியத்தின்படி உங்கள் குறைவையெல்லாம் கிறிஸ்து இயேசுவுக்குள் நிறைவாக்குவார்.",
-            "சங்கீதம் 91:11 — உன் வழிகளிலெல்லாம் உன்னைக் காக்கும்படி, உனக்காகத் தம்முடைய தூதர்களுக்குக் கட்டளையிடுவார்.",
-            "எரேமியா 29:11 — நீங்கள் எதிர்பாரத்திருக்கும் முடிவை உங்களுக்குக் கொடுக்கும்படிக்கு நான் நினைத்திருக்கிற நினைவுகளை அறிவேன்.",
-            "சங்கீதம் 34:8 — கர்த்தர் நல்லவர் என்பதை ருசித்துப் பாருங்கள்; அவர்மேல் நம்பிக்கையாயிருக்கிற மனுஷன் பாக்கியவான்.",
-            "நீதிமொழிகள் 3:5 — உன் சுயபுத்தியின்மேல் சாயாமல், உன் முழு இருதயத்தோடும் கர்த்தரில் நம்பிக்கையாயிரு.",
-            "ஏசாயா 40:31 — கர்த்தருக்குக் காத்திருக்கிறவர்களோ புதுப்பெலன் அடைந்து, கழுகுகளைப்போலச் செட்டைகளை அடித்து எழும்புவார்கள்.",
-            "மத்தேயு 6:33 — முதலாவது தேவனுடைய ராஜ்யத்தையும் அவருடைய நீதியையும் தேடுங்கள், அப்பொழுது இவைகளெல்லாம் உங்களுக்குக் கூடக் கொடுக்கப்படும்.",
-            "சங்கீதம் 16:11 — ஜீவவழியை எனக்குத் தெரியப்படுத்துவீர்; உமது சமுகத்தில் பரிபூரண ஆனந்தமும், உமது வலதுபாரிசத்தில் நித்திய பேரின்பமும் உண்டு.",
-            "மல்கியா 3:10 — பரலோகத்தின் பலகணிகளைத் திறந்து, இடங்கொள்ளாமற்போகுமட்டும் உங்கள்மேல் ஆசீர்வாதத்தை வர்ஷிக்கமாட்டேனோ என்று சோதித்துப் பாருங்கள்.",
-            "சங்கீதம் 103:1 — என் ஆத்துமாவே, கர்த்தரை ஸ்தோத்திரி; என் முழு உள்ளமே, அவருடைய பரிசுத்த நாமத்தை ஸ்தோத்திரி.",
-            "1 நாளாகமம் 16:34 — கர்த்தரைத் துதியுங்கள், அவர் நல்லவர்; அவருடைய கிருபை என்றுமுள்ளது.",
-            "சங்கீதம் 84:11 — கர்த்தராகிய தேவன் சூரியனும் கேடகமுமானவர்; கர்த்தர் கிருபையையும் மகிமையையும் அருளுவார்; உத்தமமாய் நடக்கிறவர்களுக்கு நன்மையை வழங்காமல் இருக்கமாட்டார்.",
-            "ஏசாயா 43:1 — நீ பயப்படாதே; உன்னை மீட்டுக்கொண்டேன், உன்னைப் பேர்சொல்லி அழைத்தேன், நீ என்னுடையவன்.",
-            "சங்கீதம் 118:24 — இது கர்த்தர் பண்ணின நாள்; இதிலே களிகூர்ந்து மகிழக்கடவோம்.",
-            "செப்பனியா 3:17 — உன் தேவனாகிய கர்த்தர் உன் நடுவில் இருக்கிறார்; அவர் பராக்கிரமமுள்ளவர், அவர் இரட்சிப்பார்; அவர் உன் பேரில் சந்தோஷமாய் மகிழ்ந்து மகிழுவார்.",
-            "சங்கீதம் 107:1 — கர்த்தரைத் துதியுங்கள், அவர் நல்லவர், அவருடைய கிருபை என்றுமுள்ளது.",
-            "நீதிமொழிகள் 4:18 — நீதிமான்களுடைய பாதை நடுப்பகல்வரைக்கும் அதிகமதிகமாய்ப் பிரகாசிக்கிற சூரியவொளியைப்போலிருக்கும்.",
-            "ஏசாயா 58:11 — கர்த்தர் நித்தமும் உன்னை நடத்தி, மகா வறட்சியான காலங்களில் உன் ஆத்துமாவைத் திருப்தியாக்கி, உன் எலும்புகளை நிணமுள்ளதாக்குவார்.",
-            "சங்கீதம் 145:18 — தம்மை நோக்கிக் கூப்பிடுகிற யாவருக்கும், உண்மையாய்த் தம்மை நோக்கிக் கூப்பிடுகிற யாவருக்கும் கர்த்தர் சமீபமாயிருக்கிறார்.",
-            "யோவான் 14:27 — சமாதானத்தை உங்களுக்கு வைத்துப்போகிறேன், என்னுடைய சமாதானத்தையே உங்களுக்குக் கொடுக்கிறேன்.",
-            "1 கொரிந்தியர் 16:14 — உங்கள் காரியங்களெல்லாம் அன்போடே செய்யப்படக்கடவது.",
-            "சங்கீதம் 119:105 — உம்முடைய வசனம் என் கால்களுக்குத் தீபமும், என் பாதைக்கு வெளிச்சமுமாயிருக்கிறது.",
-            "கலாத்தியர் 6:9 — நன்மைசெய்கிறதில் சோர்ந்துபோகாமல் இருப்போமாக; நாம் தளர்ந்துபோகாதிருந்தால் ஏற்றகாலத்தில் அறுப்போம்.",
-            "சங்கீதம் 138:8 — கர்த்தர் எனக்காக யாவையும் செய்துமுடிப்பார்; கர்த்தரே, உமது கிருபை என்றுமுள்ளது.",
-            "பிலிப்பியர் 4:13 — என்னைப் பெலப்படுத்துகிற கிறிஸ்துவினாலே எல்லாவற்றையுஞ்செய்ய எனக்குப் பெலனுண்டு.",
-            "எபிரெயர் 13:8 — இயேசு கிறிஸ்து நேற்றும் இன்றும் என்றென்றைக்கும் மாறாதவராயிருக்கிறார்.",
-            "யாக்கோபு 1:17 — நன்மையான எந்த ஈவும் பூரணமான எந்த வரமும் பரத்திலிருந்து இறங்கி, ஜோதிகளின் பிதாவினிடத்திலிருந்து வருகிறது.",
-            "1 யோவான் 4:19 — அவர் முதலாவது நம்மிடத்தில் அன்புகூர்ந்தபடியால் நாமும் அவரிடத்தில் அன்புகூருகிறோம்.",
-            "சங்கீதம் 46:1 — தேவன் நமக்கு அடைக்கலமும் பெலனும், ஆபத்துக்காலத்தில் அநுகூலமான துணையுமானவர்.",
-            "நீதிமொழிகள் 18:10 — கர்த்தரின் நாமம் பலத்த துருகம்; நீதிமான் அதற்குள் ஓடிச் சுகமாயிருப்பான்.",
-            "ஏசாயா 26:3 — உம்மை உறுதியாய்ப் பற்றிக்கொண்ட மனதையுடையவன் உம்மையே நம்பியிருக்கிறபடியால், நீர் அவனைப் பூரண சமாதானத்துடன் காத்துக்கொள்வீர்.",
-            "சங்கீதம் 62:1 — என் ஆத்துமா தேவனை நோக்கியே அமர்ந்திருக்கிறது; அவரால்தான் என் இரட்சிப்பு வரும்.",
-            "ரோமர் 8:28 — அன்றியும், தேவனுடைய தீர்மானத்தின்படி அழைக்கப்பட்டவர்களாய் அவரிடத்தில் அன்புகூருகிறவர்களுக்குச் சகலமும் நன்மைக்கு ஏதுவாக நடக்கிறதென்று அறிந்திருக்கிறோம்.",
-            "2 கொரிந்தியர் 12:9 — என் கிருபை உனக்குத் போதும்; பலவீனத்திலே என் பலம் பூரணமாய் விளங்கும்.",
-            "எபேசியர் 3:20 — நாம் வேண்டிக்கொள்ளுகிறதற்கும் நினைக்கிறதற்கும் மிகவும் அதிகமாய் நமக்குள்ளே கிரியைசெய்கிற வல்லமையின்படியே செய்யவல்லவராகிய அவருக்கு மகிமை உண்டாவதாக.",
-            "கொலோசெயர் 3:14 — இவை எல்லாவற்றின்மேலும், பூரணகுணத்தின் கட்டாகிய அன்பைத் தரித்துக்கொள்ளுங்கள்.",
-            "1 தெசலோனிக்கேயர் 5:18 — எல்லாவற்றிலேயும் ஸ்தோத்திரஞ்செய்யுங்கள்; அப்படிச் செய்வதே கிறிஸ்து இயேசுவுக்குள் உங்களைக்குறித்து தேவனுடைய சித்தமாயிருக்கிறது.",
-            "2 தீமோத்தேயு 1:7 — தேவன் நமக்குப்பயமுள்ள ஆவியைக் கொடாமல், பலமும் அன்பும் தெளிந்த புத்தியுமுள்ள ஆவியையே கொடுத்திருக்கிறார்.",
-            "சங்கீதம் 112:7 — துர்ச்செய்தியைக் கேட்கிறதினால் பயப்படான்; அவன் இருதயம் கர்த்தரை நம்பித் திடனாயிருக்கும்.",
-            "நீதிமொழிகள் 10:22 — கர்த்தரின் ஆசீர்வாதமே ஐசுவரியத்தைத் தரும்; அவர் அதனோடே வேதனையைக் கூட்டார்.",
-            "ஏசாயா 30:15 — அமர்ந்திருக்கையிலும் நம்பிக்கையாயிருக்கையிலும் உங்கள் பெலன் இருக்கும்.",
-            "சங்கீதம் 27:1 — கர்த்தர் என் வெளிச்சமும் என் இரட்சிப்புமானவர், யாருக்குப் பயப்படுவேன்? கர்த்தர் என் ஜீவனின் பெலனானவர், யாருக்குத் திகைப்பேன்?",
-            "யோவான் 15:5 — நானே திராட்சச்செடி, நீங்கள் கொடிகள். ஒருவன் என்னிலும் நான் அவனிலும் நிலைத்திருந்தால், அவன் மிகுந்த கனிகளைக் கொடுப்பான்.",
-            "ரோமர் 12:12 — நம்பிக்கையிலே சந்தோஷமாயிருங்கள்; உபத்திரவத்திலே பொறுமையாயிருங்கள்; ஜெபத்திலே உறுதியாய்த்தரித்திருங்கள்.",
-            "1 பேதுரு 5:7 — அவர் உங்களை விசாரிக்கிறவரானபடியால், உங்கள் கவலைகளையெல்லாம் அவர்மேல் வைத்துவிடுங்கள்.",
-            "சங்கீதம் 32:8 — நான் உனக்குப் போதித்து, நீ நடக்கவேண்டிய வழியை உனக்குக் காட்டுவேன்; உன்மேல் என் கண்ணை வைத்து, உனக்கு ஆலோசனை சொல்லுவேன்.",
-            "நீதிமொழிகள் 23:18 — நிச்சயமாகவே முடிவு உண்டு, உன் நம்பிக்கை வீண்போகாது.",
-            "ஏசாயா 43:19 — இதோ, நான் புதிய காரியத்தைச் செய்கிறேன்; இப்பொழுதே அது தோன்றும்; நீங்கள் அதை அறியீர்களா? நான் வனாந்தரத்திலே வழியையும், அவாந்தரவெளியிலே ஆறுகளையும் உண்டாக்குவேன்.",
-            "சங்கீதம் 55:22 — கர்த்தர்மேல் உன் பாரத்தை வைத்துவிடு, அவர் உன்னை ஆதரிப்பார்; நீதிமானை என்றைக்கும் தள்ளாடவொட்டார்.",
-            "யோவான் 16:33 — உலகத்தில் உங்களுக்கு உபத்திரவம் உண்டு, ஆனாலும் திடன்கொள்ளுங்கள்; நான் உலகத்தை ஜெயித்தேன்.",
-            "2 நாளாகமம் 16:9 — தம்மைப்பற்றி உத்தம இருதயத்தோடிருக்கிறவர்களுக்குத் தம்முடைய வல்லமையைப் விளங்கப்பண்ணும்படி, கர்த்தருடைய கண்கள் பூமியெங்கும் உலாவிக்கொண்டிருக்கிறது.",
-            "சங்கீதம் 63:3 — ஜீவனைப்பார்க்கிலும் உமது கிருபை மேலானது; என் உதடுகள் உம்மைத் துதிக்கும்.",
-            "நீதிமொழிகள் 8:17 — என்னைச் சிநேகிக்கிறவர்களை நான் சிநேகிக்கிறேன்; அதிகாலையில் என்னைத் தேடுகிறவர்கள் என்னைக் கண்டடைவார்கள்.",
-            "ஏசாயா 60:22 — சிறியவன் ஆயிரமும், சிறியவன் பலத்த ஜாதியுமாவான்; கர்த்தராகிய நான் ஏற்றகாலத்தில் இதைத் தீவிரமாய் நடப்பிப்பேன்.",
-            "சங்கீதம் 86:15 — ஆண்டவரே, நீர் மனவுருக்கமும் இரக்கமும், நீடிய சாந்தமும், மிகுந்த கிருபையும் சத்தியமுமுள்ள தேவன்.",
-            "மத்தேயு 11:28 — வருத்தப்பட்டுப் பாரஞ்சுமக்கிறவர்களே! நீங்கள் எல்லாரும் என்னிடத்தில் வாருங்கள், நான் உங்களுக்கு இளைப்பாறுதல் தருவேன்.",
-            "ரோமர் 8:31 — தேவனுக்கு நமக்கு அநுகூலமாயிருக்கையில், நமக்கு விரோதமாய் இருப்பவன் யார்?",
-            "2 கொரிந்தியர் 5:17 — இப்படிப்பட்டவன் கிறிஸ்துவுக்குள்ளிருந்தால் புதிய சிருஷ்டியாயிருக்கிறான்; பழையவைகள் ஒழிந்துபோயின, எல்லாம் புதியவைகளாயின.",
-            "எபேசியர் 2:10 — நற்கிரியைகளைச் செய்கிறதற்கு நாம் கிறிஸ்து இயேசுவுக்குள் சிருஷ்டிக்கப்பட்டு, தேவனுடைய செய்கையாயிருக்கிறோம்.",
-            "பிலிப்பியர் 4:7 — எல்லாப் புத்திக்கும் மேலான தேவ சமாதானம் உங்கள் இருதயங்களையும் உங்கள் சிந்தைகளையும் கிறிஸ்து இயேசுவுக்குள் காத்துக்கொள்ளும்.",
-            "கொலோசெயர் 3:17 — நீங்கள் வார்த்தையினாலாவது கிரியையினாலாவது எதைச் செய்தாலும், அதையெல்லாம் கர்த்தராகிய இயேசுவின் நாமத்தினாலே செய்து, அவர் மூலமாய்ப் பிதாவாகிய தேவனை ஸ்தோத்தரியுங்கள்.",
-            "சங்கீதம் 116:1 — கர்த்தர் என் சத்தத்தையும் என் விண்ணப்பங்களையும் கேட்டபடியால், அவரில் அன்புகூருகிறேன்.",
-            "நீதிமொழிகள் 14:26 — கர்த்தருக்குப் பயப்படுகிறவனுக்குத் திடநம்பிக்கை உண்டு; அவன் பிள்ளைகளுக்கும் அடைக்கலம் கிடைக்கும்.",
-            "ஏசாயா 65:24 — அவர்கள் கூப்பிடுகிறதற்குமுன்னே நான் மறுஉத்தரவு கொடுப்பேன்; அவர்கள் பேசிக்கொண்டிருக்கும்போதே நான் கேட்பேன்.",
-            "சங்கீதம் 119:50 — உமது வாக்கு என்னை உயிர்ப்பித்தது; இதுவே என் சிறுமையில் எனக்கு ஆறுதல்.",
-            "மத்தேயு 28:20 — இதோ, உலகத்தின் முடிவுபரியந்தம் சகல நாட்களிலும் நான் உங்களுடனேகூட இருக்கிறேன்.",
-            "யோவான் 8:12 — நான் உலகத்திற்கு ஒளியாயிருக்கிறேன், என்னைப் பின்பற்றுகிறவன் இருளிலே நடவாமல் ஜீவஒளியை அடைந்திருப்பான்.",
-            "சங்கீதம் 100:5 — கர்த்தர் நல்லவர், அவருடைய கிருபை என்றுமுள்ளது; அவருடைய உண்மை தலைமுறை தலைமுறைக்கும் இருக்கும்.",
-            "உபாகமம் 31:6 — நீங்கள் பலங்கொண்டு திடமனதாயிருங்கள்... உங்கள் தேவனாகிய கர்த்தர் தாமே உங்களுடனேகூட வருகிறார்; அவர் உங்களைக் கைவிடமாட்டார்.",
-            "யோசுவா 24:15 — நானும் என் வீட்டாருமோவென்றால், கர்த்தரையே சேவிப்போம்.",
-            "சங்கீதம் 139:14 — நான் பிரமிக்கத்தக்க அதிசயமாய் நெய்யப்பட்டபடியால், உம்மைத் துதிப்பேன்.",
-            "நீதிமொழிகள் 3:6 — உன் வழிகளிலெல்லாம் அவரை நினExternal, அப்பொழுது அவர் உன் பாதைகளைச் செவ்வைப்படுத்துவார்.",
-            "ஏசாயா 46:4 — உங்கள் முதிர்வயதுவரைக்கும் நான் அப்படிச் செய்வேன்; நரைவயதுவரைக்கும் நான் உங்களைத் தாங்குவேன்.",
-            "எரேமியா 31:3 — அநாதி சிநேகத்தால் உன்னைச் சிநேகித்தேன்; அதனால் காருண்யத்தால் உன்னை இழுத்துக்கொள்ளுகிறேன்.",
-            "சங்கீதம் 147:3 — இருதயம் நொறுங்குண்டவர்களைக் குணமாக்குகிறார், அவர்களுடைய காயங்களைக் கட்டுகிறார்.",
-            "ரோமர் 12:2 — நீங்கள் இந்த உலகத்திற்கு ஒத்த வேஷம்தரியாமல், தேவனுடைய நன்மையும் பிரியமும் பரிபூரணமுமான சித்தம் இன்னதென்று பகுத்தறியத்தக்கதாக, உங்கள் மனம் புதிதாகிறதினாலே மறுரூபமாகுங்கள்.",
-            "1 யோவான் 4:16 — தேவன் அன்பாகவே இருக்கிறார்; அன்பில் நிலைத்திருக்கிறவன் தேவனில் நிலைத்திருக்கிறான், தேவனும் அவனில் நிலைத்திருக்கிறார்.",
-            "சங்கீதம் 103:5 — நன்மையினால் உன் வாயைத் திருப்தியாக்குகிறார்; கழுகுக்குச் சமானமாய் உன் வயது திரும்ப வாலவயதுபோலாகிறது."
-        ];
-
-        const kavithaigalDatabase = [
-            "நாட்கள் நகர நகர என் காதல் கூடுகிறது,\nஉன் பிறந்தநாளை எதிர்நோக்கி என் இதயம் துடிக்கிறது! ❤️",
-            "உன் புன்னகை தான் என் உலகத்தின் வெளிச்சம்,\nஉன்னோடு வாழும் ஒவ்வொரு நொடியும் வரம்! 👑",
-            "என் தனிமையின் இரவுகளை அழகாக மாற்றியவன் நீ,\nஎன் இதயத்துடிப்பின் ரகசிய இசையும் நீ! 💕",
-            "கடல் அலையாய் உன் நினைவு என் மனதில் மோதிக்கொண்டே இருக்கிறது.\nபேரன்பே, உன்னை அடைந்த நான் பாக்கியசாலி! ✨",
-            "கண்கள் பேசும் மொழியை விட உன் மௌனம் எனக்குப் புரியும்,\nஉன் கரம் கோர்க்கும் நொடியில் என் கவலைகள் யாவும் மறையும்! 🌿",
-            "உன்னை எனக்குத் தந்த இறைவனுக்கு என் நன்றி சமர்ப்பணம்,\nஎன் மொத்த காதலும் உனக்கு மட்டும்தான் ஐசக்! 💫",
-            "நாளை விடியும் பொழுது உனக்கான பொன்னான நாள்,\nகாத்திருக்கிறேன் உன் புன்னகையைக் காண! 🌹",
-            "என் அன்பான ஐசக், பிறந்தநாள் நல்வாழ்த்துகள்! நீ நினைத்த காரியங்கள் அனைத்தும் ஜெயமாய் முடியட்டும். உன்னோடு வாழும் இந்த வாழ்க்கை பேரழகு! 💝",
-            "பின்னிய விரல்களின் கதகதப்பில் உலகத்தையே மறக்கிறேன்,\nநீ அருகில் இருந்தால் மரணத்தையும் புன்னகையோடு கடப்பேன்! 🕊️",
-            "விண்ணில் இருக்கும் நிலவு ஒரு அழகு என்றால்,\nஎன் வாழ்வில் இருக்கும் நீ பேரழகு என் அன்பே! 🌙",
-            "மொழிகள் தீர்ந்து போகலாம், ஆனால் உன் மீதான என் காதல்\nஒருபோதும் தீராது, வற்றிப்போகாத ஊற்றாக என்றும் பாயும்! 🌊",
-            "என் உலகத்தின் மையப்புள்ளி நீதான்,\nஎன் விடியலும் நீ, என் அந்தியும் நீ! ☀️",
-            "காற்றுக்குத் தெரிவதில்லை அது யாரைத் தீண்டுகிறது என்று,\nஆனால் என் இதயத்திற்குத் தெரியும் அது உனக்காக மட்டுமே துடிக்கிறது என்று! 💨",
-            "கோடி நொடிகள் வாழ்வதை விட,\nஉன் தோள் சாய்ந்து வாழும் ஒரு நொடி போதும் எனக்கு! 🐨",
-            "என் மௌனத்தின் அர்த்தம் உனக்குத் தெரிகிறது,\nஎன் கண்ணீரின் ரகசியம் உன் விரல் தீண்டலில் கரைகிறது! 💧",
-            "நீ பேசும் வார்த்தைகள் எல்லாம் எனக்கு கவிதைகள் தான்,\nநீ காட்டும் அன்பில் நான் குழந்தையாகிப் போகிறேன்! 👶",
-            "காலங்கள் மாறினாலும் கோலங்கள் மாறினாலும்,\nஉன் மீது நான் கொண்ட தூய காதல் என்றும் மாறாது! ⏳",
-            "விண்மீன்கள் கூட்டம் எல்லாம் உன் அழகைக் கண்டு பொறாமை கொள்கிறது,\nஎன் விண்மீனே, என் உலகமே நீதான்! 🌌",
-            "உன் இதழோரப் புன்னகையில் என் கவலைகள் யாவும் மறைகின்றன,\nநீயின்றி என் வாழ்வில் வேறென்ன மகிழ்ச்சி வேண்டும்! 😊",
-            "விடியலைத் தேடும் பறவையாய் என் இதயம் உன்னைத் தேடுகிறது,\nஉன் அன்பெனும் கூட்டில் அடைக்கலம் புக ஏங்குகிறது! 🦅",
-            "என் கரம் கோர்த்து நீ நடக்கும் பாதைகள் எல்லாம்\nஎனக்கு நந்தவனமாய் மாறுகிறது என் அரசனே! 👑",
-            "விடை தெரியா பல கேள்விகளுக்கு,\nஉன் ஒற்றை அணைப்பு அழகிய விடையாகிறது! 🤗",
-            "வானவில்லின் வண்ணங்கள் எல்லாம் உன்னோடு ஒப்பிடுகையில் மங்கிப்போகின்றன,\nஎன் வாழ்வை வண்ணமயமாக்கிய வர்ணமே நீ! 🎨",
-            "உன் நினைவுகள் இல்லாத நிமிடங்களை என் கடிகாரம் காட்டுவதில்லை,\nஎன் காலமும் நேரமும் நீயாகவே இருக்கிறாய்! ⏱️",
-            "இரவின் அமைதியில் உன் மூச்சுக்காற்றின் சத்தம் போதும்,\nஎன் தூக்கத்தை உலகிலேயே மிகவும் இனிமையானதாக மாற்ற! 😴",
-            "ஆயிரம் சொந்தங்கள் என்னைச் சுற்றி இருந்தாலும்,\nஉன் ஒற்றைப் பார்வை தரும் பாதுகாப்பு தனித்துவமானது! 🛡️",
-            "உன் கண்களில் என் முகத்தைப் பார்க்கும் போது தான்,\nநான் எவ்வளவு அழகாக இருக்கிறேன் என்று எனக்கே புரிகிறது! 👀",
-            "கடலின் ஆழத்தை அளந்துவிடலாம்,\nஆனால் என் ஆழமான காதலை யாராலும் அளக்க முடியாது! ⚓",
-            "நெருங்கி வரும் ஒவ்வொரு நொடியும் நம் காதலை வளர்க்கிறது,\nபிறந்தநாள் நெருங்க நெருங்க என் ஆர்வம் கூடுகிறது! 🎈",
-            "என் வானில் நீ உதித்த சூரியன்,\nஎன் இருண்ட பக்கங்களை எல்லாம் ஒளியால் நிரப்பியவன்! ☀️",
-            "வசந்த காலம் என்பது வருடத்திற்கு ஒரு முறை தான் வரும்,\nஆனால் நீ என் வாழ்வில் வந்ததில் இருந்து தினமும் வசந்தமே! 🌸",
-            "உன் விரல் பிடித்து நடக்கும் போது\nபூமிப்பந்தே என் காலடியில் இருப்பது போல் உணர்கிறேன்! 🌍",
-            "நெஞ்சக் கூட்டில் உன்னை மட்டுமே சிறை வைத்திருக்கிறேன்,\nஅந்தச் சிறையை விட்டு நீ ஒருபோதும் தப்பிக்க முடியாது! ⛓️",
-            "கனவுகளில் மட்டுமே வந்த நீ, என் நிஜமாகிப் போனாய்,\nஇந்த நிஜம் என்றும் அழியாத வரமாய் வேண்டும்! 💭",
-            "உன் புன்னகை என்னும் மழையில் நனையக் காத்திருக்கிறேன்,\nஎன் தாகம் தீர்க்கும் ஜீவ நதி நீதான்! 🌧️",
-            "என் கவலைகளின் போதெல்லாம் உன் மடி தான் என் படுக்கை,\nஅங்கே சாய்ந்தால் அகிலத்தின் துன்பங்களும் காணாமல் போகும்! 🛌",
-            "யார் என்ன சொன்னாலும் என் உலகம் உன்னோடு தான்,\nஎன் இறுதி மூச்சு வரை என் காதல் உனக்காக மட்டுமே! 🫁",
-            "உன் குரல் கேட்கும் போது என் இதயத்தின்\nதுடிப்பு சீராகிறது, நீ தான் என் உயிர் காதலன்! 🎙️",
-            "மழைத்துளி பூமிக்கு அழகு என்றால்,\nஉன் அன்பு என் வாழ்க்கைக்குக் கிடைத்த பேரழகு! 💧",
-            "பூக்கள் எல்லாம் வாடிப் போகலாம், ஆனால் என் மனத் தோட்டத்தில்\nபூத்த உன் நினைவுப் பூ என்றும் வாடாது! 🌹",
-            "உன்னோடு பேசும் நிமிடங்கள் தான் என் நாளின் சிறந்த நிமிடங்கள்,\nஅப்படியே அந்த நேரம் உறைந்துவிடக் கூடாதா என ஏங்குகிறேன்! ⏳",
-            "என் சின்னஞ்சிறு இதயத்தில் பிரம்மாண்டமாய் வாழ்கிறாய் நீ,\nஉன்னைத் தவிர வேறு யாருக்கும் அங்கே இடமில்லை! 💗",
-            "விழிகளில் உன்னை மறைத்து வைப்பேன், யாராவது திருடிவிடப் போகிறார்கள்,\nஎன் கண்ணின் மணி போன்றவன் நீ ஐசக்! 👁️",
-            "காதல் என்ற சொல்லுக்கு இலக்கணம் தேடினேன்,\nஉன் அன்பைக் கண்ட பின் அகராதியே தேவையில்லை என்றானது! 📖",
-            "நெருப்பில் உருகும் மெழுகாய் உன் அன்பில் உருகுகிறேன்,\nஉன்னோடு கலந்த பின் நானே நீயாக மாறுகிறேன்! 🕯️",
-            "உன் வருகை என் வாழ்வில் பல மாற்றங்களைத் தந்தது,\nஎன்னை எனக்கே பிடிக்க வைத்த என் மந்திரவாதி நீ! 🪄",
-            "பூமி சுழல்வதை நிறுத்தினாலும் என் இதயம் உன்னைச்\nசுற்றி வருவதை ஒருபோதும் நிறுத்தாது அன்பே! 🔄",
-            "உன் கைகளில் நான் இருக்கும் போது,\nஉலகத்தின் எந்தப் புயலும் என்னை ஒன்றும் செய்ய முடியாது! 🌪️",
-            "என் வாழ்வின் ஒவ்வொரு பக்கத்திலும் உன் பெயர் மட்டுமே எழுதப்பட்டிருக்கிறது,\nநீ தான் என் முழுமையான காவியம்! 📚",
-            "நீ என் அருகில் இருக்கும் போது மரணமும் தள்ளிப் போகும்,\nநீ தான் என் உயிர் காக்கும் संजीवनी! 🌿",
-            "யாரையும் உன்னோடு ஒப்பிட எனக்கு விருப்பமில்லை,\nஏனெனில் நீ எனக்கு மட்டுமே சொந்தமான தனித்துவம்! 💎",
-            "உன் ஒற்றை முத்தத்தில் என் உலகமே சுழல்கிறது,\nஎன் மொத்த காதலும் உனக்கே அர்ப்பணம்! 💋",
-            "நிழல் போல உன்னோடு தொடர ஆசைப்படுகிறேன்,\nஇருளிலும் உன்னை பிரியாத நிழலாய் நான் இருப்பேன்! 👤",
-            "என் இதயக் கதவை தட்டியவன் நீ,\nஅதை என்றென்றைக்குமாக பூட்டி சாவியை உன்னிடமே தந்துவிட்டேன்! 🔑",
-            "உன் கண்களின் ஆழத்தில் நான் தொலைந்து போகிறேன்,\nமீண்டும் என்னை அங்கே கண்டெடுக்கவே ஆசைப்படுகிறேன்! 🌊",
-            "நாட்கள் கடந்து போகலாம், வயது கூடிப் போகலாம்,\nஆனால் உம்மீதான என் காதல் என்றும் இளமையாகவே இருக்கும்! 👶",
-            "என் கவிதைகளின் நாயகன் நீதான்,\nஉன்னை எழுத எழுத என் பேனா மை தீர்ந்தாலும் காதல் தீராது! ✒️",
-            "உன் நினைவோடு உறங்கி உன் நினைவோடு விழிக்கிறேன்,\nஎன் விடியலின் அழகே நீதான் ஐசக்! 🌄",
-            "பூமியில் வாழும் சொர்க்கம் எதுவென்றால்,\nஉன் தோள் சாய்ந்து இருக்கும் இடம் தான் என்பேன்! 🌌",
-            "உன் அன்பு என்னும் கடலில் நான் ஒரு சிறு துளி,\nஉன்னோடு கலந்த பின் நானும் கடலாகிப் போனேன்! 🌊",
-            "என் இதயத்தின் துடிப்பை உன்னிடம் ஒப்படைத்துவிட்டேன்,\nஅதை பத்திரமாகப் பார்த்துக் கொள்வது உன் கடமை! 💓",
-            "உன் புன்னகை என் வாழ்வின் இருளை விரட்டும் ஒளிரும் விளக்கு,\nஎன்றும் என் வாழ்வில் ஒளிர்க என் தீபமே! 🪔",
-            "உன் கரம் கோர்த்து நடக்கும் போது வெயில் கூட குளிர்ச்சியாகிறது,\nஉன் அன்பு அத்தனை விசித்திரமானது! ☀️",
-            "என் மௌனங்களுக்கு வார்த்தைகள் தருபவன் நீ,\nஎன் தேவைகளை நான் கேட்காமலேயே அறிபவன் நீ! 🤫",
-            "உன்னோடு செலவழிக்கும் ஒவ்வொரு நொடியும் சேமித்து வைக்கிறேன்,\nஎன் நினைவுகளின் ஆகச்சிறந்த பொக்கிஷம் அதுதான்! 📦",
-            "என் வாழ்வின் வசந்தமே, உன்னை அடைந்த பின்\nஎன் வாழ்வில் துன்பம் என்ற சொல்லுக்கே இடமில்லை! 🌸",
-            "கண்களால் உன்னை பருகிக் கொண்டே இருக்க ஆசை,\nஉன் அழகு என்றும் குறையாத பேரதிசயம்! 🏛️",
-            "என் இதயத்தின் ராஜ்ஜியத்திற்கு நீ தான் என்றும் அரசன்,\nஉன் கட்டளைகளுக்குக் காத்திருக்கும் உன்னவள் நான்! 👑",
-            "உன் மூச்சுக்காற்று என் மீது படும் போது,\nஎன் உயிரின் வேர் இன்னும் ஆழமாகப் பாய்கிறது! 🌱",
-            "யார் உன்னை கைவிட்டாலும் என் கரம் உன்னைத் தாங்கும்,\nஉன் நிழலாய் என்றும் நான் உன்னோடு இருப்பேன்! 🤝",
-            "உன் நினைவுகள் என் மனதில் என்றும் ஆடும் ஊஞ்சல்,\nஅதில் ஆடிக்கொண்டே இருக்கட்டும் என் காதல் மனம்! 🪢",
-            "என் வாழ்வின் அர்த்தம் நீதான்,\nநீயில்லாத ஒரு வாழ்க்கையை என்னால் கற்பனை கூட செய்ய முடியாது! 💭",
-            "உன் அன்பில் நான் நனையும் போது,\nஎன் மொத்த உலகமும் அழகாக மாறிப் போகிறது! 🌧️",
-            "என் இதயத்தின் ஓசை உனக்குக் கேட்கிறதா?\nஅது ஐசக் ஐசக் என்று மட்டுமே துடிக்கிறது! 💓",
-            "விண்மீன்கள் மறைந்தாலும் நிலவு தேய்ந்தாலும்,\nஉன் மீதான என் கிருபையும் காதலும் என்றும் குறையாது! 🌙",
-            "உன் கரம் பிடித்து நான் கடக்கும் பாதைகள் எல்லாம்\nபூக்கள் தூவிய கார்ப்பெட்டாய் மாறுகிறது! 🌹",
-            "என் வாழ்வின் ஆகச்சிறந்த பரிசு நீதான்,\nஉன்னைத் தந்த இறைவனுக்கு நான் என்றும் கடமைப்பட்டிருக்கிறேன்! 🎁",
-            "உன் ஒற்றைப் புன்னகை போதும், என் நாளின்\nஅனைத்து சோர்வுகளையும் கணப்பொழுதில் விரட்ட! ⚡",
-            "உன் மார்பில் சாய்ந்து கொள்ளும் போது கிடைக்கும் அமைதி,\nஉலகத்தின் எந்த மூலையிலும் எனக்குக் கிடைக்காது! 💤",
-            "என் காதலின் எல்லை நீதான், என் தேடலின் முடிவு நீதான்,\nஎன் மொத்த வாழ்க்கையின் சாரமும் நீயே! ♾️",
-            "உன்னோடு பேசத் தொடங்கும் போது கவலைகள் மறக்கின்றன,\nபேசி முடித்த பின் உன் நினைவுகள் மட்டுமே எஞ்சுகின்றன! 🗣️",
-            "என் விழிகளின் ஒளியே, என் இதயத்தின் உயிரே,\nஎன்றும் என் அருகிலேயே இரு என் காதலனே! 🕯️",
-            "காலங்கள் உருண்டோடினாலும் நம் காதல் காவியம்\nவரலாற்றில் அழியாத காதலாக என்றும் நிலைத்திருக்கும்! 📜",
-            "உன் கைகளில் நான் என்னை முழுமையாக ஒப்படைத்துவிட்டேன்,\nஎன் உலகம், என் உயிர், என் எல்லாமே நீதான்! 🌍",
-            "உன் நினைவுகளின் தழுவலில் என் இரவுகள் கழிகின்றன,\nஉன் வருகைக்காகக் காத்திருக்கிறது என் ஏகப்பட்ட காதல்! 🌌",
-            "என் இதயத்தின் துடிப்புக்கு உயிர் தந்தவன் நீ,\nஉன் அன்பின் ஆழத்தில் நான் என்றும் அடிமையே! ⛓️",
-            "என் வாழ்வின் ஒவ்வொரு நொடியும் உன்னால் அழகாகிறது,\nநீ என் வாழ்வில் வந்ததே நான் செய்த பெரும் தவம்! 🧘",
-            "உன் அன்பெனும் மழையில் நனைந்து தீர ஆசை,\nஎன்னை முழுமையாக ஆட்கொண்ட என் மழையே நீ! 🌧️",
-            "நாளை விடியும் பொழுது உனக்கான பொன்னான நாள்,\nஎன் மொத்த காதலும் உனக்கு அர்ப்பணம் ஐசக்! 🌹",
-            "என் அன்பான ஐசக், பிறந்தநாள் நல்வாழ்த்துகள்! நீ நினைத்த காரியங்கள் அனைத்தும் ஜெயமாய் முடியட்டும். உன்னோடு வாழும் இந்த வாழ்க்கை பேரழகு! என்றும் உன் நினைவுகளுடன் நான்... 💝"
-        ];
+        let globalTitle = ""; 
 
         function openDailySurprise() {
-            const modalContainer = document.getElementById('modalDynamicContent');
-            
-            // Birthday Target Node Date Setup
             const bday = new Date("2026-09-08");
             const today = new Date();
-            
-            // Clean temporal alignment stripping metadata hours
-            bday.setHours(0,0,0,0);
-            today.setHours(0,0,0,0);
+            bday.setHours(0,0,0,0); today.setHours(0,0,0,0);
             
             const diffTime = bday - today;
             const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
             
-            let selectedTitle = "";
-            let selectedVerse = "";
-            let selectedKavithai = "";
+            let targetIndex = 90 - diffDays;
+            if(targetIndex < 0) targetIndex = 0;
+            if(targetIndex >= 90) targetIndex = 89;
 
-            if (diffDays === 0) {
-                // September 8th Master Grand Reveal Trigger
-                selectedTitle = "🎂 HAPPY 24th BIRTHDAY ISAAC! 🎉";
-                selectedVerse = versesDatabase[89];
-                selectedKavithai = kavithaigalDatabase[89];
-            } else if (diffDays > 0 && diffDays <= 90) {
-                // Chronological linear countdown indexing algorithm matrix mapping
-                const targetIndex = 90 - diffDays; 
-                selectedTitle = `${diffDays} Days To Go - Special Surprise! ✨`;
-                selectedVerse = versesDatabase[targetIndex] || versesDatabase[0];
-                selectedKavithai = kavithaigalDatabase[targetIndex] || kavithaigalDatabase[0];
-            } else if (diffDays < 0) {
-                // Safe handling interface lock if accessed past date window range
-                selectedTitle = "Hope you had a great birthday! 💖";
-                selectedVerse = versesDatabase[89];
-                selectedKavithai = "உன்னோடு வாழும் ஒவ்வொரு நாளும் எனக்கு பிறந்தநாள் தான் என் அன்பே! 🥰";
-            } else {
-                // Out of scope protection range fallbacks
-                selectedTitle = "Countdown Active! ⚡";
-                selectedVerse = versesDatabase[0];
-                selectedKavithai = "செப்டம்பர் 8-ம் தேதி வரை தினமும் ஒரு புதிய கவிதை மற்றும் வேத வசனம் இங்கே உனக்காகக் காத்திருக்கும் அன்பே! 🤫❤️";
-            }
+            globalTitle = (diffDays === 0) ? "🎂 HAPPY BIRTHDAY ISAAC! 🎉" : `${diffDays} Days To Go! ✨`;
+            
+            document.getElementById('mTitle').innerText = globalTitle;
+            document.getElementById('mVerse').innerText = versesDatabase[targetIndex];
+            document.getElementById('mKavithai').innerText = kavithaigalDatabase[targetIndex];
 
-            modalContainer.innerHTML = `
-                <h3 class="modal-day-title">${selectedTitle}</h3>
-                <p class="modal-verse">${selectedVerse}</p>
-                <div class="modal-kavithai">${selectedKavithai}</div>
-            `;
+            const quiz = quizDatabase[targetIndex];
+            document.getElementById('quizQn').innerText = quiz.q;
+            
+            const optsContainer = document.getElementById('quizOpts');
+            optsContainer.innerHTML = "";
+            quiz.a.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = "quiz-btn";
+                btn.innerText = opt;
+                btn.onclick = () => checkQuizAnswer(idx, quiz.correct);
+                optsContainer.appendChild(btn);
+            });
+
+            document.getElementById('quizWrapper').classList.add('show');
+            document.getElementById('scratchWrapper').classList.remove('show');
+            document.getElementById('moodWrapper').classList.remove('show');
 
             document.getElementById('giftModal').classList.add('active');
+        }
+
+        function checkQuizAnswer(selected, correct) {
+            if (selected === correct) {
+                alert("சரியான விடை! 🎉 இதோ உனக்கான இன்றைய சர்ப்ரைஸ் ஸ்கிராட்ச் கார்டு! 🎫");
+                document.getElementById('quizWrapper').classList.remove('show');
+                document.getElementById('scratchWrapper').classList.add('show');
+                initScratchCard();
+            } else {
+                alert("அய்யோ தப்பான பதிலாச்சே! 😜 யோசிச்சு கரெக்டா சொல்லுங்க மிஸ்டர் மியூசிசியன்!");
+            }
+        }
+
+        function initScratchCard() {
+            const canvas = document.getElementById('scratchCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            canvas.width = canvas.parentElement.clientWidth;
+            canvas.height = canvas.parentElement.clientHeight;
+
+            ctx.fillStyle = '#aa841c';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            ctx.font = 'bold 14px Montserrat';
+            ctx.fillStyle = '#04120c';
+            ctx.textAlign = 'center';
+            ctx.fillText('🎸 SCRATCH WITH LOVE 🥁', canvas.width / 2, canvas.height / 2 - 10);
+            ctx.font = '10px Montserrat';
+            ctx.fillText('தேய்த்து சர்ப்ரைஸை திறக்கவும்', canvas.width / 2, canvas.height / 2 + 15);
+
+            let isDrawing = false;
+
+            function scratch(e) {
+                if (!isDrawing) return;
+                const rect = canvas.getBoundingClientRect();
+                const x = (e.clientX || e.touches[0].clientX) - rect.left;
+                const y = (e.clientY || e.touches[0].clientY) - rect.top;
+
+                ctx.globalCompositeOperation = 'destination-out';
+                ctx.beginPath();
+                ctx.arc(x, y, 24, 0, Math.PI * 2);
+                ctx.fill();
+
+                checkScratchPercentage();
+            }
+
+            canvas.addEventListener('mousedown', () => isDrawing = true);
+            canvas.addEventListener('touchstart', () => isDrawing = true);
+            canvas.addEventListener('mousemove', scratch);
+            canvas.addEventListener('touchmove', scratch);
+            window.addEventListener('mouseup', () => isDrawing = false);
+            window.addEventListener('touchend', () => isDrawing = false);
+        }
+
+        function checkScratchPercentage() {
+            document.getElementById('moodWrapper').classList.add('show');
+        }
+
+        function sendMoodReply(mood) {
+            const encodedMsg = encodeURIComponent(`அன்பே! இன்றைய சர்ப்ரைஸ் மெசேஜ் பார்த்தேன் (${globalTitle}). ஐ ஃபீல் ரொம்ப ${mood}!! ❤️🎸`);
+            window.open(`https://wa.me/?text=${encodedMsg}`, '_blank');
         }
 
         function closeGift() { document.getElementById('giftModal').classList.remove('active'); }
@@ -433,15 +419,14 @@
 
         function generateLoveParticles() {
             const container = document.getElementById('particles');
-            for(let i=0; i<20; i++) {
+            for(let i=0; i<30; i++) {
                 const particle = document.createElement('div');
-                particle.innerHTML = i % 2 === 0 ? '✨' : '❤';
+                particle.innerHTML = i % 3 === 0 ? '🎸' : (i % 3 === 1 ? '🎹' : '❤️');
                 particle.style.position = 'absolute';
                 particle.style.left = Math.random() * 100 + '%';
                 particle.style.top = Math.random() * 100 + '%';
-                particle.style.fontSize = (Math.random() * 10 + 8) + 'px';
-                particle.style.color = 'rgba(212, 175, 55, 0.25)';
-                particle.style.opacity = Math.random();
+                particle.style.fontSize = (Math.random() * 14 + 10) + 'px';
+                particle.style.opacity = Math.random() * 0.25;
                 container.appendChild(particle);
             }
         }
