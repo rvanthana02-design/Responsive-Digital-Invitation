@@ -13,72 +13,68 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            /* Romantic, Deep Midnight & Luxury Emerald Mesh Gradient */
-            background: radial-gradient(at 0% 0%, hwb(240 4% 89%) 0, transparent 55%), 
-                        radial-gradient(at 50% 0%, #0d203d 0, transparent 60%), 
-                        radial-gradient(at 100% 0%, #163624 0, transparent 55%), 
-                        radial-gradient(at 0% 100%, #1a102f 0, transparent 60%), 
-                        radial-gradient(at 50% 100%, #07162c 0, transparent 60%), 
-                        radial-gradient(at 100% 100%, #11261a 0, transparent 55%);
-            background-color: #0a0f1d;
+            /* Premium Royal Deep Emerald Mesh Gradient */
+            background: radial-gradient(at 0% 0%, #061c12 0, transparent 55%), 
+                        radial-gradient(at 50% 0%, #0a2b1d 0, transparent 60%), 
+                        radial-gradient(at 100% 0%, #04140e 0, transparent 55%), 
+                        radial-gradient(at 0% 100%, #0d1f16 0, transparent 60%), 
+                        radial-gradient(at 50% 100%, #03120b 0, transparent 60%), 
+                        radial-gradient(at 100% 100%, #0b2418 0, transparent 55%);
+            background-color: #04120c;
             font-family: 'Montserrat', sans-serif;
-            padding: 24px;
+            padding: 25px;
             overflow-x: hidden;
-        }
-
-        /* Premium Glassmorphic Card */
-        .card {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            width: 100%;
-            max-width: 420px;
-            padding: 45px 25px;
-            border-radius: 24px;
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6),
-                        inset 0 1px 0px rgba(255, 255, 255, 0.1);
-            text-align: center;
-            color: #f5f5f7;
             position: relative;
         }
 
-        /* Ambient glow behind card */
-        .card::before {
-            content: '';
-            position: absolute;
-            top: -2px; left: -2px; right: -2px; bottom: -2px;
-            border-radius: 24px;
-            background: linear-gradient(45deg, transparent, rgba(229, 193, 88, 0.15), transparent);
-            z-index: -1;
+        /* Floating Background Particles */
+        .particles-container {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
             pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Luxury Glassmorphic Card */
+        .card {
+            background: rgba(10, 35, 24, 0.35);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            width: 100%;
+            max-width: 420px;
+            padding: 40px 25px;
+            border-radius: 30px;
+            border: 1px solid rgba(212, 175, 55, 0.18);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7),
+                        inset 0 1px 1px rgba(255, 255, 255, 0.05);
+            text-align: center;
+            color: #f5f5f7;
+            z-index: 1;
+            position: relative;
         }
 
         .bible-verse {
             font-family: 'Noto Sans Tamil', sans-serif;
-            color: rgba(255, 255, 255, 0.75);
+            color: rgba(255, 255, 255, 0.8);
             font-size: 0.88rem;
             line-height: 1.8;
-            margin-bottom: 30px;
-            letter-spacing: 0.3px;
+            margin-bottom: 20px;
         }
 
         .bible-verse strong {
-            color: #e5c158;
+            color: #d4af37;
             display: block;
             margin-top: 6px;
-            font-weight: 700;
         }
 
         .name {
             font-family: 'Great Vibes', cursive;
             font-size: 4.8rem;
-            color: #e5c158; /* Warm Champagne Gold */
-            background: linear-gradient(135deg, #f3e7c4 0%, #e5c158 50%, #b89030 100%);
+            background: linear-gradient(135deg, #fff3cd 0%, #d4af37 50%, #aa841c 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin: 5px 0;
-            filter: drop-shadow(0 2px 10px rgba(229, 193, 88, 0.25));
+            filter: drop-shadow(0 2px 15px rgba(212, 175, 55, 0.3));
         }
 
         .turning-one {
@@ -87,101 +83,166 @@
             font-size: 0.8rem;
             font-weight: 800;
             color: rgba(255, 255, 255, 0.6);
-            margin-bottom: 35px;
+            margin-bottom: 15px;
         }
 
-        /* Modern Countdown Grid */
+        /* Live Heartbeat Pulse Row */
+        .pulse-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .ecg-svg {
+            width: 120px;
+            height: 30px;
+        }
+
+        .ecg-line {
+            stroke: #d4af37;
+            stroke-width: 2;
+            fill: none;
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: dash 3s linear infinite;
+        }
+
+        @keyframes dash {
+            to { stroke-dashoffset: 0; }
+        }
+
+        .bpm-counter {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #d4af37;
+            letter-spacing: 1px;
+            animation: textPulse 1s ease-in-out infinite alternate;
+        }
+
+        @keyframes textPulse {
+            from { opacity: 0.7; } to { opacity: 1; }
+        }
+
+        /* Countdown Grid */
         #countdown {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 10px;
-            margin: 30px 0;
+            margin: 20px 0;
         }
 
         .time-box {
-            background: rgba(255, 255, 255, 0.04);
-            padding: 14px 2px;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 12px 2px;
             border-radius: 14px;
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            box-shadow: inset 0 1px 1px rgba(255,255,255,0.05);
-            transition: transform 0.3s ease, border-color 0.3s ease;
-        }
-
-        .time-box:hover {
-            border-color: rgba(229, 193, 88, 0.3);
-            transform: translateY(-2px);
+            border: 1px solid rgba(212, 175, 55, 0.1);
         }
 
         .time-num { 
-            display: block; 
-            font-size: 1.6rem; 
-            font-weight: 700; 
-            color: #e5c158; 
-            font-family: 'Montserrat', sans-serif;
+            display: block; font-size: 1.5rem; font-weight: 700; color: #d4af37; 
         }
         
         .time-label { 
-            font-size: 0.55rem; 
-            color: rgba(255, 255, 255, 0.45); 
-            text-transform: uppercase; 
-            letter-spacing: 1px;
-            font-weight: 600;
+            font-size: 0.55rem; color: rgba(255, 255, 255, 0.5); text-transform: uppercase; letter-spacing: 1px;
         }
 
         .details {
-            border-top: 1px solid rgba(229, 193, 88, 0.2);
-            border-bottom: 1px solid rgba(229, 193, 88, 0.2);
-            padding: 25px 0;
-            margin: 30px 0;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            padding: 20px 0;
+            margin: 25px 0;
             line-height: 1.7;
         }
 
-        .date-highlight {
-            color: #fff; 
-            font-weight: 700; 
-            letter-spacing: 2px; 
-            font-size: 0.95rem;
+        .date-highlight { color: #fff; font-weight: 700; letter-spacing: 2px; font-size: 0.95rem; }
+        .venue { font-family: 'Cinzel', serif; font-weight: 800; font-size: 1.2rem; display: block; margin: 5px 0; color: #d4af37; }
+        .address { font-size: 0.85rem; color: rgba(255, 255, 255, 0.7); font-weight: 300; }
+
+        /* Action Buttons Frame */
+        .action-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
         }
 
-        .venue {
-            font-family: 'Cinzel', serif;
-            font-weight: 800;
-            font-size: 1.2rem;
-            display: block;
-            margin: 8px 0 4px 0;
-            color: #e5c158;
-            letter-spacing: 1px;
-        }
-
-        .address {
-            font-size: 0.85rem; 
-            color: rgba(255, 255, 255, 0.65);
-            font-weight: 300;
-        }
-
-        /* Luxury Gold Button Styling */
-        .btn-map {
-            padding: 16px;
+        .btn {
+            padding: 15px;
             border-radius: 50px;
             text-decoration: none;
             font-weight: 700;
             font-size: 0.85rem;
             letter-spacing: 1px;
-            display: block;
-            color: #0a0f1d;
-            background: linear-gradient(135deg, #f3e7c4 0%, #e5c158 100%);
-            box-shadow: 0 10px 25px rgba(229, 193, 88, 0.2);
+            border: none;
+            cursor: pointer;
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-map {
+            color: #04120c;
+            background: linear-gradient(135deg, #fff3cd 0%, #d4af37 100%);
+            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.2);
         }
 
         .btn-map:hover {
-            background: linear-gradient(135deg, #fff 0%, #f1c40f 100%);
-            transform: translateY(-3px);
-            box-shadow: 0 15px 30px rgba(229, 193, 88, 0.35);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 25px rgba(212, 175, 55, 0.35);
         }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #d4af37;
+        }
+
+        /* Virtual Gift Modal */
+        .modal {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(4, 18, 12, 0.8);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+            opacity: 0; pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+
+        .modal.active { opacity: 1; pointer-events: auto; }
+
+        .modal-content {
+            background: rgba(15, 46, 32, 0.9);
+            border: 1px solid #d4af37;
+            padding: 35px 25px;
+            border-radius: 24px;
+            max-width: 340px;
+            text-align: center;
+            color: #fff;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            transform: scale(0.8);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .modal.active .modal-content { transform: scale(1); }
+
+        .modal-content p { font-size: 0.95rem; line-height: 1.6; margin: 15px 0; font-weight: 300; }
+        .close-modal { color: #d4af37; font-weight: 700; cursor: pointer; text-transform: uppercase; font-size: 0.8rem; margin-top: 15px; display: inline-block; }
     </style>
 </head>
 <body>
+
+    <div class="particles-container" id="particles"></div>
 
     <div class="card">
         <div class="bible-verse">
@@ -193,6 +254,14 @@
 
         <div class="name">ISAAC</div>
         <p class="turning-one">24TH BIRTHDAY CELEBRATION</p>
+
+        <!-- Live Heartbeat Wave Dynamic Visual Element -->
+        <div class="pulse-container">
+            <svg class="ecg-svg" viewBox="0 0 100 30">
+                <path class="ecg-line" d="M0,15 L30,15 L35,5 L40,25 L45,15 L50,15 L53,10 L56,20 L59,15 L100,15" />
+            </svg>
+            <span class="bpm-counter">❤️ 98 BPM</span>
+        </div>
 
         <div id="countdown">
             <div class="time-box"><span class="time-num" id="days">00</span><span class="time-label">Days</span></div>
@@ -210,14 +279,29 @@
             </p>
         </div>
 
-        <a href="https://share.google/I0SMHtHQirX8CQIFC" target="_blank" class="btn-map">📍 VIEW ON GOOGLE MAPS</a>
+        <div class="action-buttons">
+            <a href="https://share.google/I0SMHtHQirX8CQIFC" target="_blank" class="btn btn-map">📍 VIEW ON GOOGLE MAPS</a>
+            <button class="btn btn-secondary" onclick="openGift()">🎁 OPEN SURPRISE MESSAGE</button>
+            <a id="calendarLink" target="_blank" class="btn btn-secondary">📅 ADD TO CALENDAR</a>
+        </div>
+    </div>
+
+    <!-- Surprise Modal Overlay Container -->
+    <div class="modal" id="giftModal" onclick="closeGift()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <h3 style="color:#d4af37; font-family:'Cinzel', serif;">To My Favorite Person</h3>
+            <p>Happy 24th Birthday, Isaac! building this little space to celebrate you. May this year bring you closer to all your beautiful dreams. ✨</p>
+            <span class="close-modal" onclick="closeGift()">Close Box</span>
+        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <script>
+        // Confetti Engine Initiation
         window.onload = () => {
-            // Elegant gold and white celebration bursts
-            confetti({ particleCount: 100, spread: 60, origin: { y: 0.65 }, colors: ['#e5c158', '#ffffff', '#f3e7c4'] });
+            confetti({ particleCount: 120, spread: 65, origin: { y: 0.65 }, colors: ['#d4af37', '#ffffff', '#1a5c38'] });
+            createCalendarLink();
+            generateLoveParticles();
         };
 
         const targetDate = new Date("September 08, 2026 18:30:00").getTime();
@@ -231,7 +315,6 @@
             const m = Math.floor((gap % (1000 * 60 * 60)) / (1000 * 60));
             const s = Math.floor((gap % (1000 * 60)) / 1000);
 
-            // Check if element exists before setting innerText to avoid errors
             if(document.getElementById("days")) {
                 document.getElementById("days").innerText = d < 10 ? "0" + d : d;
                 document.getElementById("hours").innerText = h < 10 ? "0" + h : h;
@@ -240,13 +323,44 @@
             }
 
             if (gap < 0) {
-                document.getElementById("countdown").innerHTML = "<div style='grid-column: span 4; color:#e5c158; font-weight:700; letter-spacing:1px;'>🎂 HAPPY BIRTHDAY ISAAC! 🎉</div>";
+                document.getElementById("countdown").innerHTML = "<div style='grid-column: span 4; color:#d4af37; font-weight:700; letter-spacing:1px;'>🎂 HAPPY BIRTHDAY ISAAC! 🎉</div>";
                 clearInterval(timerInterval);
             }
         }
         
         const timerInterval = setInterval(updateCountdown, 1000);
         updateCountdown();
+
+        // Surprise Window Handlers
+        function openGift() { document.getElementById('giftModal').classList.add('active'); }
+        function closeGift() { document.getElementById('giftModal').classList.remove('active'); }
+
+        // Dynamic Google Calendar Configuration Function
+        function createCalendarLink() {
+            const title = encodeURIComponent("Isaac's 24th Birthday Celebration!");
+            const details = encodeURIComponent("Join us to celebrate Isaac's special day.");
+            const location = encodeURIComponent("121 b, 8th Street, Tirumalai Colony, Sammatipuram, Madurai - 625016");
+            const dates = "20260908T130000Z/20260908T160000Z"; // Converts evening local time window cleanly to UTC range
+            
+            document.getElementById('calendarLink').href = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${dates}&details=${details}&location=${location}`;
+        }
+
+        // Background Sparkles Simulator
+        function generateLoveParticles() {
+            const container = document.getElementById('particles');
+            for(let i=0; i<20; i++) {
+                const particle = document.createElement('div');
+                particle.innerHTML = i % 2 === 0 ? '✨' : '❤';
+                particle.style.position = 'absolute';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.fontSize = (Math.random() * 10 + 8) + 'px';
+                particle.style.color = 'rgba(212, 175, 55, 0.25)';
+                particle.style.opacity = Math.random();
+                particle.style.pointerEvents = 'none';
+                container.appendChild(particle);
+            }
+        }
     </script>
 </body>
 </html>
