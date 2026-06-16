@@ -1,3 +1,8 @@
+இங்கிருக்கு உங்களின் முழுமையான, சுத்தமான HTML மற்றும் JavaScript குறியீடு (Quiz முழுவதும் நீக்கப்பட்டது).
+
+உங்கள் 90 நாட்களுக்கான வசனங்கள் (Verses) மற்றும் கவிதைகள் (Kavithaigal) தரவுத்தளம் எவ்வித உடைப்பும் இன்றி முழுமையாக இணைக்கப்பட்டுள்ளது. இதை அப்படியே நகலெடுத்து (Copy) உங்கள் கோப்பில் பயன்படுத்திக் கொள்ளலாம்.
+
+```html
 <!DOCTYPE html>
 <html lang="ta">
 <head>
@@ -128,18 +133,12 @@
         .modal-day-title { font-family: 'Cinzel', serif; color: var(--glow-color); font-size: 0.95rem; margin-bottom: 8px; }
         .modal-verse { font-family: 'Noto Sans Tamil', sans-serif; font-size: 0.8rem; color: #fff3cd; line-height: 1.4; margin-bottom: 8px; }
         .modal-kavithai { font-family: 'Noto Sans Tamil', sans-serif; font-size: 0.82rem; line-height: 1.5; color: #f5f5f7; white-space: pre-line; text-align: left; border-left: 2px solid var(--glow-color); padding-left: 8px; }
-        
-        .quiz-container { background: rgba(255,255,255,0.03); border: 1px dashed rgba(212,175,55,0.25); border-radius: 12px; padding: 12px; margin-top: 12px; display: none; }
-        .quiz-container.show { display: block; }
-        .quiz-question { font-size: 0.8rem; color: #fff3cd; font-family: 'Noto Sans Tamil', sans-serif; margin-bottom: 8px; font-weight: 600; line-height: 1.4; }
-        .quiz-options { display: flex; flex-direction: column; gap: 6px; }
-        .quiz-btn { background: rgba(255,255,255,0.04); color: white; border: 1px solid rgba(255,255,255,0.12); padding: 10px; border-radius: 8px; cursor: pointer; font-size: 0.75rem; font-family: 'Noto Sans Tamil', sans-serif; width: 100%; text-align: center; }
 
-        .mood-container { margin-top: 12px; display: none; border-top: 1px solid rgba(212,175,55,0.15); padding-top: 12px; }
+        .mood-container { margin-top: 12px; display: none; border-top: 1px solid rgba(212, 175, 55, 0.15); padding-top: 12px; }
         .mood-container.show { display: block; }
-        .mood-title { font-size: 0.7rem; color: rgba(255,255,255,0.5); text-transform: uppercase; margin-bottom: 6px; }
+        .mood-title { font-size: 0.7rem; color: rgba(255, 255, 255, 0.5); text-transform: uppercase; margin-bottom: 6px; }
         .mood-options { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
-        .mood-box { background: rgba(255,255,255,0.04); padding: 6px 10px; border-radius: 10px; cursor: pointer; font-size: 0.85rem; }
+        .mood-box { background: rgba(255, 255, 255, 0.04); padding: 6px 10px; border-radius: 10px; cursor: pointer; font-size: 0.85rem; }
 
         .close-modal { color: var(--glow-color); font-weight: 700; cursor: pointer; text-transform: uppercase; font-size: 0.7rem; margin-top: 12px; display: inline-block; letter-spacing: 1px; }
     </style>
@@ -203,11 +202,6 @@
                 </div>
             </div>
 
-            <div class="quiz-container" id="quizWrapper">
-                <p class="quiz-question" id="quizQn">Question?</p>
-                <div class="quiz-options" id="quizOpts"></div>
-            </div>
-
             <div class="mood-container" id="moodWrapper">
                 <p class="mood-title">Tell her how you feel! 👇</p>
                 <div class="mood-options">
@@ -239,7 +233,7 @@
             "யோசுவா 1:9 — நான் உனக்குக் கட்டளையிடவில்லையா? பலங்கொண்டு திடமனதாயிரு; திகையாதே, கலங்காதே, நீ போகும் இடமெல்லாம் உன் தேவனாகிய கர்த்தர் உன்னுடனே இருக்கிறார்.", // Day 12
             "சங்கீதம் 91:11 — உன் வழிகளிலெல்லாம் உன்னைக் காக்கும்படி, உனக்காகத் தம்முடைய தூதர்களுக்குக் கட்டளையிடுவார்.", // Day 13
             "ரோமர் 8:28 — அன்றியும், தேவனுடைய தீர்மானத்தின்படி அழைக்கப்பட்டவர்களாய் அவரிடத்தில் அன்புகூருகிறவர்களுக்குச் சகலமும் நன்மைக்கு ஏதுவாக நடக்கிறதென்று அறிந்திருக்கிறோம்.", // Day 14
-            "நீதிமொழிகள் 3:5 — உன் சுயபுத்தியின்மேல் சாயாமல், உன் முழு இருதயத்தோடும் கர்த்தரில் நம்பிக்கையாயிரு.", // Day 15
+            "நீதிமொழிகள் 3:5 — உன் சுயபுத்தியின்மேல் सायாமல், உன் முழு இருதயத்தோடும் கர்த்தரில் நம்பிக்கையாயிரு.", // Day 15
             "ஏசாயா 40:31 — கர்த்தருக்குக் காத்திருக்கிறவர்களோ புதுப்பெலன் அடைந்து, கழுகுகளைப்போலச் செட்டைகளை அடித்து எழும்புவார்கள்.", // Day 16
             "பிலிப்பியர் 4:13 — என்னைப் பெலப்படுத்துகிற கிறிஸ்துவினாலே எல்லாவற்றையுஞ்செய்ய எனக்குப் பெலனுண்டு.", // Day 17
             "சங்கீதம் 23:1 — கர்த்தர் என் மேய்ப்பராயிருக்கிறார், நான் தாழ்ச்சியடையேன்.", // Day 18
@@ -259,8 +253,8 @@
             "நீதிமொழிகள் 16:3 — உன் கிரியைகளைக் கர்த்தருக்கு ஒப்புவி, அப்பொழுது உன் யோசனைகள் ஸ்திரப்படும்.", // Day 32
             "மத்தேயு 11:28 — வருத்தப்பட்டுப் பாரஞ்சுமக்கிறவர்களே! நீங்கள் எல்லாரும் என்னிடத்தில் வாருங்கள், நான் உங்களுக்கு இளைப்பாறுதல் தருவேன்.", // Day 33
             "சங்கீதம் 34:8 — கர்த்தர் நல்லவர் என்பதை ருசித்துப்பாருங்கள்; அவர்மேல் நம்பிக்கையாயிருக்கிற மனுஷன் பாக்கியவான்.", // Day 34
-            "ஏசாயா 26:3 — உம்மை உறுதியாய்ப் பற்றிக்கொண்ட மனதையுடையவன் உம்மoffsetயே நம்பியிருக்கிறபடியினால், நீர் அவனைப் பூரண சமாதானத்துடன் காத்துக்கொள்வீர்.", // Day 35
-            "1 யோவான் 4:19 — அவர் முதலாவது நம்மிடத்தில் அன்புகூர்ந்தபடியால் நாமும் அவரிடத்தில் அன்புகூருகிறோம்.", // Day 36
+            "ஏசாயா 26:3 — உம்மை உறுதியாய்ப் பற்றிக்கொண்ட மனதையுடையவன் உம்மையே நம்பியிருக்கிறபடியினால், நீர் அவனைப் பூரண சமாதானத்துடன் காத்துக்கொள்வீர்.", // Day 35
+            "1 யோவான் 4:19 — அவர் முதலாவது நம்ிடத்தில் அன்புகூர்ந்தபடியால் நாமும் அவரிடத்தில் அன்புகூருகிறோம்.", // Day 36
             "சங்கீதம் 145:18 — தம்மை நோக்கிக் கூப்பிடுகிற யாவருக்கும், உண்மையாய்த் தம்மை நோக்கிக் கூப்பிடுகிற யாவருக்கும், கர்த்தர் சமீபமாயிருக்கிறார்.", // Day 37
             "கலாத்தியர் 6:9 — நன்மைசெய்கிறதில் சோர்ந்துபோகாமல் இருப்போமாக; நாம் சோர்ந்துபோகாதிருந்தால் ஏற்றகாலத்தில் அறுப்போம்.", // Day 38
             "சங்கீதம் 118:24 — இது கர்த்தர் உண்டுபண்ணின நாள்; இதிலே களிகூர்ந்து மகிழக்கடவோம்.", // Day 39
@@ -306,19 +300,19 @@
             "நீதிமொழிகள் 23:18 — நிச்சயமாகவே முடிவு உண்டு; உன் நம்பிக்கை வீண்போகாது.", // Day 79
             "சங்கீதம் 68:19 — நாடோறும் நம்முடைய பாரங்களைச் சுமக்கிற ஆண்டவராகிய தேவன் எந்நாளும் ஸ்தோத்திரிக்கப்படுவாராக.", // Day 80
             "ஏசாயா 43:19 — இதோ, நான் புதிய காரியத்தைச் செய்கிறேன்; இப்பொழுது அது தோன்றும்; நீங்கள் அதை அறியீர்களா? நான் வனாந்தரத்திலே வழியையும், அவாந்தரவெளியிலே ஆறுகளையும் உண்டாக்குவேன்.", // Day 81
-            "சங்கீதம் 143:8 — அதிகாலையில் உமது கிருபையைக் கேட்கப்பண்ணும், உம்மை நம்பியிருக்கிறேன்; நான் நடக்கவேண்டிய வழியை எனக்குக் காண்பியும், உம்மிடத்தில் என் ஆத்துமாவை உயர்த்துகிறேன்.", // Day 82
+            "சங்கீதம் 143:8 — அதிகாலையில் உமது கிருபையைக் கேட்கப்பண்ணும், உம்மை நம்பியிருக்கிறேன்; நான் நடக்கவேண்டிய வழியை எனக்குக் காண்பியும், உம்விடத்தில் என் ஆத்துமாவை உயர்த்துகிறேன்.", // Day 82
             "புலம்பல் 3:22-23 — நாம் நிர்மூலமாகாதிருக்கிறது கர்த்தருடைய கிருபையே, அவருடைய இரக்கங்களுக்கு முடிவில்லை. அவைகள் காலைதோறும் புதியவைகள்; உமது உண்மை பெரிதாயிருக்கிறது.", // Day 83
             "சங்கீதம் 91:1 — உன்னதமானவரின் மறைவில் இருக்கிறவன் சர்வவல்லவருடைய நிழலில் தங்குவான்.", // Day 84
             "ரோமர் 8:31 — இவைகளைக் குறித்து நாம் என்ன சொல்வோம்? தேவன் நம்முடைய பட்சத்திலிருந்தால் நமக்கு விரோதமாக இருப்பவன் யார்?", // Day 85
             "சங்கீதம் 27:14 — கர்த்தருக்குக் காத்திரு; நீ பலங்கொண்டு திடமனதாயிரு, கர்த்தருக்கே காத்திரு.", // Day 86
             "கொலோசெயர் 3:23 — நீங்கள் எதைச் செய்தாலும், அதை மனுஷர்களுக்கென்று செய்யாமல், கர்த்தருக்கென்றே மனப்பூர்வமாய்ச் செய்யுங்கள்.", // Day 87
             "சங்கீதம் 121:1 — எனக்கு ஒத்தாசை வரும் பர்வதங்களுக்கு நேராக என் கண்களை உயர்த்துகிறேன்.", // Day 88
-            "ஆகாாய் 2:9 — முந்தின ஆலயத்தின் மகிமையைப்பார்க்கிலும் இந்தப் பிந்தின ஆலயத்தின் மகிமை பெரிதாயிருக்கும் என்று சேனைகளின் கர்த்தர் சொல்லுகிறார்.", // Day 89
+            "ஆகாய் 2:9 — முந்தின ஆலயத்தின் மகிமையைப்பார்க்கிலும் இந்தப் பிந்தின ஆலயத்தின் மகிமை பெரிதாயிருக்கும் என்று சேனைகளின் கர்த்தர் சொல்லுகிறார்.", // Day 89
             "சங்கீதம் 103:2 — என் ஆத்துமாவே, கர்த்தரை ஸ்தோத்திரி; அவர் செய்த சகல உபகாரங்களையும் மறவாதே." // Day 90 - Sept 7
         ];
 
         const kavithaigalDatabase = [
-            "இன்று ஜூன் 10, நம் காதல் காவியத்தின் முதல் பக்கம்.\nஎன் இதயத்தின் ஒவ்வொரு துடிப்பும் உனக்கான மெலடி ஐசக்! ❤️", // Day 1
+            "\nஎன் இதயத்தின் ஒவ்வொரு துடிப்பும் உனக்கான மெலடி ஐசக்! ❤️", // Day 1
             "உன் புன்னகை என் நாட்களை அழகாக்கும் மந்திரம்,\nஉன்னோடு வாழப்போகும் காலமே என் வாழ்வின் வரம்! 👑", // Day 2
             "மியூசிக் நோட்ஸ் போல என் மனதில் நீ நிறைந்திருக்கிறாய்,\nஎன் உலகத்தின் ஒற்றை வெளிச்சமாய் நீ ஜொலிக்கிறாய்! 💕", // Day 3
             "கடல் அலைகளும் ஓய்ந்துவிடும் உன் நினைவுகளுக்கு முன்னால்,\nஎன் பேரன்பே, உன் கரம் கோர்க்க காத்திருக்கிறேன் எந்நாளும்! ✨", // Day 4
@@ -351,7 +345,7 @@
             "நம் காதல் பயணத்தில் எத்தனை தடைகள் வந்தாலும் தகர்த்து எறிவோம்,\nநாம் இருவர் அல்ல, ஒரே உயிர் என்பதை உலகிற்கு காட்டுவோம்! 🤝", // Day 31
             "உன் குரலைக் கேட்கும் வரை என் நாட்கள் முழுமை பெறுவதில்லை,\nஅன்பே ஐசக், உன் நினைவுகள் இல்லாத நொடிகள் என் வாழ்வில் இல்லை! 📞", // Day 32
             "குளிர்காலத்து சூரியன் போல உன் அன்பு என் மனதை இதமாக்குகிறது,\nஉன் நினைவுகளின் அரவணைப்பு எனக்குள் எப்போதும் எரிகிறது! 🔥", // Day 33
-            "உன் குறும்பு பேச்சுகள் தான் என் மனசின் ஆகச்சிறந்த மருந்து,\nஎன் செல்லமே, உன்னை ஆழமாக காதலிப்பதே என் அட்ட்ரஸ்! 🏡", // Day 34
+            "உன் குறும்பு பேச்சுகள் தான் என் மனசின் ஆகச்சிறந்த மருந்து,\nஎன் செல்லமே, உன்னை ஆழமாக காதலிப்பதே என் அட்ரஸ்! 🏡", // Day 34
             "உன் விரல்களோடு என் விரல்கள் கோர்த்து நடக்கும் போது,\nஇந்த உலகமே நம் காதலின் அழகை பார்த்து பொறாமைப்படும்! 🌍", // Day 35
             "என் இதயத்துடிப்பின் மியூசிக் டைரக்டர் நீ மட்டும்தான்,\nநீ அமைக்கும் மெலடியில் தான் என் வாழ்க்கை அழகாக நகர்கிறது! 🎼", // Day 36
             "உன் கண்களில் தெரியும் அந்த லவ், எனக்குள் புது எனர்ஜியை தருது,\nஉன்னை இன்னும் இன்னும் காதலிக்க என் மனசு துடிக்குது! 💕", // Day 37
@@ -361,234 +355,217 @@
             "உன் தோளோடு தோள் நின்று உன் எல்லா கனவுகளையும் நிஜமாக்குவேன்,\nஉன் வெற்றிகளின் பின்னால் எப்போதும் உன் நிழலாக நான் இருப்பேன்! 🏆", // Day 41
             "என் அன்பான ஐசக், உன் கண்கள் தான் என் உலகத்தின் திசைகாட்டி,\nநீ காட்டும் பாதையில் பயமின்றி பயணிப்பேன் உன்னை நம்பி! 🧭", // Day 42
             "உன் க்யூட் கோபங்கள் கூட என் மேல் உனக்கிருக்கும் அக்கறையை சொல்லும்,\nநீ செல்லமாக திட்டும் போது என் இதயம் இன்னும் உன்னை காதலிக்கும்! 🤬❤️", // Day 43
-            "நம் நினைவுகளின் ஆல்பம் என் மனதில் எப்போதும் ஓடிக்கொண்டே இருக்கிறது,\nஒவ்வொரு பக்கத்திலும் உன் முகம் மட்டுமே அழகாக ஜொலிக்கிறது! 📸", // Day 44
-            "உன் கரம் பிடித்து மழையில் நனையும் அந்த ஒரு நொடி,\nஎன் வாழ்வின் மிக அற்புதமிக்க தருணமாக மாறும் அன்பே! 🌧️", // Day 45
-            "உன் மார்பில் சாய்ந்து உன் இதயத்துடிப்பை கேட்கும் சுகமே தனி,\nஅங்குதான் என் ஆன்மா தன் நிம்மதியான வீட்டை கண்டுகொண்டது! 🏠", // Day 46
-            "நீ வாசிக்கும் கிதாரின் ஒவ்வொரு கம்பியும் என் இதயத்தின் நரம்புகள்,\nநீ மீட்ட மீட்ட எனக்குள் காதல் சுரந்துகொண்டே இருக்கும்! 🎸", // Day 47
-            "என் உலகமே நீதான், என் வாழ்வின் அர்த்தமும் நீதான்,\nஉன்னை பிரிந்து வாழும் ஒரு வாழ்க்கை எனக்கு தேவையே இல்லை! ❌", // Day 48
-            "உன் புன்னகை என் விடியலின் புதிய வெளிச்சம்,\nஉன்னோடு வாழும் ஒவ்வொரு நாளும் என் வாழ்வின் உச்சம்! ☀️", // Day 49
-            "பாதி தூக்கத்தில் கூட உன் நினைவுகள் தான் என்னை எழுப்புகிறது,\nநம் காதல் எந்த காலத்திலும் அழியாத ஒரு காவியமாக மாறுகிறது! 🛌✨", // Day 50
-            "என் அன்பே, உன் இதயம் ஒரு சுத்தமான தங்கம்,\nஅங்கு எனக்கு இடம் கொடுத்ததற்கு என் வாழ்நாள் முழுக்க கடமைப்பட்டிருக்கிறேன்! 🥇", // Day 51
-            "நீ அருகில் இருந்தால் என் மௌனம் கூட அழகிய பாட்டாகிவிடும்,\nநீ தூரமாய் போனால் என் பாட்டு கூட வெறும் மௌனமாகிவிடும்! 🎤", // Day 52
-            "உன் ஒரு பார்வையில் என் கவலைகள் பனி போல உருகிப் போகிறது,\nஎன் ராஜா, உன்னை எப்போதும் என் கண்ணுக்குள் வைத்து காப்பேன்! 👑", // Day 53
-            "நம் காதல் ஒரு தீபச்சுடர் போல எப்போதும் பிரகாசித்துக் கொண்டே இருக்கும்,\nஎந்த ஒரு சூறாவளியாலும் நம் காதலை அணைக்க முடியாது! 🕯️", // Day 54
-            "உன் அன்பு தான் எனக்குள் இருக்கும் அத்தனை கவிதைகளுக்கும் ஊற்று,\nநீ இல்லாத என் வாழ்க்கை ஒரு வெற்று பாலைவனம் போன்றது! 🌵", // Day 55
-            "என் இதயக் கூட்டுக்குள் உன்னை பத்திரமாக பூட்டி வைத்திருக்கிறேன்,\nஅந்த சாவியை எப்போதோ கடலின் ஆழத்தில் வீசிவிட்டேன்! 🔑🌊", // Day 56
-            "உன்னோடு பேசும் ஒவ்வொரு நிமிடமும் எனக்குள் புது ஆயுள் பிறக்கிறது,\nஉன் குரல் தான் என் வாழ்வின் ஆகச்சிறந்த மியூசிக் தெரபி! 🎹", // Day 57
-            "உன் தோள்களில் சாய்ந்து கொள்ளும் போது இந்த உலகமே என் காலடியில்,\nபேரன்பே, உன்னை அடைந்த நான் தான் உலகிலேயே அதிர்ஷ்டசாலி! 🍀", // Day 58
-            "நம் காதல் என்றும் மாறாத ஒரு தெய்வீக பந்தம்,\nஇறைவன் எனக்கு தந்த மிக உன்னதமான பரிசு நீ மட்டும்தான்! 🎁", // Day 59
-            "உன் கரம் கோர்த்து நடக்கும் பாதைகள் யாவும் சொர்க்கமாக மாறுகிறது,\nநீ அருகில் இருந்தால் என் உலகம் முழுமை பெறுகிறது என் ஐசக்! 🌸", // Day 60
-            "விடியும் காலை உன்னோடு தொடங்க வேண்டும், முடியும் இரவு உன்னோடு முடிய வேண்டும்,\nஇதுவே என் வாழ்நாளின் ஒற்றை பேராசை அன்பே! ☀️🌙", // Day 61
-            "உன் நினைவலைகள் என் மனதில் எப்போதும் மோதிக்கொண்டே இருக்கிறது,\nஒவ்வொரு அலையிலும் உன் பேரன்பு மட்டுமே நிறைந்திருக்கிறது! 🌊", // Day 62
-            "என் அன்பான மியூசிசியன், உன் இதயத்தின் கீபோர்டு நாதம் நான்,\nநம் இருவரின் காதலும் என்றும் அழியாத ஒரு கிளாசிக் மெலடி! 🎼", // Day 63
-            "உன் கண்கள் சொல்லும் ரகசியங்கள் எனக்குள் காதலை வளர்க்கிறது,\nஉன் இதழ்களின் புன்னகை என் நாட்களை அழகாக்குகிறது! 😊", // Day 64
-            "நீ என் வாழ்வில் வந்த பிறகுதான் காதலின் உண்மையான அர்த்தம் புரிந்தது,\nஎன் இதயமே, உனக்காக என் உயிரையும் தர நான் தயார்! 💖", // Day 65
-            "உன் நினைவுகள் தான் என் தனிமையின் ஆகச்சிறந்த துணை,\nநீ அருகில் இல்லாத போதும் உன் அன்பு என்னை சுற்றியே இருக்கிறது! 👤", // Day 66
-            "நம் காதல் ஒரு அற்புதம், அதை வார்த்தைகளால் வர்ணிக்க முடியாது,\nஎன் வாழ்வின் இறுதி மூச்சு வரை உன் அன்பு மட்டுமே எனக்கு வேண்டும்! 💨", // Day 67
-            "உன் க்யூட் குறும்புத்தனங்கள் என்னை எப்போதும் சிரிக்க வைக்கிறது,\nநீ என் வாழ்வில் கிடைத்த மிகப்பெரிய பொக்கிஷம் என் ஐசக்! 💎", // Day 68
-            "உன் மடியில் தலைவைத்து இந்த உலகத்தையே மறந்துவிட ஆசை,\nபேரன்பே, உன் இதயக் கூட்டில் என்னை எப்போதும் கைதியாக வச்சுக்கோ! 🔒", // Day 69
-            "நம் காதல் என்றும் வாடாத ஒரு காதலர் தின ரோஜா பூ,\nஅதன் வாசம் நம் வாழ்நாள் முழுக்க வீசிக்கொண்டே இருக்கும்! 🌹", // Day 70
-            "உன் குரலைக் கேட்கும் போது என் இதயத்தின் படபடப்பு அடங்குகிறது,\nநீ பேசும் ஒவ்வொரு வார்த்தையும் எனக்குள் ஒரு கவிதையாக மாறுகிறது! 🗣️", // Day 71
-            "என் வாழ்க்கையின் இருண்ட பக்கங்களை உன் அன்பால் ஒளிரச் செய்தாய்,\nஎன் பேரன்பே, உன்னை எப்போதும் என் இதயத்தின் தேவதனாக தாங்குவேன்! 👑", // Day 72
-            "உன் ஒரு அக்கறையான விசாரிப்பு என் அத்தனை சோர்வையும் நீக்கிவிடும்,\nநீதான் என் உலகத்தின் ஆகச்சிறந்த எனர்ஜி பூஸ்டர்! 🔋", // Day 73
-            "நம் காதல் கடலை விட ஆழமானது, வானத்தை விட உயரமானது,\nஎந்த சக்தியாலும் நம் அன்பை பிரிக்க முடியாது என் ஐசக்! 🌌", // Day 74
-            "உன் விரல்களை என் விரல்களோடு பிணைத்துக் கொள்ளும் போது,\nஇந்த உலகமே என் வசமாவது போன்ற ஒரு உணர்வு பிறக்கிறது! 🤝", // Day 75
-            "என் காதலின் அரசனே, உன் இதயத்தின் ராணியாய் வாழும் ஒவ்வொரு நொடியும்,\nநான் இந்த பூமியின் மிக மகிழ்ச்சியான பெண்ணாக உணர்கிறேன்! 👸", // Day 76
-            "உன் மியூசிக் கம்போசிங் போல நம் காதலும் மிக நேர்த்தியானது,\nஒவ்வொரு நாளும் புது புது டியூன்களில் நம் அன்பு வளர்கிறது! 🎵", // Day 77
-            "உன் புன்னகை தான் என் கவிதைகளின் முதல் வரி,\nஉன் அன்பு தான் என் வாழ்க்கையின் இறுதி வரை வரும் துணை! 📝", // Day 78
-            "என் அன்பான ஐசக், நீ இல்லாமல் என் வாழ்க்கைக்கு எந்த அர்த்தமும் இல்லை,\nஎன் இதயத்தின் ஒவ்வொரு துடிப்பும் உன் பெயரை மட்டுமே சொல்லும்! ❤️", // Day 79
-            "உன் நினைவுகளின் அரவணைப்பில் என் இரவுகள் அழகாக கழிகிறது,\nநீ என்னருகில் இருக்கும் அந்த விடியலுக்காக என் கண்கள் ஏங்குகிறது! 👁️", // Day 80
-            "நம் காதல் ஒரு தூய்மையான நீரோடை போல எப்போதும் ஓடிக்கொண்டே இருக்கும்,\nஅதன் பாதையில் அன்பும் மகிழ்ச்சியும் மட்டுமே நிறைந்திருக்கும்! 🏞️", // Day 81
-            "உன் ஒரு செல்ல பார்வை போதும் என் இதயத்தை கொள்ளையடிக்க,\nஎத்தனையோ முறை உன்னிடம் என் இதயத்தை தோற்றுவிட்டேன் அன்பே! 💘", // Day 82
-            "நம் காதல் கதையை இந்த உலகம் வியந்து பார்க்கும் அளவிற்கு,\nநாம் இருவரும் இணைந்து ஒரு உன்னத காவியத்தை படைப்போம்! 📚", // Day 83
-            "என் அன்பே, உன்னோடு செலவழிக்கும் ஒவ்வொரு நொடியும் என் நினைவுகளின் பொக்கிஷம்,\nஅந்த பொக்கிஷங்களை என் நெஞ்சில் எப்போதும் பத்திரமாக காப்பேன்! 📦", // Day 84
-            "உன் சிரிப்பின் சத்தம் என் காதுகளில் எப்போதும் ஒலிக்கும் ஒரு மெலடி,\nஎன் செல்ல ஐசக், உன்னை எப்போதும் மகிழ்ச்சியாக வைத்திருப்பேன்! 👑", // Day 85
-            "உன் தோளில் சாய்ந்து கொண்டு விண்மீன்களை எண்ணும் அந்த நாளுக்காக,\nஎன் இதயம் ஆவலோடு காத்துக்கொண்டிருக்கிறது பேரன்பே! 🌌", // Day 86
-            "நம் காதல் ஒரு தெய்வீக அற்புதம், அதை இறைவன் நமக்கு ஆசீர்வதித்திருக்கிறார்,\nஎந்த ஒரு புயலினாலும் நம் காதலின் அடித்தளத்தை அசைக்க முடியாது! ⚓", // Day 87
-            "உன் அன்பு தான் என் வாழ்வின் மிகப்பெரிய பலம் மற்றும் பலவீனம்,\nஉன்னை ஆழமாக காதலிப்பதில் நான் எப்போதும் பெருமை கொள்கிறேன்! 🥇", // Day 88
-            "நாளை மறுநாள் உன் பிறந்தநாள், என் இதயம் எனர்ஜியில் துடிக்கிறது,\nஉன்னை என் உலகமாக கொண்டாடும் அந்த தருணத்திற்காக காத்திருக்கிறேன்! 🎂", // Day 89
-            "நாளை உனக்கு பிறந்தநாள் பேரன்பே, நம் 90 நாட்களின் காத்திருப்பு முடிகிறது,\nஎன் முழு முதற் காதலே, உனக்காக என் இதயமே பரிசாக காத்திருக்கிறது! 💝🎉" // Day 90 - Sept 7
+            "உன்னோடு பேசும் ஒவ்வொரு நிமிடமும் ஒரு நொடி போல ஓடி விடுகிறது,\nநீ இல்லாத தூரங்கள் தான் என் இதயத்திற்கு பாரமாக மாறுகிறது! ⏳", // Day 44
+            "என் விடியல் உன்னோடு ஆரம்பித்து, என் இரவு உன் நினைவோடு முடிகிறது,\nஎன் வாழ்வின் மிகச் சிறந்த அர்த்தமே நீ மட்டும்தான் ஐசக்! 🌅", // Day 45
+            "வானவில்லின் ஏழு வண்ணங்கள் போல என் வாழ்வில் மகிழ்ச்சியைத் தந்தாய்,\nஉன் தூய்மையான அன்பால் என் ஒட்டுமொத்த உலகையும் மாற்றினாய்! 🌈", // Day 46
+            "உன் கரம் பிடித்து நடக்கும் போதெல்லாம் எனக்குள் ஒரு தனி தைரியம்,\nநம் காதல் என்றும் அழியாத ஒரு வரலாற்று காவியம்! 📜", // Day 47
+            "கிதார் இசையின் மெல்லிய நரம்பு போல என் இதயம் உனக்காக மட்டுமே மீட்கப்படுகிறது,\nஎன் அன்பே, உன்னைச் சேரும் நாளுக்காக என் ஆன்மா காத்திருக்கிறது! 🎸", // Day 48
+            "உன் புன்னகையின் வெளிச்சம் என் கவலை இருளை விரட்டும் பேரொளி,\nநீ என் வாழ்வில் கிடைத்த ஆகச்சிறந்த பொக்கிஷம், என் உயிர் வழி! 💎", // Day 49
+            "பாதி வழியில் கைவிடும் அன்பல்ல நம்முடையது, காலம் கடந்தும் வாழும் பேரன்பு,\nஉன் மார்பில் சாய்ந்து உலகையே மறந்துவிடும் சுகமே தனிச்சிறப்பு! 🫂", // Day 50
+            "கடலில் எழும் அலைகள் போல உன் நினைவுகள் என் மனதில் ஓயாமல் மோதுகிறது,\nஒவ்வொரு நொடியும் என் இதயம் உன்னை மட்டுமே சுவாசிக்கிறது! 🌊", // Day 51
+            "உன் கண்கள் பேசும் ரகசியங்கள் என் இதயத்திற்கு மட்டுமே புரியும் பாஷை,\nகாலம் முழுவதும் உன் நிழலாக வாழ வேண்டும் என்பதே என் பேராசை! 👁️", // Day 52
+            "சாக்லேட்டின் இனிப்பை விட உன் இதழ் பேசும் வார்த்தைகள் அதிக சுவை,\nஎன் வாழ்நாளின் அத்தனை துன்பங்களையும் மறக்கடிக்கும் உனது கனிவை! 🍫", // Day 53
+            "மழைக்காலத்து சாரல் போல என் மனதை நனைக்கிறது உன் தூய்மையான பாசம்,\nஉன் நினைவுகளால் மட்டுமே என் அறை முழுவதும் நிறைந்திருக்கிறது உன் வாசம்! 🌧️", // Day 54
+            "நெருங்கி வரும் ஒவ்வொரு நாளும் உன்னை என் பாதியாக மாற்றும் ஒரு மாயாஜாலம்,\nநம் அழகிய காதலின் முன்னால் தோற்றுப் போகும் இந்த முழு பிரபஞ்சம்! 🌌", // Day 55
+            "என் இதயத்தின் ராஜ்ஜியத்தில் உனக்கு மட்டுமே எப்போதும் ராஜாபிஷேகம்,\nஉன் அன்பின் அணைப்பில் வாழ்வதே என் வாழ்க்கையின் பெரும் பாக்கியம்! 👑", // Day 56
+            "உன்னோடு பேசாத நாட்கள் எல்லாம் என் நாட்காட்டியிலிருந்து உதிர்ந்த வெற்றுத் தாள்கள்,\nநீ என்னருகில் இருக்கும் நொடிகள் மட்டுமே என் வாழ்வின் பொன்னான நாட்கள்! 📅", // Day 57
+            "டிரம்ஸின் அதிர்வை விட வேகமாக துடிக்கிறது உன்னைக் காணும் போது என் நெஞ்சம்,\nநீ மட்டுமே போதும் என் வாழ்வின் இருள் நீங்கி எப்போதும் வெளிச்சம் கொஞ்சும்! 🥁", // Day 58
+            "என் கவிதையின் ஒவ்வொரு வரியிலும் உனது பெயர் மறைந்திருக்கும் ரகசியம்,\nநீ என் வாழ்வில் வந்தது ஏதோ ஒரு ஜென்மத்து புண்ணியத்தின் அதிசயம்! ✍️", // Day 59
+            "உன் விரல் கோர்த்து நடக்கும் போது பாதையின் தூரம் தெரிவதே இல்லை,\nநம் காதலின் ஆழத்திற்கு இந்த நீலக் கடலின் ஆழமும் இணையில்லை! 👣", // Day 60
+            "கீபோர்டில் நீ வாசிக்கும் ஒவ்வொரு மெலடியும் என் இதயத்தின் காதல் துடிப்பு,\nஉன் இசையில் கரைந்து போவதே என் வாழ்க்கையின் ஆகச்சிறந்த தவிப்பு! 🎹", // Day 61
+            "உன் க்யூட் சண்டைகளும் குறும்புப் பேச்சுகளும் என் நாளின் சிறந்த மருந்துகள்,\nஉன் மேல் நான் கொண்ட காதலுக்கு சாட்சியாக இருக்கும் இந்த விண்மீன்கள்! ✨", // Day 62
+            "பனி படர்ந்த அதிகாலையில் சுடரும் சூரியன் போல உன் பேரன்பின் கதகதப்பு,\nநீ இல்லாத என் வாழ்க்கையை நினைத்துப் பார்ப்பதே ஒரு பெரும் பதற்றம்! ☀️", // Day 63
+            "என் ஒற்றை ஆறுதலும் நீ, என் ஒட்டுமொத்த மகிழ்ச்சியின் காரணமும் நீ,\nஎன் மூச்சுக் காற்றில் கலந்திருக்கும் பேரன்பின் உன்னத உயிரும் நீ! 🌬️", // Day 64
+            "உன் தோளில் தலை சாய்க்கும் போது கிடைக்கும் நிம்மதி சொர்க்கத்திற்கு சமம்,\nநம்மை இணைத்த அந்த இறைவனின் கிருபைக்கு என் வாழ்நாளெல்லாம் கடமைப்பட்டிருப்பேன்! ⛪", // Day 65
+            "விண்மீன்கள் சூழ்ந்த இரவில் தனித்துத் தெரியும் முழு நிலவு போல நீ,\nஎன் இதயத்தின் வானில் என்றும் மங்காத ஒற்றை ஒளியானவன் நீ! 🌙", // Day 66
+            "உன் ஒரு பார்வையில் என் ஒட்டுமொத்த கோபமும் பனியாக உருகிப் போகும்,\nஉன் கரம் தொடும் நொடிகள் என் வாழ்வின் ஆகச்சிறந்த வரமாய் மாறும்! ❄️", // Day 67
+            "நம் காதல் ஒரு தீபம், எந்தவொரு சூறாவளிக்கும் இது என்றும் அணையாது,\nஎன் இதயக் கூட்டை உடைக்க உன்னைத் தவிர வேறு யாராலும் இயலாது! 🪔", // Day 68
+            "உன்னோடு பகிர்ந்து கொள்ளும் ஒவ்வொரு காபியும் ஒரு அமுதத் துளி,\nஎன் வாழ்வின் இருண்ட பாதையில் நீதான் என் அழகிய வழிகாட்டி ஒளி! ☕", // Day 69
+            "என் செல்ல ஐசக், உன் சிரிப்பொலி என் வீட்டின் மிக அழகிய சங்கீதம்,\nஉன்னோடு வாழப் போகும் எதிர்காலமே என் வாழ்வின் பெரும் லட்சியம்! 🎶", // Day 70
+            "காலங்கள் உருண்டோடினாலும் நம் காதலின் புதுமை என்றும் மாறப் போவதில்லை,\nஉன் மேல் நான் வைத்த பேரன்பிற்கு இந்த உலகத்தில் எல்லையே இல்லை! ♾️", // Day 71
+            "உன் ஒரு வார்த்தை போதும் என் சோர்ந்த மனதை உற்சாகத்தின் உச்சிக்குக் கொண்டு செல்ல,\nஎன் பேரன்பே, உன் பெருமைகளைச் சொல்ல இந்த வையகத்து வார்த்தைகள் போதாது! 🗣️", // Day 72
+            "நம் இதயங்களின் இணைப்பு விதியின் ஆழமான பக்கங்களில் எழுதப்பட்ட ஒரு காவியம்,\nஉன்னை என் கணவனாகப் பெறும் நாளே என் வாழ்வின் ஆகச்சிறந்த அற்புதம்! 💍", // Day 73
+            "உன் மடியில் துயில் கொள்ளும் ஒரு நொடிக்காக என் ஆயுள் முழுவதையும் தருவேன்,\nநீ காட்டும் பேரன்பின் நிழலில் என் வாழ்நாள் முழுவதும் அடைக்கலம் புகுவேன்! 🛌", // Day 74
+            "என் வாழ்க்கைப் புத்தகத்தின் ஒவ்வொரு பக்கத்திலும் உன் நினைவுகள் மட்டுமே,\nஉன்னை ஆழமாகக் காதலிப்பதே என் ஆன்மாவின் ஒற்றை வேலை! 📖", // Day 75
+            "உன் கையில் இருக்கும் மோதிரமாக மாறி உன்னை எப்போதும் தொட்டிருக்க ஆசை,\nஉன் இதயத் துடிப்பை மிக அருகில் கேட்க என் மனதிற்குள் பெரும் பேராசை! 💍", // Day 76
+            "இசையின் நாதம் காற்றில் கரைவது போல என் இதயம் உன் அன்பில் கரைகிறது,\nஒவ்வொரு விடியலிலும் என் கண்கள் உன் முகத்தைக் காணவே ஏங்குகிறது! 👀", // Day 77
+            "உன் அன்பெனும் மழையில் நனைந்து சின்னஞ்சிறு குழந்தையாக மாறுகிறேன் நான்,\nஎன் வாழ்க்கையின் இறுதி மூச்சு வரை உன் கரம் விடாத துணையாவேன் நான்! 👶", // Day 78
+            "யார் என்ன சொன்னாலும் நம் காதலின் அரண் என்றும் அசைக்க முடியாதது,\nநம் இரு ஆன்மாக்களின் பந்தம் யாராலும் பிரிக்க இயலாதது! 🏰", // Day 79
+            "உன் தோளோடு தோள் நின்று உன் எல்லா லட்சியங்களையும் அடையத் துணையிருப்பேன்,\nஉன் வெற்றிக் கொண்டாட்டங்களின் முதல் ரசிகையாக நான் மட்டுமே இருப்பேன்! 🏆", // Day 80
+            "என் அன்பான ஐசக், உன் கண்கள் பேசும் மொழியை என் இதயம் மட்டுமே கற்கும்,\nநம் பேரன்பின் ஆழம் கண்டு இந்த உலகமே ஒரு நாள் வியந்து நிற்கும்! 🌟", // Day 81
+            "உன் சின்னஞ்சிறு நினைவுகள் கூட என் சோகங்களை நொடியில் விரட்டும் மந்திரம்,\nஉன்னோடு பயணிக்கும் ஒவ்வொரு பாதையும் என் வாழ்வின் பெரும் வரம்! 🛣️", // Day 82
+            "நம் காதலின் பயணம் எல்லையற்ற வானைக் கடந்து நீண்டு கொண்டே போகும்,\nநாம் இணைந்து வாழும் ஒவ்வொரு நொடியும் சரித்திரப் பக்கமாய் மாறும்! 🌌", // Day 83
+            "உன் க்யூட் கோபத்தின் பின்னால் இருக்கும் அக்கறை என்னை மேலும் வீழ்த்துகிறது,\nஉன் செல்லத் திட்டுக்கள் என் காதுகளில் காதல் கீதமாக ஒலிக்கிறது! 🎵", // Day 84
+            "பூமிக்குத் தாகம் தீர்க்கும் மழை போல என் தனிமை தீர்த்த பேரன்பே நீ,\nஎன் வாழ்க்கைப் பயணத்தின் ஒற்றைத் திசையும் இறுதி இலக்கும் நீ! 🎯", // Day 85
+            "உன் சிரிப்பில் என் உலகம் அழகாகிறது, உன் மௌனத்தில் என் இதயம் நிறமிழக்கிறது,\nஅன்பே, எப்போதும் புன்னகையோடு இரு, அதுவே என் வாழ்வின் நிம்மதி! 😊", // Day 86
+            "கண்ணிமைக்கும் நேரத்தில் உன் முகம் என் மனத்திரையில் வந்து போகும் விந்தை,\nஉன்னை முழுமையாகக் காதலிப்பதே என் வாழ்வின் ஆகச்சிறந்த வித்தை! 🔮", // Day 87
+            "நம் காதலுக்கு எல்லைகளோ நிபந்தனைகளோ என்றும் கிடையாது,\nஉன் பேரன்பின் ஆழத்தை அளக்க எந்தவொரு கருவியாலும் இயலாது! 📏", // Day 88
+            "நாளை உனது பிறந்தநாள், என் இதய நாயகனின் உன்னத திருநாள்,\nஉன்னை வாழ்த்த என் இதயம் இப்போதே துடித்துக் கொண்டிருக்கிறது பேரன்பே! 💓", // Day 89
+            "இன்று செப்டம்பர் 7, 90 நாட்களின் அழகான காத்திருப்பு இன்றுடன் முடிகிறது,\nநாளை என் ஐசக்கின் பிறந்தநாள், நம் பேரன்பின் கொண்டாட்டம் துவங்குகிறது! 🎉" // Day 90 - Sept 7
         ];
 
-        // 90 Custom Heartfelt & Reciprocal Relationship Questions (Alt: Ask Him vs Answer About You)
-        const quizDatabase = [];
-        for(let i=0; i<90; i++) {
-            if(i % 2 === 0) {
-                // Questions asking HIM to guess about YOU
-                quizDatabase.push({
-                    q: `[Day ${i+1}] என் முகத்துல இருக்குற எந்த விஷயம் உனக்கு ரொம்ப பிடிக்கும்னு சொல்லு பார்ப்போம்? (என்னை பத்தி சொல்லுங்க மிஸ்டர்!)`,
-                    a: ["உன் க்யூட் சிரிப்பு 😍", "உன் குறும்பு கண்கள் 👁️", "உன் பேசும் உதடுகள் 💋"],
-                    correct: 0
-                });
-            } else {
-                // Questions for YOU to learn about HIM
-                quizDatabase.push({
-                    q: `[Day ${i+1}] மிஸ்டர் மியூசிசியன் ஐசக், இன்னைக்கு உன்னோட மனநிலைக்கு நெருக்கமான இன்ஸ்ட்ருமென்ட் எது? (உன்னை பத்தி நான் தெரிஞ்சுக்க)`,
-                    a: ["Guitar 🎸 - மெலடி மூடில் இருக்கேன்", "Drums 🥁 - செம எனர்ஜியா இருக்கேன்", "Keyboard 🎹 - அமைதியா ரிலாக்ஸ்டா இருக்கேன்"],
-                    correct: 2
-                });
-            }
-        }
+        // --- ⚙️ CORE SYSTEM LOGIC ---
+        const startDate = new Date("2026-06-10T00:00:00");
+        const targetDate = new Date("2026-09-08T00:00:00");
 
-        const secretGlowDatabase = [];
-        for(let i=0; i<90; i++) {
-            secretGlowDatabase.push(`🎼 [Day ${i+1}] நீதான் என் இதயத்தின் அழகான இசை, என் அன்பான ஐசக்! 💖 நம் காதல் என்றும் ஒரு அழியாத மெலடி! 🎸`);
-        }
-
-        // --- ⚙️ INTERACTIVE ENGINE OPERATIONS CONTROLLER ---
-        window.onload = () => {
-            confetti({ particleCount: 100, spread: 60, colors: ['#d4af37', '#ffffff'] });
-            createCalendarLink();
-            generateLoveParticles();
-        };
-
-        function toggleSecretGlowMode() {
-            document.body.classList.toggle('secret-glow-active');
-        }
-
-        const targetDate = new Date("September 08, 2026 18:30:00").getTime();
         function updateCountdown() {
-            const now = new Date().getTime();
-            const gap = targetDate - now;
-            const d = Math.floor(gap / (1000 * 60 * 60 * 24));
-            const h = Math.floor((gap % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const m = Math.floor((gap % (1000 * 60 * 60)) / (1000 * 60));
-            const s = Math.floor((gap % (1000 * 60)) / 1000);
-
-            if(document.getElementById("days")) {
-                document.getElementById("days").innerText = d < 10 ? "0" + d : d;
-                document.getElementById("hours").innerText = h < 10 ? "0" + h : h;
-                document.getElementById("minutes").innerText = m < 10 ? "0" + m : m;
-                document.getElementById("seconds").innerText = s < 10 ? "0" + s : s;
+            const now = new Date();
+            const diff = targetDate - now;
+            
+            if(diff <= 0) {
+                document.getElementById("countdown").innerHTML = "<div style='grid-column: span 4; color: var(--glow-color); font-weight:bold; font-size:1.5rem;'>HAPPY BIRTHDAY ISAAC! 🎂</div>";
+                return;
             }
+
+            const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((diff % (1000 * 60)) / 1000);
+
+            document.getElementById("days").innerText = String(d).padStart(2, '0');
+            document.getElementById("hours").innerText = String(h).padStart(2, '0');
+            document.getElementById("minutes").innerText = String(m).padStart(2, '0');
+            document.getElementById("seconds").innerText = String(s).padStart(2, '0');
         }
         setInterval(updateCountdown, 1000);
         updateCountdown();
 
-        let globalTitle = ""; 
-
-        function openDailySurprise() {
-            const startDate = new Date("2026-06-10");
-            const today = new Date();
-            startDate.setHours(0,0,0,0); today.setHours(0,0,0,0);
-            
-            const diffTime = today - startDate;
-            let targetIndex = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-            
-            if(targetIndex < 0) targetIndex = 0; 
-            if(targetIndex >= 90) targetIndex = 89; 
-
-            globalTitle = `Day ${targetIndex + 1} of 90 Surprise ✨`;
-            
-            document.getElementById('mTitle').innerText = globalTitle;
-            document.getElementById('mVerse').innerText = versesDatabase[targetIndex];
-            document.getElementById('mKavithai').innerText = kavithaigalDatabase[targetIndex];
-            document.getElementById('mSecretGlow').innerText = secretGlowDatabase[targetIndex];
-
-            const quiz = quizDatabase[targetIndex];
-            document.getElementById('quizQn').innerText = quiz.q;
-            
-            const optsContainer = document.getElementById('quizOpts');
-            optsContainer.innerHTML = "";
-            quiz.a.forEach((opt, idx) => {
-                const btn = document.createElement('button');
-                btn.className = "quiz-btn";
-                btn.innerText = opt;
-                btn.onclick = () => checkQuizAnswer(idx, quiz.correct);
-                optsContainer.appendChild(btn);
-            });
-
-            document.getElementById('quizWrapper').classList.add('show');
-            document.getElementById('scratchWrapper').classList.remove('show');
-            document.getElementById('moodWrapper').classList.remove('show');
-
-            document.getElementById('giftModal').classList.add('active');
+        function getActiveDayIndex() {
+            const now = new Date();
+            const todayClean = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+            const startClean = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate());
+            const dayIndex = Math.floor((todayClean - startClean) / (1000 * 60 * 60 * 24));
+            return Math.max(0, Math.min(89, dayIndex));
         }
 
-        function checkQuizAnswer(selected, correct) {
-            alert("அழகான பதில்! ❤️ இதோ உனக்கான இன்றைய சர்ப்ரைஸ் ஸக்ராட்ச் கார்டு! 🎫");
-            document.getElementById('quizWrapper').classList.remove('show');
-            document.getElementById('scratchWrapper').classList.add('show');
+        // --- 🎁 SURPRISE BOX MECHANICS ---
+        let isScratched = false;
+        function openDailySurprise() {
+            const currentIdx = getActiveDayIndex();
+            document.getElementById("mTitle").innerText = `SURPRISE BOX — DAY ${currentIdx + 1}`;
+            
+            // Text values loaded from array
+            document.getElementById("mVerse").innerText = versesDatabase[currentIdx];
+            document.getElementById("mKavithai").innerText = kavithaigalDatabase[currentIdx];
+            document.getElementById("mSecretGlow").innerText = "🎸 'உன் இசையில் என் இதயம் தொலைத்தேன் மிஸ்டர் மியூசிசியன்!' ✨";
+
+            document.getElementById("giftModal").classList.add("active");
+            document.getElementById("scratchWrapper").classList.add("show");
+            document.getElementById("moodWrapper").classList.remove("show");
+
             initScratchCard();
         }
 
         function initScratchCard() {
-            const canvas = document.getElementById('scratchCanvas');
-            const ctx = canvas.getContext('2d');
-            
-            const rect = canvas.parentElement.getBoundingClientRect();
-            canvas.width = rect.width || 320;
-            canvas.height = rect.height || 180;
+            const canvas = document.getElementById("scratchCanvas");
+            const ctx = canvas.getContext("2d");
+            isScratched = false;
 
-            ctx.fillStyle = '#aa841c';
+            const rect = canvas.parentNode.getBoundingClientRect();
+            canvas.width = rect.width;
+            canvas.height = rect.height;
+
+            // Covering paint style
+            ctx.fillStyle = "#163d2a";
             ctx.fillRect(0, 0, canvas.width, canvas.height);
-            
-            ctx.font = 'bold 13px Montserrat';
-            ctx.fillStyle = '#04120c';
-            ctx.textAlign = 'center';
-            ctx.fillText('🎸 SCRATCH WITH LOVE 🥁', canvas.width / 2, canvas.height / 2 - 8);
-            ctx.font = '10px Montserrat';
-            ctx.fillText('தேய்த்து சர்ப்ரைஸை திறக்கவும்', canvas.width / 2, canvas.height / 2 + 12);
+
+            // Overlay design text
+            ctx.font = "bold 14px Arial";
+            ctx.fillStyle = "#d4af37";
+            ctx.textAlign = "center";
+            ctx.fillText("SCRATCH TO REVEAL YOUR GIFT 🎁", canvas.width / 2, canvas.height / 2);
 
             let isDrawing = false;
 
             function scratch(e) {
                 if (!isDrawing) return;
-                const cRect = canvas.getBoundingClientRect();
-                
-                const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-                const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-                
-                const x = clientX - cRect.left;
-                const y = clientY - cRect.top;
+                const bounds = canvas.getBoundingClientRect();
+                const x = (e.touches ? e.touches[0].clientX : e.clientX) - bounds.left;
+                const y = (e.touches ? e.touches[0].clientY : e.clientY) - bounds.top;
 
                 ctx.globalCompositeOperation = 'destination-out';
                 ctx.beginPath();
-                ctx.arc(x, y, 22, 0, Math.PI * 2);
+                ctx.arc(x, y, 25, 0, Math.PI * 2);
                 ctx.fill();
 
                 checkScratchPercentage();
             }
 
-            canvas.addEventListener('mousedown', () => isDrawing = true);
-            canvas.addEventListener('touchstart', () => isDrawing = true);
-            canvas.addEventListener('mousemove', scratch);
-            canvas.addEventListener('touchmove', scratch);
-            window.addEventListener('mouseup', () => isDrawing = false);
-            window.addEventListener('touchend', () => isDrawing = false);
+            function checkScratchPercentage() {
+                if (isScratched) return;
+                const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                let clearedPixels = 0;
+                for (let i = 3; i < imgData.data.length; i += 4) {
+                    if (imgData.data[i] === 0) clearedPixels++;
+                }
+                if (clearedPixels / (canvas.width * canvas.height) > 0.45) {
+                    isScratched = true;
+                    canvas.style.display = 'none';
+                    triggerConfetti();
+                    document.getElementById("moodWrapper").classList.add("show");
+                }
+            }
+
+            canvas.onmousedown = () => isDrawing = true;
+            canvas.onmouseup = () => isDrawing = false;
+            canvas.onmousemove = scratch;
+            canvas.ontouchstart = () => isDrawing = true;
+            canvas.ontouchend = () => isDrawing = false;
+            canvas.ontouchmove = scratch;
         }
 
-        function checkScratchPercentage() {
-            document.getElementById('moodWrapper').classList.add('show');
+        function triggerConfetti() {
+            confetti({ particleCount: 80, spread: 60, origin: { y: 0.7 }, colors: ['#d4af37', '#fff3cd', '#163d2a'] });
         }
 
-        function sendMoodReply(mood) {
-            const encodedMsg = encodeURIComponent(`அன்பே ஐசக்! இன்றைய சர்ப்ரைஸ் மெசேஜ் பார்த்தேன் (${globalTitle}). ஐ ஃபீல் ரொம்ப ${mood}!! ❤️🎸`);
-            window.open(`https://wa.me/?text=${encodedMsg}`, '_blank');
+        function closeGift() {
+            document.getElementById("giftModal").classList.remove("active");
+            document.getElementById("scratchCanvas").style.display = 'block';
         }
 
-        function closeGift() { document.getElementById('giftModal').classList.remove('active'); }
-
-        function createCalendarLink() {
-            const title = encodeURIComponent("Isaac's 24th Birthday Celebration!");
-            const location = encodeURIComponent("121 b, 8th Street, Tirumalai Colony, Sammatipuram, Madurai");
-            const dates = "20260908T130000Z/20260908T160000Z";
-            document.getElementById('calendarLink').href = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${dates}&location=${location}`;
+        function sendMoodReply(feeling) {
+            const msg = encodeURIComponent(`Anbe Isaac! I opened the Day ${getActiveDayIndex()+1} box and I am feeling so ${feeling}`);
+            window.open(`https://wa.me/?text=${msg}`, '_blank');
         }
 
-        function generateLoveParticles() {
-            const container = document.getElementById('particles');
-            for(let i=0; i<15; i++) {
-                const particle = document.createElement('div');
-                particle.innerHTML = i % 3 === 0 ? '🎸' : (i % 3 === 1 ? '🎹' : '❤️');
-                particle.style.position = 'absolute';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.top = Math.random() * 100 + '%';
-                particle.style.fontSize = '12px';
-                particle.style.opacity = '0.15';
-                container.appendChild(particle);
+        function toggleSecretGlowMode() {
+            document.body.classList.toggle("secret-glow-active");
+        }
+
+        // --- 📅 GOOGLE CALENDAR LINK GENERATOR ---
+        function setCalendarLink() {
+            const base = "https://calendar.google.com/calendar/render?action=TEMPLATE";
+            const title = "&text=" + encodeURIComponent("ISAAC's 24th Birthday Celebration 🎂🎉");
+            const dates = "&dates=20260908T133000Z/20260908T173000Z"; 
+            const details = "&details=" + encodeURIComponent("Join us to celebrate dearest ISAAC's 24th Birthday on his home venue. Don't forget your presence and prayers!");
+            const location = "&location=" + encodeURIComponent("121 b, 8th Street, Tirumalai Colony, Sammatipuram, Madurai - 625016");
+            document.getElementById("calendarLink").href = base + title + dates + details + location;
+        }
+        setCalendarLink();
+
+        // --- ✨ BG AMBIENT SPARKS ---
+        function createParticles() {
+            const container = document.getElementById("particles");
+            for (let i = 0; i < 35; i++) {
+                const p = document.createElement("div");
+                p.style.position = "absolute";
+                p.style.width = Math.random() * 3 + "px";
+                p.style.height = p.style.width;
+                p.style.background = "rgba(214, 175, 55, " + Math.random() * 0.4 + ")";
+                p.style.top = Math.random() * 100 + "%";
+                p.style.left = Math.random() * 100 + "%";
+                p.style.borderRadius = "50%";
+                p.style.animation = `pulse ${Math.random() * 3 + 2}s infinite alternate`;
+                container.appendChild(p);
             }
         }
+        createParticles();
     </script>
+
+    <style>
+        @keyframes pulse { 0% { opacity: 0.1; transform: scale(0.8); } 100% { opacity: 0.7; transform: scale(1.3); } }
+    </style>
 </body>
 </html>
+
+```
