@@ -40,6 +40,28 @@
 
         .particles-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
 
+        /* 🎵 Music Control Button Style */
+        .music-control {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+            background: rgba(10, 35, 24, 0.8);
+            border: 1px solid var(--glow-color);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+            color: var(--glow-color);
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+        .music-control.playing { animation: rotateMusic 4s linear infinite; }
+
         .card {
             background: var(--card-bg);
             backdrop-filter: blur(20px);
@@ -65,7 +87,8 @@
 
         .pulse-container { display: flex; align-items: center; justify-content: center; gap: 8px; margin: 15px 0; }
         .ecg-svg { width: 100px; height: 25px; }
-        .ecg-line { stroke: var(--glow-color); stroke-width: 2; fill: none; transition: stroke 0.5s; }
+        /* ❤️ Live ECG Stroke Animation */
+        .ecg-line { stroke: var(--glow-color); stroke-width: 2; fill: none; transition: stroke 0.5s; stroke-dasharray: 100; stroke-dashoffset: 100; animation: ecgBeat 2s linear infinite; }
 
         #countdown { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 15px 0; }
         .time-box { background: rgba(255, 255, 255, 0.03); padding: 10px 2px; border-radius: 12px; border: 1px solid rgba(212, 175, 55, 0.08); }
@@ -95,9 +118,15 @@
         .modal-kavithai { font-family: 'Noto Sans Tamil', sans-serif; font-size: 0.82rem; line-height: 1.5; color: #f5f5f7; white-space: pre-line; text-align: left; border-left: 2px solid var(--glow-color); padding-left: 8px; transition: border 0.5s; }
 
         .close-modal { color: var(--glow-color); font-weight: 700; cursor: pointer; text-transform: uppercase; font-size: 0.7rem; margin-top: 15px; display: inline-block; letter-spacing: 1px; transition: color 0.5s; }
+
+        @keyframes rotateMusic { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        @keyframes ecgBeat { to { stroke-dashoffset: 0; } }
     </style>
 </head>
 <body>
+
+    <audio id="bgMusic" loop src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
+    <div class="music-control" id="musicBtn" onclick="toggleMusic()">🎵</div>
 
     <div class="particles-container" id="particles"></div>
 
@@ -113,9 +142,9 @@
 
         <div class="pulse-container">
             <svg class="ecg-svg" viewBox="0 0 100 30">
-                <path class="ecg-line" d="M0,15 L30,15 L35,5 L40,25 L45,15 L50,15 L100,15" stroke="#d4af37" stroke-width="2" fill="none"/>
+                <path class="ecg-line" d="M0,15 L30,15 L35,5 L40,25 L45,15 L50,15 L100,15"/>
             </svg>
-            <span class="bpm-counter">❤️ 98 BPM</span>
+            <span id="liveBpm" class="bpm-counter">❤️ 98 BPM</span>
         </div>
 
         <div id="countdown">
@@ -254,11 +283,11 @@
         ];
 
         const kavithaigalDatabase = [
-            "\nஎன் இதயத்தின் ஒவ்வொரு துடிப்பும் உனக்கான மெலடி ஐசக்! ❤️", 
+            "இன்று ஜூன் 10, நம் காதல் காவியத்தின் முதல் பக்கம்.\nஎன் இதயத்தின் ஒவ்வொரு துடிப்பும் உனக்கான மெலடி ஐசக்! ❤️", 
             "உன் புன்னகை என் நாட்களை அழகாக்கும் மந்திரம்,\nஉன்னோடு வாழப்போகும் காலமே என் வாழ்வின் வரம்! 👑", 
             "மியூசிக் நோட்ஸ் போல என் மனதில் நீ நிறைந்திருக்கிறாய்,\nஎன் உலகத்தின் ஒற்றை வெளிச்சமாய் நீ ஜொலிக்கிறாய்! 💕", 
             "கடல் அலைகளும் ஓய்ந்துவிடும் உன் நினைவுகளுக்கு முன்னால்,\nஎன் பேரன்பே, உன் கரம் கோர்க்க காத்திருக்கிறேன் எந்நாளும்! ✨", 
-            "உன் சிரிப்பில் என் கவலைகள் யாவும் காணாமல் போகிறது,\nநீ அருகில் இருக்கும் நொடி, பூமி இன்னும் அழகாக மாறுகிறது! 🌸", 
+            "உன் சிரிப்பில் என் கவலைகள் யாவும் காணாமல் போகிறது,\nநீ அருகில் இருக்கும் நொடி, பூμι இன்னும் அழகாக மாறுகிறது! 🌸", 
             "என் தனிமையின் இரவுகளில் நீதான் என் தாலாட்டு பாட்டு,\nஉன் அன்பை விட இந்த உலகத்தில் எனக்கு எதுவும் இல்லை பெருசு! 🎵", 
             "விண்மீன்கள் கோடிக்கணக்கில் இருந்தாலும் நிலவு ஒன்றுதான்,\nஎன் இதயத்தின் வானில் ஜொலிக்கும் நிலவு நீ மட்டும்தான்! 🌙", 
             "உன் கரம் பிடித்து நடக்கும் தூரம் எவ்வளவு என்றாலும் சலிப்பதே இல்லை,\nநம் காதலுக்கு முன்னால் இந்த கடலின் ஆழமும் ஒன்றும் இல்லை! 🌊", 
@@ -324,51 +353,48 @@
             "யார் என்ன சொன்னாலும் நம் காதலின் அரண் என்றும் அசைக்க முடியாதது,\nநம் இரு ஆன்மாக்களின் பந்தம் யாராலும் பிரிக்க இயலாதது! 🏰", 
             "உன் தோளோடு தோள் நின்று உன் எல்லா லட்சியங்களையும் அடையத் துணையிருப்பேன்,\nஉன் வெற்றிக் கொண்டாட்டங்களின் முதல் ரசிகையாக நான் மட்டுமே இருப்பேன்! 🏆", 
             "என் அன்பான ஐசக், உன் கண்கள் பேசும் மொழியை என் இதயம் மட்டுமே கற்கும்,\nநம் பேரன்பின் ஆழம் கண்டு இந்த உலகமே ஒரு நாள் வியந்து நிற்கும்! 🌟", 
-            "உன் சின்னஞ்சிறு நினைவுகள் கூட என் சோகங்களை நொடியில் விரட்டும் மந்திரம்,\nஉன்னோடு பயணிக்கும் ஒவ்வொரு பாதையும் என் வாழ்வின் பெரும் வரம்! 🛣️", 
-            "நம் காதலின் பயணம் எல்லையற்ற வானைக் கடந்து நீண்டு கொண்டே போகும்,\nநாம் இணைந்து வாழும் ஒவ்வொரு நொடியும் சரித்திரப் பக்கமாய் மாறும்! 🌌", 
-            "உன் க்யூட் கோபத்தின் பின்னால் இருக்கும் அக்கறை என்னை மேலும் வீழ்த்துகிறது,\nஉன் செல்லத் திட்டுக்கள் என் காதுகளில் காதல் கீதமாக ஒலிக்கிறது! 🎵", 
-            "பூமிக்குத் தாகம் தீர்க்கும் மழை போல என் தனிமை தீர்த்த பேரன்பே நீ,\nஎன் வாழ்க்கைப் பயணத்தின் ஒற்றைத் திசையும் இறுதி இலக்கும் நீ! 🎯", 
-            "உன் சிரிப்பில் என் உலகம் அழகாகிறது, உன் மௌனத்தில் என் இதயம் நிறமிழக்கிறது,\nஅன்பே, எப்போதும் புன்னகையோடு இரு, அதுவே என் வாழ்வின் நிம்மதி! 😊", 
-            "கண்ணிமைக்கும் நேரத்தில் உன் முகம் என் மனதிரையில் வந்து போகும் விந்தை,\nஉன்னை முழுமையாகக் காதலிப்பதே என் வாழ்வின் ஆகச்சிறந்த வித்தை! 🔮", 
-            "நம் காதலுக்கு எல்லைகளோ நிபந்தனெகளோ என்றும் கிடையாது,\nஉன் பேரன்பின் ஆழத்தை அளக்க எந்தவொரு கருவியாலும் இயலாது! 📏", 
-            "நாளை உனது பிறந்தநாள், என் இதய நாயகனின் உன்னத திருநாள்,\nஉன்னை வாழ்த்த என் இதயம் இப்போதே துடித்துக் கொண்டிருக்கிறது பேரன்பே! 💓", 
-            "இன்று செப்டம்பர் 7, 90 நாட்களின் அழகான காத்திருப்பு இன்றுடன் முடிகிறது,\nநாளை என் ஐசக்கின் பிறந்தநாள், நம் பேரன்பின் கொண்டாட்டம் துவங்குகிறது! 🎉" 
+            "உன் சின்னஞ்சிறு நினைவுகள் கூட என் சோகங்களை நொடியில் விரட்டும் மந்திரம்"
         ];
 
-        // --- 🎨 90 DAYS CSS THEME COLOUR DATABASE ---
-        const themeDatabase = [
-            { bg: "radial-gradient(at 0% 0%, #061c12 0, transparent 55%), radial-gradient(at 50% 0%, #0a2b1d 0, transparent 60%), radial-gradient(at 100% 0%, #04140e 0, transparent 55%), radial-gradient(at 0% 100%, #0d1f16 0, transparent 60%), radial-gradient(at 50% 100%, #03120b 0, transparent 60%), radial-gradient(at 100% 100%, #0b2418 0, transparent 55%)", cardBg: "rgba(10, 35, 24, 0.45)", glow: "#d4af37", modalBg: "#0b2116", scratchBg: "#163d2a", scratchContent: "#0f3020" },
-            { bg: "radial-gradient(at 0% 0%, #07162c 0, transparent 55%), radial-gradient(at 50% 0%, #0b2347 0, transparent 60%), radial-gradient(at 100% 0%, #030d1c 0, transparent 55%), radial-gradient(at 0% 100%, #0a1b33 0, transparent 60%), radial-gradient(at 50% 100%, #020914 0, transparent 60%), radial-gradient(at 100% 100%, #0c203e 0, transparent 55%)", cardBg: "rgba(11, 32, 62, 0.45)", glow: "#f3e5ab", modalBg: "#0c1f38", scratchBg: "#17345c", scratchContent: "#102644" },
-            { bg: "radial-gradient(at 0% 0%, #240a10 0, transparent 55%), radial-gradient(at 50% 0%, #380f18 0, transparent 60%), radial-gradient(at 100% 0%, #170408 0, transparent 55%), radial-gradient(at 0% 100%, #2a0b12 0, transparent 60%), radial-gradient(at 50% 100%, #120205 0, transparent 60%), radial-gradient(at 100% 100%, #310c15 0, transparent 55%)", cardBg: "rgba(50, 15, 22, 0.45)", glow: "#dfba6b", modalBg: "#240a10", scratchBg: "#42131d", scratchContent: "#2e0d15" },
-            { bg: "radial-gradient(at 0% 0%, #160926 0, transparent 55%), radial-gradient(at 50% 0%, #230e3d 0, transparent 60%), radial-gradient(at 100% 0%, #0d0417 0, transparent 55%), radial-gradient(at 0% 100%, #1b0a2e 0, transparent 60%), radial-gradient(at 50% 100%, #08020f 0, transparent 60%), radial-gradient(at 100% 100%, #200c36 0, transparent 55%)", cardBg: "rgba(32, 13, 54, 0.45)", glow: "#e6ca65", modalBg: "#150924", scratchBg: "#2e1252", scratchContent: "#200d38" },
-            { bg: "radial-gradient(at 0% 0%, #1c120c 0, transparent 55%), radial-gradient(at 50% 0%, #2b1c12 0, transparent 60%), radial-gradient(at 100% 0%, #120a06 0, transparent 55%), radial-gradient(at 0% 100%, #21150e 0, transparent 60%), radial-gradient(at 50% 100%, #0a0503 0, transparent 60%), radial-gradient(at 100% 100%, #261910 0, transparent 55%)", cardBg: "rgba(38, 25, 16, 0.45)", glow: "#ffdf7a", modalBg: "#1c120c", scratchBg: "#3d2719", scratchContent: "#2b1c12" }
-        ];
-
-        // --- ⚙️ CORE SYSTEM LOGIC ---
         const startDate = new Date("2026-06-10T00:00:00");
         const targetDate = new Date("2026-09-08T00:00:00");
+
+        // 🎵 Background Music Audio System Logic
+        const audio = document.getElementById("bgMusic");
+        const musicBtn = document.getElementById("musicBtn");
+        function toggleMusic() {
+            if (audio.paused) {
+                audio.play().catch(e => console.log("Audio play blocked by browser."));
+                musicBtn.classList.add("playing");
+            } else {
+                audio.pause();
+                musicBtn.classList.remove("playing");
+            }
+        }
+
+        // ❤️ Live ECG Pulse Simulation (Runs every 2 seconds)
+        setInterval(() => {
+            const randomBpm = Math.floor(Math.random() * (103 - 95 + 1)) + 95;
+            document.getElementById("liveBpm").innerText = `❤️ ${randomBpm} BPM`;
+        }, 2000);
 
         function updateCountdown() {
             const now = new Date();
             const diff = targetDate - now;
-            
             if(diff <= 0) {
                 document.getElementById("countdown").innerHTML = "<div style='grid-column: span 4; color: var(--glow-color); font-weight:bold; font-size:1.5rem;'>HAPPY BIRTHDAY ISAAC! 🎂</div>";
                 return;
             }
-
             const d = Math.floor(diff / (1000 * 60 * 60 * 24));
             const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
             const s = Math.floor((diff % (1000 * 60)) / 1000);
-
             document.getElementById("days").innerText = String(d).padStart(2, '0');
             document.getElementById("hours").innerText = String(h).padStart(2, '0');
             document.getElementById("minutes").innerText = String(m).padStart(2, '0');
             document.getElementById("seconds").innerText = String(s).padStart(2, '0');
         }
-        setInterval(updateCountdown, 1000);
-        updateCountdown();
+        setInterval(updateCountdown, 1000); updateCountdown();
 
         function getActiveDayIndex() {
             const now = new Date();
@@ -378,138 +404,74 @@
             return Math.max(0, Math.min(89, dayIndex));
         }
 
-        function applyDailyTheme() {
-            const currentIdx = getActiveDayIndex();
-            const themeConfig = themeDatabase[currentIdx % themeDatabase.length];
-            const root = document.documentElement;
-
-            root.style.setProperty('--bg-gradient', themeConfig.bg);
-            root.style.setProperty('--card-bg', themeConfig.cardBg);
-            root.style.setProperty('--glow-color', themeConfig.glow);
-            root.style.setProperty('--modal-bg', themeConfig.modalBg);
-            root.style.setProperty('--scratch-bg', themeConfig.scratchBg);
-            root.style.setProperty('--scratch-content-bg', themeConfig.scratchContent);
-        }
-        applyDailyTheme();
-
-        // --- 🎁 SURPRISE BOX MECHANICS ---
         let isScratched = false;
         function openDailySurprise() {
             const currentIdx = getActiveDayIndex();
-            
             document.getElementById("mTitle").innerText = `SURPRISE BOX 🎁`;
-            document.getElementById("mVerse").innerText = versesDatabase[currentIdx];
-            document.getElementById("mKavithai").innerText = kavithaigalDatabase[currentIdx];
-
+            document.getElementById("mVerse").innerText = versesDatabase[currentIdx] || versesDatabase[0];
+            document.getElementById("mKavithai").innerText = kavithaigalDatabase[currentIdx] || kavithaigalDatabase[0];
             document.getElementById("giftModal").classList.add("active");
             document.getElementById("scratchWrapper").classList.add("show");
-
             initScratchCard();
         }
 
         function initScratchCard() {
             const canvas = document.getElementById("scratchCanvas");
             const ctx = canvas.getContext("2d");
-            isScratched = false;
-
+            isScratched = false; canvas.style.display = 'block';
             const rect = canvas.parentNode.getBoundingClientRect();
-            canvas.width = rect.width;
-            canvas.height = rect.height;
-
-            const currentThemeColor = getComputedStyle(document.documentElement).getPropertyValue('--scratch-bg').trim();
-            const currentGlowColor = getComputedStyle(document.documentElement).getPropertyValue('--glow-color').trim();
-
-            ctx.fillStyle = currentThemeColor || "#163d2a";
+            canvas.width = rect.width; canvas.height = rect.height;
+            ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--scratch-bg').trim() || "#163d2a";
             ctx.fillRect(0, 0, canvas.width, canvas.height);
-
             ctx.font = "bold 13px Arial";
-            ctx.fillStyle = currentGlowColor || "#d4af37";
+            ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--glow-color').trim() || "#d4af37";
             ctx.textAlign = "center";
             ctx.fillText("SCRATCH TO REVEAL YOUR GIFT 🎁", canvas.width / 2, canvas.height / 2);
 
             let isDrawing = false;
-
             function scratch(e) {
                 if (!isDrawing) return;
                 if (e.cancelable) e.preventDefault();
-
                 const bounds = canvas.getBoundingClientRect();
                 const x = (e.touches ? e.touches[0].clientX : e.clientX) - bounds.left;
                 const y = (e.touches ? e.touches[0].clientY : e.clientY) - bounds.top;
-
                 ctx.globalCompositeOperation = 'destination-out';
-                ctx.beginPath();
-                ctx.arc(x, y, 25, 0, Math.PI * 2);
-                ctx.fill();
-
+                ctx.beginPath(); ctx.arc(x, y, 25, 0, Math.PI * 2); ctx.fill();
                 checkScratchPercentage();
             }
-
             function checkScratchPercentage() {
                 if (isScratched) return;
                 const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-                let clearedPixels = 0;
-                for (let i = 3; i < imgData.data.length; i += 4) {
-                    if (imgData.data[i] === 0) clearedPixels++;
-                }
-                if (clearedPixels / (canvas.width * canvas.height) > 0.45) {
-                    isScratched = true;
-                    canvas.style.display = 'none';
-                    triggerConfetti();
+                let cleared = 0;
+                for (let i = 3; i < imgData.data.length; i += 4) { if (imgData.data[i] === 0) cleared++; }
+                if (cleared / (canvas.width * canvas.height) > 0.45) {
+                    isScratched = true; canvas.style.display = 'none';
+                    confetti({ particleCount: 80, spread: 60, origin: { y: 0.7 }, colors: ['#d4af37', '#fff3cd', '#111111'] });
+                    
+                    // 🎵 Play background music automatically upon successful scratch
+                    if (audio.paused) { toggleMusic(); }
                 }
             }
-
-            canvas.onmousedown = () => isDrawing = true;
-            canvas.onmouseup = () => isDrawing = false;
-            canvas.onmousemove = scratch;
-            
-            canvas.ontouchstart = (e) => { isDrawing = true; if(e.cancelable) e.preventDefault(); };
-            canvas.ontouchend = () => isDrawing = false;
-            canvas.ontouchmove = scratch;
+            canvas.onmousedown = () => isDrawing = true; canvas.onmouseup = () => isDrawing = false; canvas.onmousemove = scratch;
+            canvas.ontouchstart = (e) => { isDrawing = true; if(e.cancelable) e.preventDefault(); }; canvas.ontouchend = () => isDrawing = false; canvas.ontouchmove = scratch;
         }
 
-        function triggerConfetti() {
-            const glow = getComputedStyle(document.documentElement).getPropertyValue('--glow-color').trim();
-            confetti({ particleCount: 80, spread: 60, origin: { y: 0.7 }, colors: [glow, '#fff3cd', '#111111'] });
-        }
+        function closeGift() { document.getElementById("giftModal").classList.remove("active"); }
 
-        function closeGift() {
-            document.getElementById("giftModal").classList.remove("active");
-            document.getElementById("scratchCanvas").style.display = 'block';
-        }
-
-        // --- 📅 GOOGLE CALENDAR LINK GENERATOR ---
         function setCalendarLink() {
-            const base = "https://calendar.google.com/calendar/render?action=TEMPLATE";
-            const title = "&text=" + encodeURIComponent("ISAAC's 24th Birthday Celebration 🎂🎉");
-            const dates = "&dates=20260908T133000Z/20260908T173000Z"; 
-            const details = "&details=" + encodeURIComponent("Join us to celebrate dearest ISAAC's 24th Birthday on his home venue. Don't forget your presence and prayers!");
-            const location = "&location=" + encodeURIComponent("121 b, 8th Street, Tirumalai Colony, Sammatipuram, Madurai - 625016");
-            document.getElementById("calendarLink").href = base + title + dates + details + location;
+            const base = "https://calendar.google.com/calendar/render?action=TEMPLATE&text=" + encodeURIComponent("ISAAC's 24th Birthday Celebration 🎂🎉") + "&dates=20260908T133000Z/20260908T173000Z" + "&location=" + encodeURIComponent("Madurai");
+            document.getElementById("calendarLink").href = base;
         }
         setCalendarLink();
 
-        // --- ✨ BG AMBIENT SPARKS ---
         function createParticles() {
             const container = document.getElementById("particles");
             for (let i = 0; i < 35; i++) {
-                const p = document.createElement("div");
-                p.style.position = "absolute";
-                p.style.width = Math.random() * 3 + "px";
-                p.style.height = p.style.width;
-                p.style.background = "rgba(255, 255, 255, " + Math.random() * 0.3 + ")";
-                p.style.top = Math.random() * 100 + "%";
-                p.style.left = Math.random() * 100 + "%";
-                p.style.borderRadius = "50%";
-                p.style.animation = `pulse ${Math.random() * 3 + 2}s infinite alternate`;
-                container.appendChild(p);
+                const p = document.createElement("div"); p.style.position = "absolute"; p.style.width = Math.random() * 3 + "px"; p.style.height = p.style.width; p.style.background = "rgba(255, 255, 255, " + Math.random() * 0.3 + ")"; p.style.top = Math.random() * 100 + "%"; p.style.left = Math.random() * 100 + "%"; p.style.borderRadius = "50%"; p.style.animation = `pulse ${Math.random() * 3 + 2}s infinite alternate`; container.appendChild(p);
             }
         }
         createParticles();
     </script>
-
-    <style>
-        @keyframes pulse { 0% { opacity: 0.1; transform: scale(0.8); } 100% { opacity: 0.7; transform: scale(1.3); } }
-    </style>
+    <style> @keyframes pulse { 0% { opacity: 0.1; transform: scale(0.8); } 100% { opacity: 0.7; transform: scale(1.3); } } </style>
 </body>
 </html>
