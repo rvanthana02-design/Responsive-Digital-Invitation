@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>ISAAC's 24TH Birthday Countdown</title>
+    
+    <!-- Importing cinematic, elegant, and native Tamil typography families -->
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cinzel:wght@600;800&family=Noto+Sans+Tamil:wght@400;700&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
     
     <style>
@@ -46,7 +48,7 @@
             z-index: 0; 
         }
 
-        /* 🎵 Music Control Button */
+        /* 🎵 Music Control Floating Button */
         .music-control {
             position: fixed;
             top: 20px;
@@ -106,7 +108,6 @@
         .date-highlight { color: #fff; font-weight: 700; letter-spacing: 1px; }
         .venue { font-family: 'Cinzel', serif; font-weight: 800; font-size: 1.1rem; display: block; margin: 3px 0; color: var(--glow-color); transition: color 0.5s; }
 
-        /* 👥 Visitor Log Container Styling */
         .visitor-card {
             background: var(--card-bg);
             backdrop-filter: blur(20px);
@@ -191,7 +192,6 @@
         .visitor-feed::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.01); }
         .visitor-feed::-webkit-scrollbar-thumb { background: var(--glow-color); border-radius: 10px; }
 
-        /* --- STREAMING_CHUNK: Styling the new premium visitor log elements --- */
         .visitor-stats-row {
             display: flex;
             justify-content: space-between;
@@ -342,12 +342,12 @@
 </head>
 <body>
 
-    <!-- 🎵 Dynamic Background Audio Setup -->
     <audio id="bgMusic" loop src=""></audio>
     <div class="music-control" id="musicBtn" onclick="toggleMusic()">🎵</div>
 
     <div class="particles-container" id="particles"></div>
 
+    <!-- MAIN CELEBRATION APP CARD -->
     <div class="card">
         <div class="bible-verse">
             "நன்மையினால் உன் வாயைத் திருப்தியாக்குகிறார்;<br>
@@ -358,6 +358,7 @@
         <div class="name">ISAAC</div>
         <p class="turning-one">24TH BIRTHDAY CELEBRATION</p>
 
+        <!-- Dynamic Live Ticker with heartbeat line -->
         <div class="pulse-container">
             <svg class="ecg-svg" viewBox="0 0 100 30">
                 <path class="ecg-line" d="M0,15 L30,15 L35,5 L40,25 L45,15 L50,15 L100,15"/>
@@ -388,7 +389,6 @@
         </div>
     </div>
 
-    <!-- 👥 Real-time Visitor Register -->
     <div class="visitor-card">
         <h3 class="visitor-title">வருகையாளர் பதிவேடு 👥</h3>
         
@@ -403,6 +403,7 @@
             <span class="visitor-count-badge" id="visitorCount">0 வருகைகள்</span>
         </div>
 
+        <!-- Dynamic scrollable list displaying visitor parameters -->
         <div class="visitor-feed" id="visitorFeed">
             <div style="text-align: center; color: rgba(255,255,255,0.4); font-size: 0.75rem; padding: 10px;">
                 வருகையாளர்கள் விவரங்கள் ஏற்றப்படுகிறது...
@@ -537,14 +538,12 @@
                 const yesterday = new Date();
                 yesterday.setDate(today.getDate() - 1);
 
-                // Precise localized time extraction (e.g. "12:30 PM")
                 const timeStr = dateObj.toLocaleTimeString('ta-IN', {
                     hour: '2-digit',
                     minute: '2-digit',
                     hour12: true
                 });
 
-                // Relative day label in Tamil (இன்று, நேற்று, or standard date)
                 let dayLabel = "";
                 if (dateObj.toDateString() === today.toDateString()) {
                     dayLabel = "இன்று (Today)";
@@ -558,7 +557,6 @@
                     });
                 }
 
-                // Elegant generation of visual avatar based on initials
                 const firstChar = v.name ? v.name.trim().charAt(0).toUpperCase() : "👤";
 
                 return `
@@ -621,7 +619,7 @@
             { bg: "radial-gradient(at 0% 0%, #2c1a04 0, transparent 55%), radial-gradient(at 50% 0%, #422807 0, transparent 60%), radial-gradient(at 100% 0%, #190f02 0, transparent 55%)", card: "rgba(50, 30, 8, 0.45)", glow: "#f39c12", modal: "#301d05", scratch: "#54330b", content: "#402708" }  
         ];
 
-        // 🎵 Stable alternative audio stream links
+        // Beautiful curated instrumental Tamil Bgm list
         const audioTracks = [
             "https://pub-c5e31b5cdafb419a824e6939b7051de4.r2.dev/96_Life_of_Ram_Flute.mp3",
             "https://pub-c5e31b5cdafb419a824e6939b7051de4.r2.dev/VTV_Mannipaaya_Violin.mp3",
@@ -665,7 +663,6 @@
             "https://pub-c5e31b5cdafb419a824e6939b7051de4.r2.dev/Aayirathil_Oruvan_Unna_Mela.mp3"
         ];
 
-        // Fill remaining tracks dynamically to complete 90 days cleanly
         while (audioTracks.length < 90) {
             audioTracks.push(audioTracks[audioTracks.length % 10]);
         }
@@ -749,7 +746,7 @@
             "ஏசாயா 60:22 — சின்னவன் ஆயிரமும், சிறியவன் பலத்த ஜாதியுமாவான்; கர்த்தராகிய நான் ஏற்றகாலத்தில் இதைத் தீவிரமாய் நடப்பிப்பேன்.", 
             "சங்கீதம் 18:2 — கர்த்தர் என் கன்மலையும், என் கோட்டையும், என் ரட்சகரும், என் கேடகமுமாய் இருக்கிறார்.", 
             "உபாகமம் 31:6 — பலங்கொண்டு திடமனதாயிருங்கள்; உன் தேவனாகிய கர்த்தர் தாமே உன்னுடனேகூட வருகிறார்.", 
-            "சங்கீதம் 30:5 — சாயங்காலத்தில் அழுகை தங்கும், விடியற்காலத்திலே களிப்புண்டாகும்.", 
+            "சங்கீதம் 30:5 — सायங்காலத்தில் அழுகை தங்கும், விடியற்காலத்திலே களிப்புண்டாகும்.", 
             "ஆதியாகமம் 28:15 — நான் உன்னுடனே இருந்து, நீ போகிற இடத்திலெல்லாம் உன்னைக் காத்து உன்னை கைவிடுவதில்லை.", 
             "சங்கீதம் 40:1 — கர்த்தருக்காகப் பொறுமையுடன் காத்திருந்தேன்; அவர் என்னிடமாய்ச் சாய்ந்து என் கூப்பிடுதலைக் கேட்டார்.", 
             "2 கொரிந்தியர் 12:9 — என் கிருபை உனக்குத் போதும்; பலவீனத்திலே என் பலம் பூரணமாய் விளங்கும்.", 
@@ -760,7 +757,7 @@
             "சங்கீதம் 68:19 — நாடோறும் நம்முடைய பாரங்களைச் சுமக்கிற ஆண்டவராகிய தேவன் எந்நாளும் ஸ்தோத்திரிக்கப்படுவாக.", 
             "ஏசாயா 43:19 — இதோ, நான் புதிய காரியத்தைச் செய்கிறேன்; வனாந்தரத்திலே வழியையும், அவாந்தரவெளியிலே ஆறுகளையும் உண்டாக்குவேன்.", 
             "சங்கீதம் 143:8 — அதிகாலையில் உமது கிருபையைக் கேட்கப்பண்ணும், உம்மை நம்பியிருக்கிறேன்.", 
-            "புலம்பல் 3:22-23 — நாம் நிர்மூலமாகாதிருக்கிறது கர்த்தருடைய கிருபையே, அவைகள் காலைதோறும் புதியவைகள்.", 
+            "புலம்பல் 3:22-23 — நாம் நிர்மூலமாகாதிருக்கிறது கர்த்தடைய கிருபையே, அவைகள் காலைதோறும் புதியவைகள்.", 
             "சங்கீதம் 91:1 — உன்னதமானவரின் மறைவில் இருக்கிறவன் சர்வவல்லவருடைய நிழலில் தங்குவான்.", 
             "ரோமர் 8:31 — இவைகளைக் குறித்து நாம் என்ன சொல்வோம்? தேவன் நம்முடைய பட்சத்திலிருந்தால் நமக்கு விரோதமாக இருப்பவன் யார்?", 
             "சங்கீதம் 27:14 — கர்த்தருக்குக் காத்திரு; நீ பலங்கொண்டு திடமனதாயிரு, கர்த்தருக்கே காத்திரு.", 
@@ -844,11 +841,9 @@
             "உன் சின்னஞ்சிறு நினைவுகள் கூட என் சோகங்களை நொடியில் விரட்டும் மந்திரம்"
         ];
 
-        // Ensure both databases are exactly equal to 90 elements
         while (versesDatabase.length < 90) { versesDatabase.push(versesDatabase[versesDatabase.length % 5]); }
         while (kavithaigalDatabase.length < 90) { kavithaigalDatabase.push(kavithaigalDatabase[kavithaigalDatabase.length % 5]); }
 
-        // 📅 Cross-browser safe date definition (Year, Month Index 0-11, Day, Hour, Minute)
         const startDate = new Date(2026, 5, 10, 0, 0, 0); // June 10, 2026
         const targetDate = new Date(2026, 8, 8, 0, 0, 0); // Sept 8, 2026
 
@@ -867,7 +862,6 @@
             const dayIdx = getActiveDayIndex();
             const currentTheme = themeDatabase[dayIdx];
             
-            // Dynamic styling injection
             const root = document.documentElement;
             root.style.setProperty('--bg-gradient', currentTheme.style.bg);
             root.style.setProperty('--card-bg', currentTheme.style.card);
@@ -876,7 +870,6 @@
             root.style.setProperty('--scratch-bg', currentTheme.style.scratch);
             root.style.setProperty('--scratch-content-bg', currentTheme.style.content);
 
-            // Safe async audio loading
             if (audio) {
                 audio.src = currentTheme.audioUrl;
                 audio.preload = "auto";
