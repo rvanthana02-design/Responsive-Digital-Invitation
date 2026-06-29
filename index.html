@@ -70,7 +70,6 @@
         .bible-verse { font-family: 'Noto Sans Tamil', sans-serif; font-size: 0.85rem; line-height: 1.6; margin-bottom: 15px; }
         .bible-verse strong { color: var(--glow-color); display: block; margin-top: 4px; }
         
-        /* ISAAC பெயருக்கு மட்டும் டபுள் கிளிக் செய்வதற்கான கர்சர் செட்டிங் */
         .name { font-family: 'Great Vibes', cursive; font-size: 4rem; background: linear-gradient(135deg, #fff3cd 0%, var(--glow-color) 50%, #aa841c 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 5px 0; cursor: pointer; user-select: none; }
         
         .turning-one { font-family: 'Cinzel', serif; letter-spacing: 3px; font-size: 0.75rem; font-weight: 800; color: rgba(255, 255, 255, 0.6); margin-bottom: 15px; }
@@ -126,8 +125,7 @@
             <strong>— சங்கீதம் 103:5</strong>
         </div>
 
-        <!-- 🤫 ரகசிய மாற்றங்கள்: "ISAAC" மீது 2 முறை கிளிக் (ondblclick) செய்தால் மட்டுமே ஓனர் டேஷ்போர்டு திறக்கும் -->
-        <div class="name" ondblclick="openOwnerDashboard()">ISAAC</div>
+        <div class="name">ISAAC</div>
         <p class="turning-one">24TH BIRTHDAY CELEBRATION</p>
 
         <div class="pulse-container">
@@ -160,8 +158,7 @@
         </div>
     </div>
 
-    <!-- ✍️ Name Input Modal -->
-    <div class="modal" id="nameModal">
+    <div class="modal" id="nameModal" onclick="closeModal('nameModal')">
         <div class="modal-content" onclick="event.stopPropagation()">
             <h3 style="font-size: 1.2rem; color: var(--glow-color); margin-bottom: 10px;">WELCOME ✨</h3>
             <p style="font-size: 0.8rem; color: #a0a0a0; margin-bottom: 15px;">சர்ப்ரைஸ் பாக்ஸைத் திறக்க உங்கள் பெயரை உள்ளிடவும்:</p>
@@ -172,8 +169,7 @@
         </div>
     </div>
 
-    <!-- 🎁 Surprise Content Modal -->
-    <div class="modal" id="surpriseModal" onclick="closeSurpriseModal()">
+    <div class="modal" id="surpriseModal" onclick="closeModal('surpriseModal')">
         <div class="modal-content" onclick="event.stopPropagation()">
             <h3 style="font-size: 1.3rem; letter-spacing: 1px; color: var(--glow-color); margin-bottom: 15px;">🎁 SURPRISE BOX</h3>
             
@@ -182,29 +178,24 @@
                 <span style="color: #fff3cd;">யார் என்ன சொன்னாலும் நம் காதலின் ஆழத்தை யாராலும் அளக்க முடியாது, என் இதயக் கூட்டுக்குள் உன்னைத் தவிர வேறு யாருக்கும் இடமும் கிடையாது! 🔒</span>
             </div>
             
-            <button class="close-modal" onclick="closeSurpriseModal()">CLOSE BOX</button>
+            <button class="close-modal" onclick="closeModal('surpriseModal')">CLOSE BOX</button>
         </div>
     </div>
 
-    <!-- 👑 Owner Dashboard Panel -->
-    <div class="modal" id="ownerModal" onclick="closeOwnerModal()">
+    <div class="modal" id="ownerModal" onclick="closeModal('ownerModal')">
         <div class="modal-content" onclick="event.stopPropagation()">
             <h3 style="font-size: 1.1rem; letter-spacing: 1px; color: var(--glow-color);">👑 LIVE VIEWER LOGS</h3>
             <p style="font-size: 0.75rem; color: #a0a0a0; margin-bottom: 15px;">பார்வையாளர்களின் விபரம் (Past & Present):</p>
             
             <div id="viewerLogContainer" style="max-height: 55vh; overflow-y: auto; padding-right: 5px;">
-                <!-- Logs dynamically loaded -->
-            </div>
+                </div>
             
-            <button class="close-modal" onclick="closeOwnerModal()">Close Panel</button>
+            <button class="close-modal" onclick="closeModal('ownerModal')">Close Panel</button>
         </div>
     </div>
 
     <script>
         const targetDate = new Date("September 8, 2026 00:00:00").getTime();
-
-        // 🔒 LOCALSTORAGE இல்லாமல் தற்காலிகமாக பக்கத்தில் விபரங்களைச் சேமிக்க Array
-        // (பக்கம் ரீஃப்ரெஷ் ஆகும் வரை தற்போதைய லைவ் டேட்டாக்கள் இதில் இருக்கும்)
         let runtimeVisitorLogs = [];
 
         function getDeviceName() {
@@ -218,9 +209,7 @@
             return "Web Viewer";
         }
 
-        // சர்ப்ரைஸ் பட்டன் கிளிக் லாஜிக்
         function handleSurpriseAction() {
-            // ஒருமுறை பெயர் உள்ளிட்டால் பக்கத்தின் மெமரியிலேயே அது இருக்கும் 
             if (window.currentUserRegisteredName) {
                 openSurpriseBox();
             } else {
@@ -228,20 +217,14 @@
             }
         }
 
-        // பயனர் பெயரை உள்ளிட்டு ஓபன் செய்யும்போது
         function submitNameAndOpen() {
             const nameInput = document.getElementById('visitorNameInput').value.trim();
             if (!nameInput) {
                 alert("தயவுசெய்து உங்கள் பெயரை உள்ளிடவும்!");
                 return;
             }
-
-            // தற்காலிக வேரியபிளில் சேமித்தல் (No LocalStorage)
             window.currentUserRegisteredName = nameInput;
-            
-            // விசிட் லாகில் சேர்க்கும் பங்க்ஷன்
             recordVisit(nameInput);
-
             document.getElementById('nameModal').classList.remove('active');
             openSurpriseBox();
         }
@@ -249,4 +232,110 @@
         function recordVisit(viewerName) {
             const now = new Date();
             const dateStr = now.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
-            const timeStr = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit',Normally I can help with things like this, but I don't seem to have access to that content. You can try again or ask me for something else.
+            const timeStr = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+            
+            const logEntry = {
+                name: viewerName,
+                time: `${dateStr} @ ${timeStr}`,
+                device: getDeviceName()
+            };
+            
+            runtimeVisitorLogs.unshift(logEntry);
+            updateOwnerDashboardUI();
+        }
+
+        function updateOwnerDashboardUI() {
+            const container = document.getElementById('viewerLogContainer');
+            if (!container) return;
+            
+            if (runtimeVisitorLogs.length === 0) {
+                container.innerHTML = `<p style="font-size:0.8rem; color:rgba(255,255,255,0.4); padding:20px 0;">இன்னும் யாரும் பார்வையிடவில்லை!</p>`;
+                return;
+            }
+            
+            container.innerHTML = runtimeVisitorLogs.map(log => `
+                <div class="visitor-log-item">
+                    <div style="font-weight:700; color:#fff;">👤 ${log.name}</div>
+                    <div class="log-date">🕒 ${log.time}</div>
+                    <div class="log-device">📱 ${log.device}</div>
+                </div>
+            `).join('');
+        }
+
+        function openSurpriseBox() {
+            document.getElementById('surpriseModal').classList.add('active');
+        }
+
+        function openOwnerDashboard() {
+            updateOwnerDashboardUI();
+            document.getElementById('ownerModal').classList.add('active');
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.remove('active');
+        }
+
+        // 💻 LAPTOP TRIGGER: Pressing 'V' key opens dashboard
+        window.addEventListener('keydown', function(event) {
+            if (event.key === 'v' || event.key === 'V') {
+                // Ignore key presses inside the name input box
+                if (document.activeElement.id === 'visitorNameInput') return;
+                openOwnerDashboard();
+            }
+        });
+
+        // 📱 MOBILE TRIGGER: Triple Tap anywhere on background/body opens dashboard
+        let lastTap = 0;
+        let tapCount = 0;
+        document.body.addEventListener('click', function(e) {
+            // Prevent triggering if clicking inside elements like buttons/inputs
+            if (e.target.closest('.card') || e.target.closest('.modal-content') || e.target.closest('#musicBtn')) return;
+            
+            const currentTime = new Date().getTime();
+            const tapLength = currentTime - lastTap;
+            
+            if (tapLength < 400 && tapLength > 0) {
+                tapCount++;
+            } else {
+                tapCount = 1;
+            }
+            
+            lastTap = currentTime;
+
+            if (tapCount === 3) {
+                openOwnerDashboard();
+                tapCount = 0; // reset
+            }
+        });
+
+        // Countdown Timer Logic
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const difference = targetDate - now;
+
+            if (difference < 0) {
+                document.getElementById('countdown').innerHTML = `<div style="grid-column: span 4; color: var(--glow-color); font-weight: bold; font-size: 1.2rem;">✨ HAPPY BIRTHDAY ISAAC! ✨</div>`;
+                return;
+            }
+
+            const d = Math.floor(difference / (1000 * 60 * 60 * 24));
+            const h = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((difference % (1000 * 60)) / 1000);
+
+            document.getElementById('days').innerText = String(d).padStart(2, '0');
+            document.getElementById('hours').innerText = String(h).padStart(2, '0');
+            document.getElementById('minutes').innerText = String(m).padStart(2, '0');
+            document.getElementById('seconds').innerText = String(s).padStart(2, '0');
+        }
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // Simple Random BPM Animator
+        setInterval(() => {
+            const baseBpm = Math.floor(Math.random() * (105 - 85 + 1)) + 85;
+            document.getElementById('liveBpm').innerText = `❤️ ${baseBpm} BPM`;
+        }, 3000);
+    </script>
+</body>
+</html>
